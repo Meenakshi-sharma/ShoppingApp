@@ -1,10 +1,13 @@
 var signupCtrl;
+
 signupCtrl = (function()
  {
- 	
-	function signupCtrl() {
+	function signupCtrl()
+	{
+		var sp=this;
+	  	sp.ShowPassword='password';
   	}
   	return signupCtrl;
 
 })();
- signupModule.controller('signupCtrl', signupCtrl);
+signupModule.controller('signupCtrl', signupCtrl);

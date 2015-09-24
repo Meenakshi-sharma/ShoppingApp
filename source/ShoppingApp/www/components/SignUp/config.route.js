@@ -7,8 +7,7 @@
   $stateProvider
       .state('signup', {
       url: '/signup',
-      templateUrl: 'components/SignUp/signup.html',
-      controller: 'signupCtrl as sp'
+      templateUrl: 'components/SignUp/signup.html'
     })
       });
 })();

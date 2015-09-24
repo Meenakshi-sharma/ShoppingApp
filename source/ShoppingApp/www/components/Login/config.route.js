@@ -7,8 +7,7 @@
   $stateProvider
       .state('login', {
       url: '/login',
-      templateUrl: 'components/Login/login.html',
-      controller: 'loginCtrl as lc'
+      templateUrl: 'components/Login/login.html'
     })
       });
 })();
