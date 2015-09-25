@@ -2,12 +2,20 @@ var loginCtrl;
 
 loginCtrl = (function()
 { 	
-	function loginCtrl() {
-	  	var lc=this;
-	  	lc.ShowPassword='password';
+	function loginCtrl(loginSrvc) {
+	  	
+	  	this.loginSrvc = loginSrvc;
+	  	this.user={};
+	  	this.ShowPassword='password';
   	}
-  	return loginCtrl;
 
+	loginCtrl.prototype.userLogin=function()
+		{
+			this.loginSrvc.chkLogin(this.user.username,this.user.password);
+		}
+	
+  	return loginCtrl;
 })();
- loginModule.controller('loginCtrl', loginCtrl);
+
+loginModule.controller('loginCtrl', loginCtrl);
 
