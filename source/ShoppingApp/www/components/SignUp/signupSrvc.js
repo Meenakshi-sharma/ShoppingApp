@@ -1,11 +1,10 @@
 var signupSrvc;
 
-signupSrvc = (function()
-{
-	function signupSrvc() {
-  	
-	}
-  	return signupSrvc;
+signupSrvc = (function() {
+    function signupSrvc() {
+
+    }
+    return signupSrvc;
 })();
 
 signupModule.controller('signupSrvc', signupSrvc);
