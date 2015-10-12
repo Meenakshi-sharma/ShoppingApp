@@ -1,15 +1,20 @@
 var loginCtrl;
 
-loginCtrl = (function() {
-    function loginCtrl(loginSrvc) {
+loginCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoading, $rootScope) {
+    function loginCtrl(loginSrvc , $state , $stateParams) {
 
-        this.loginSrvc = loginSrvc;
+       this.loginSrvc = loginSrvc;
+       
+	   
         this.user = {};
         this.ShowPassword = 'password';
     }
 
     loginCtrl.prototype.userLogin = function() {
         this.loginSrvc.chkLogin(this.user.username, this.user.password);
+        console.log(this.user.username);
+        console.log(this);
+       
     }
 
     return loginCtrl;

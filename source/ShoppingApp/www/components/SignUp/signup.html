@@ -1,20 +1,23 @@
 
 <ion-view title="Signup">
     <ion-content padding="true" scroll="false" class="has-header" ng-controller="signupCtrl as sp">
-        <form>
+        <form >
             <ion-list>
                 <label class="item item-input">
-                    <input type="text" placeholder="Name">
+                    <input type="text" ng-model="sp.user.firstname" placeholder="First Name">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="sp.user.lastname" placeholder="Last Name">
                 </label>
                 <label class="item item-input">                    
-                    <input type="text" placeholder="Username">
+                    <input type="text" ng-model="sp.user.username" placeholder="Username">
                 </label>
                 <label class="item item-input">                    
-                    <input type="{{sp.ShowPassword}}" placeholder="Password">
+                    <input type="{{sp.ShowPassword}}" ng-model="sp.user.password" placeholder="Password">
                 </label>
                  <ion-checkbox name="chkPassword" ng-click="sp.ShowPassword = (sp.ShowPassword == 'password') ? 'text' : 'password'">Show Password</ion-checkbox>
             </ion-list>
-            <button class="button button-positive button-block ">Sign up</button>
+            <button class="button button-positive button-block " ng-click="sp.userLogin()">Sign up</button>
             <div style="width:70%; margin:0 15%">
                 <button class="button button-stable button-clear button-small link-button">Already have an account? Sign In</button>
             </div>

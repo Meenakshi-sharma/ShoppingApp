@@ -1,0 +1,41 @@
+
+<ion-side-menus enable-menu-with-back-views="false" ng-controller="menuCtrl as mc">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+  <!-- Left menu -->
+  <ion-side-menu side="left">
+  
+  <ion-content padding="true" scroll="false" class="has-header" >
+            <h1>
+            </h1>
+            <ion-list >
+            <ion-item ng-repeat="x in mc.categories">
+            {{x.name}}
+            <button class="button" ui-sref="app.home" ng-click="mc.getSub({{x.id}})"> {{x.id}}  </button>
+            </ion-item>
+                
+            </ion-list>
+           
+
+
+        </ion-content>
+  
+  </ion-side-menu>
+
+  
+
+</ion-side-menus>
+
+
+
+
