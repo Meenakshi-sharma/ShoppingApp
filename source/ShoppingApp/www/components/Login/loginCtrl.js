@@ -21,3 +21,4 @@ loginCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoading, $rootS
 })();
 
 loginModule.controller('loginCtrl', loginCtrl);
+loginModule.$inject = ['$state']

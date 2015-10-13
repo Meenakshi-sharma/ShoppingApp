@@ -21,7 +21,8 @@
             <ion-list >
             <ion-item ng-repeat="x in mc.categories">
             {{x.name}}
-            <button class="button" ui-sref="app.home" ng-click="mc.getSub({{x.id}})"> {{x.id}}  </button>
+            <button menu-close class="button" ng-click="mc.getSub({{x.id}})"> {{x.id}}  </button>
+
             </ion-item>
                 
             </ion-list>

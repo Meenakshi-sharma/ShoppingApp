@@ -4,7 +4,3 @@ var homeModule = angular.module('myApp.home', []);
 var menuModule = angular.module('myApp.menu', []);
 
 
-angular.module('myApp', [
-    'myApp.login',
-    'myApp.signup','myApp.home' ,'myApp.menu'
-]);

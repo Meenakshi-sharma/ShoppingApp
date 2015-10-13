@@ -5,9 +5,13 @@
         .config(function($stateProvider) {
 
             $stateProvider
-                .state('signup', {
+                .state('app.signup', {
                     url: '/signup',
+                    views: {
+                'menuContent' :{
                     templateUrl: 'components/SignUp/signup.html'
+                }
+            }
                 })
         });
 })();

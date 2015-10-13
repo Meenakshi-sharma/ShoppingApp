@@ -1,15 +1,14 @@
 var homeCtrl;
 
-homeCtrl = (function() {
+homeCtrl = (function($stateParams) {
     function homeCtrl() {
 
+       console.log("asdas"+$stateParams);
        
-       
-	   
-        this.user = {};
-        this.ShowPassword = 'password';
+	  
+        
     }
-
+ 
     
 
     return homeCtrl;

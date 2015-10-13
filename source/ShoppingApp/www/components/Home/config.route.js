@@ -4,7 +4,7 @@
         .config(function($stateProvider) {
             $stateProvider
                 .state('app.home', {
-                    url: '/home',
+                    url: '/home:id',
 
                     views: {
                 'menuContent' :{
