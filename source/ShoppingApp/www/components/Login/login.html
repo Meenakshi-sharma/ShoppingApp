@@ -11,9 +11,9 @@
          </label>
          <ion-checkbox name="chkPassword" ng-click="lc.ShowPassword = (lc.ShowPassword == 'password') ? 'text' : 'password'">Show Password</ion-checkbox>
          <div class="spacer" style="width:300px; height:72px;"></div>
-         <button class="button button-positive button-block" ng-click="lc.userLogin()" ui-sref="app.home">Sign In</button>
+         <button class="button button-positive button-block" ng-click="lc.userLogin()" ui-sref="app.banner">Sign In</button>
          <div style="width:60%; margin:0 20%">
-            <button class="button button-dark button-clear button-small link-button" >Forgot Password?</button>
+            <button class="button button-dark button-clear button-small link-button" ui-sref="app.banner" >Forgot Password?</button>
             <div class="HDivider">|</div>
             <button class="button button-dark button-clear button-small link-button" ui-sref="app.signup">Sign Up</button>
          </div>

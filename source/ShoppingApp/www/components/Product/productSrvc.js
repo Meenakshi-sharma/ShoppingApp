@@ -1,24 +1,27 @@
-var menuSrvc;
+var loginSrvc;
 
-menuSrvc = (function($log, $http, $q) {
+loginSrvc = (function($log, $http, $q) {
 
-    
-    var mc = this;
-   mc.$log = $log;
-    mc.$http = $http;
-    mc.$q = $q;
-var deferred ;
-  
-var menuSrvc ;
-           
+    var ls = this;
+    ls.$log = $log;
+    ls.$http = $http;
+    ls.$q = $q;
+
+    $log.debug("constructing loginSrvc");
+
+    var loginSrvc = {
+        chkLogin: function(username, password) {
+            var deferred;
             $log.debug("get globalCompanyFields service");
-            //console.log(username);
-            deferred = mc.$q.defer();
-            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/categories/categories')
+            console.log(username);
+            deferred = ls.$q.defer();
+            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/users/login', {
+                    email: username,
+                    password: password
+                })
                 .success((function(_this) {
                     return function(data, status) {
                         $log.debug("globalCompanyFields " + (angular.toJson(data, true)));
-                        var menuSrvc= data ;
                         return deferred.resolve(data);
                     };
                 })(this)).error((function(_this) {
@@ -30,11 +33,10 @@ var menuSrvc ;
                 })(this));
             return deferred.promise;
 
-       
-    
- 
+        }
+    }
 
-    return menuSrvc;
+    return loginSrvc;
 });
 
-menuModule.factory('menuSrvc', menuSrvc);
+loginModule.factory('loginSrvc', loginSrvc);

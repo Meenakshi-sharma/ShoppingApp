@@ -1,14 +1,14 @@
 (function() {
     'use strict';
-    homeModule
+    bannerModule
         .config(function($stateProvider) {
             $stateProvider
-                .state('app.home', {
-                    url: '/home',
+                .state('app.banner', {
+                    url: '/banner',
 
                     views: {
                 'menuContent' :{
-                    templateUrl: 'components/Home/home.html'
+                    templateUrl: 'components/Banner/banner.html'
                          }
             }
                 })

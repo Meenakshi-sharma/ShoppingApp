@@ -1,9 +1,9 @@
-<ion-view view-title="Home" ng-controller="homeCtrl as hc">
+<ion-view view-title="Banner" ng-controller="bannerCtrl as bc">
  <ion-nav-title >
         <img src="img/icon-small.png" style="height: 36px; width: 36px; margin-top: 4px; "/>
   </ion-nav-title>
   <div class="bar bar-subheader bar-dark">
-  <h1 class="title">{{hc.mcat}} Products</h1>
+  <h1 class="title">Magento Banner</h1>
 </div>
    <!-- <ion-nav-buttons side="right"  >
       <input type="search" ng-model="pc.searchproducts" />
@@ -29,7 +29,7 @@
    
     
      <div class="products" style="margin-top: 50px;">
-        <div class="product" ng-repeat="x in hc.category.children ">
+        <div class="product" ng-repeat="x in bc.category[0].Subcategories ">
             <div class="product_img"><img src="img/{{x.img}}.jpg" /></div>
             <div class="product_name">{{x.name}}</div>
             
