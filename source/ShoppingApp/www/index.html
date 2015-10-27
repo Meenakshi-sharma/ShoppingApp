@@ -12,6 +12,7 @@
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>  
 
     <!-- your app's js -->
    
@@ -42,7 +43,23 @@
     
     <script src="components/SignUp/config.route.js"></script>       
     <script src="components/SignUp/signupCtrl.js"></script>
-    <script src="components/SignUp/signupSrvc.js"></script>    
+    <script src="components/SignUp/signupSrvc.js"></script>
+
+    <!--   ProductListing  Component -->  
+    <script src="components/ProductListing/config.route.js"></script>       
+    <script src="components/ProductListing/prodListingCtrl.js"></script>
+    <script src="components/ProductListing/prodListingSrvc.js"></script>  
+
+    <!--   Filter  Component -->  
+     
+    <script src="components/Filter/config.route.js"></script>       
+    <script src="components/Filter/filterCtrl.js"></script>
+    <script src="components/Filter/filterSrvc.js"></script> 
+
+
+    <!----- ng-messages -->
+
+        
 
     <script src="components/Product/config.route.js"></script>       
     <script src="components/Product/productCtrl.js"></script>
@@ -50,6 +67,7 @@
 
   </head>
   <body ng-app="myApp">
+    <ion-nav-view></ion-nav-view>
     <ion-nav-bar class="bar-positive" animation="nav-title-slide-ios7">
         <ion-nav-back-button></ion-nav-back-button>
     </ion-nav-bar>    

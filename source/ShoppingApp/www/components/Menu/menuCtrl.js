@@ -36,6 +36,7 @@ menuCtrl.prototype.getSub = function( cid) {
     //console.log(cid);
 
 
+<<<<<<< Updated upstream
    // for(var i=0; i<= listc.length ; i++){
 
        // if ( listc[i].id === parseInt(cid) )
@@ -49,6 +50,15 @@ menuCtrl.prototype.getSub = function( cid) {
    //this.rootscope.$broadcast('scanner-started',cid);
         this.state.go("app.home", cid);
     //}
+=======
+            console.log(listc[i].Subcategories);
+            this.subcat =  listc[i].Subcategories ;
+           return (this.subcat);
+          
+    this.state.go("app.home");
+        }
+    }
+>>>>>>> Stashed changes
  
     }
     //this.state.go("app.home", cid);

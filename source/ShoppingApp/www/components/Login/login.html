@@ -1,14 +1,16 @@
 <ion-view title="Login">
    <ion-content padding="true" scroll="false" class="has-header">
-      <form ng-controller="loginCtrl as lc">
+      <form name="userLogin" ng-controller="loginCtrl as lc">
          <div class="spacer" style="width:300px; height:63px;"></div>
             <label class="item item-input">
-               <input type="text" ng-model="lc.user.username" placeholder="Username">
+               <input type="text" name="username" ng-model="lc.user.username" placeholder="Username" required>
             </label>
+            <p ng-show="userLogin.username.$invalid && !userLogin.username.$pristine && userLogin.username.$error.required" class="help-block"><span class="min-valid">Username is required.</span></p>
          <div class="spacer" style="width:300px; height:12px;"></div>
          <label class="item item-input">
-            <input type="{{lc.ShowPassword}}" ng-model="lc.user.password" placeholder="Password">
+            <input type="{{lc.ShowPassword}}" ng-model="lc.user.password" name="password" placeholder="Password" required>
          </label>
+         <p ng-show="userLogin.password.$invalid && !userLogin.password.$pristine && userLogin.password.$error.required" class="help-block"><span class="min-valid">Password is required.</span></p>
          <ion-checkbox name="chkPassword" ng-click="lc.ShowPassword = (lc.ShowPassword == 'password') ? 'text' : 'password'">Show Password</ion-checkbox>
          <div class="spacer" style="width:300px; height:72px;"></div>
          <button class="button button-positive button-block" ng-click="lc.userLogin()" ui-sref="app.banner">Sign In</button>

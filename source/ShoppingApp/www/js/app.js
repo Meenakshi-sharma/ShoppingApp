@@ -6,9 +6,51 @@
     // angular.module is a global place for creating, registering and retrieving Angular modules
     // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
     // the 2nd parameter is an array of 'requires'
+<<<<<<< Updated upstream
     angular.module('myApp', ['ionic', 'myApp.login', 'myApp.signup','myApp.home','myApp.menu','myApp.banner','myApp.product'])
+=======
+
+    angular.module('myApp', ['ionic', 'myApp.login', 'myApp.signup','myApp.home','myApp.menu','myApp.prodListing','myApp.filter','myApp.ngMessages'])
+
+>>>>>>> Stashed changes
         .run(runApp)
-        .config(configure);
+        .config(configure)
+
+     .directive('searchBar', [function () {
+    return {
+        scope: {
+            ngModel: '='
+        },
+        require: ['^ionNavBar', '?ngModel'],
+        restrict: 'E',
+        replace: true,
+        template: '<ion-nav-buttons side="right">'+
+                        '<div class="searchBar">'+
+                            '<div class="searchTxt" ng-show="ngModel.show">'+
+                                '<div class="bgtxt">'+
+                                    '<input type="text" placeholder="Search Products" >'+
+                                '</div>'+
+                            '</div>'+
+                            '<i class="icon ion-ios-search" ng-click="ngModel.txt=\'\';ngModel.show=!ngModel.show"></i>'+
+                        '<i class="icon ion-android-cart"></i>'+
+                        '</div>'+
+                    '</ion-nav-buttons>',
+        
+        compile: function (element, attrs) {
+            var icon=attrs.icon
+                    || (ionic.Platform.isAndroid() && 'ion-android-search')
+                    || (ionic.Platform.isIOS()     && 'ion-ios7-search')
+                    || 'ion-search';
+            angular.element(element[0].querySelector('.icon')).addClass(icon);
+            
+            return function($scope, $element, $attrs, ctrls) {
+                var navBarCtrl = ctrls[0];
+                $scope.navElement = $attrs.side === 'right' ? navBarCtrl.rightButtonsElement : navBarCtrl.leftButtonsElement;
+                
+            };
+        }
+  }
+  }])  
 
     function configure($stateProvider , $urlRouterProvider, $ionicConfigProvider) {
         
