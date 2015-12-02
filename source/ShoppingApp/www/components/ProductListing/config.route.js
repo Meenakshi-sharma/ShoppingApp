@@ -5,10 +5,15 @@
         .config(function($stateProvider) {
 
             $stateProvider
-                .state('prodListing', {
+                .state('app.prodListing', {
+                    cache: 'false',
                     url: '/prodListing',
-                    templateUrl: 'components/ProductListing/prodListing.html',
-                    controller: 'prodListingCtrl as pc'
+                    views: {
+                'menuContent' :{
+                    templateUrl: 'components/ProductListing/prodListing.html'
+                         }
+            },
+                    
                 })
         });
 })();

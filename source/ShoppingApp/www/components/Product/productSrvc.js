@@ -1,23 +1,23 @@
-var loginSrvc;
+var productSrvc;
 
-loginSrvc = (function($log, $http, $q) {
+productSrvc = (function($log, $http, $q) {
 
-    var ls = this;
-    ls.$log = $log;
-    ls.$http = $http;
-    ls.$q = $q;
+    var pd = this;
+    pd.$log = $log;
+    pd.$http = $http;
+    pd.$q = $q;
+var productSrvc ;
+    $log.debug("constructing productSrvc");
 
-    $log.debug("constructing loginSrvc");
-
-    var loginSrvc = {
-        chkLogin: function(username, password) {
+    var productSrvc = {
+        
+        getData: function(prid) {
             var deferred;
             $log.debug("get globalCompanyFields service");
-            console.log(username);
-            deferred = ls.$q.defer();
-            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/users/login', {
-                    email: username,
-                    password: password
+            //console.log(username);
+            deferred = pd.$q.defer();
+            $http.post('http://localhost:8025/magento_1.9/index.php/phonegapapp/Product/ProductDetail/', {
+                    id: prid 
                 })
                 .success((function(_this) {
                     return function(data, status) {
@@ -26,17 +26,18 @@ loginSrvc = (function($log, $http, $q) {
                     };
                 })(this)).error((function(_this) {
                     return function(data, status, headers) {
-                        $log.error("Failed to Login" + status);
-                        $log.error("Failed to Login Service");
+                        $log.error("Failed to product" + status);
+                        $log.error("Failed to product Service");
                         return deferred.reject(data);
                     };
                 })(this));
-            return deferred.promise;
+           return deferred.promise;
 
-        }
+        
     }
+}
 
-    return loginSrvc;
+    return productSrvc;
 });
 
-loginModule.factory('loginSrvc', loginSrvc);
+productModule.factory('productSrvc', productSrvc);

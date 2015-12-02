@@ -1,23 +1,52 @@
-var loginCtrl;
+var productCtrl;
 
-loginCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoading, $rootScope) {
-    function loginCtrl(loginSrvc , $state , $stateParams) {
+productCtrl = (function($rootScope,$scope,$state,productSrvc) {
+/*.value("person", {
+    firstName: "",
+    lastName: "",
 
-       this.loginSrvc = loginSrvc;
-       window.localStorage['id'] = 1 ;
-	   console.log(window.localStorage['id']);
-        this.user = {};
-        this.ShowPassword = 'password';
+    getFullName: function ()
+    {
+      return this.firstName + " " + this.lastName;
     }
+  })*/
+   
+function productCtrl($rootScope,$scope,productSrvc,$state,$stateParams) {
 
-    loginCtrl.prototype.userLogin = function() {
-        this.loginSrvc.chkLogin(this.user.username, this.user.password);
-        console.log(this.user.username);
-        console.log(this);
+   console.log($stateParams);
+	//this.pdata.name ="sadfsa";
+    //$scope.pdata = this.pdata;
+       this.state = $state;
+       var self = this;
+      //console.log(productSrvc);
+productSrvc.getData("4").then(function(response) {
+  
+ 
+
+ //alert(self.pdata[0].name+"dfsgdsfg");
+
+           //console.log(response);
+          self.pdata = response ;
+//$scope.fname = this.pdata[0].name;
+          // alert(this.pdata[0].name);
+         
+       })
+
+console.log(this.pdata);
+     }
+
+     productCtrl.prototype.showMeSearch = function(searchproducts){
+
+        window.localStorage['search'] = this.searchproducts;
+    
+        this.state.go("app.prodListing");
+
+     }
        
-    }
+    
 
-    return loginCtrl;
+    return productCtrl;
 })();
 
-loginModule.controller('loginCtrl', loginCtrl);
+productModule.controller('productCtrl', productCtrl);
+

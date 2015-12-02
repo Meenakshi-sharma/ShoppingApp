@@ -1,99 +1,81 @@
 var bannerSrvc;
 
 bannerSrvc = (function($log, $http, $q) {
-
     
+    var bc = this;
+    bc.$log = $log;
+    bc.$http = $http;
+    bc.$q = $q;
+//bc.rdata = [];
+     
+     var bannerSrvc = {
+        
+        getBdata: function() {
+        
+            var deferred;
+            $log.debug("get globalCompanyFields service");
+            //console.log(username);
+            deferred = bc.$q.defer();
+            $http.get('http://localhost:8025/magento_1.9/index.php/phonegapapp/Banner/bdetail')
+                .success((function(_this) {
+                    return function(data, status) {
+                        $log.debug("globalCompanyFields " + (angular.toJson(data, true)));
+                        return deferred.resolve(data);
+                       // bc.rdata = deferred.resolve(data);
 
-    var bannerSrvc =  [
-            {
-                id:1,
-                "name": "Men",
-                "Subcategories": {
-                    "Clothing": {
-                        "description": "Mens Clothing",
-                        "img" : "mens_clothing"
-                    },
-                    "Footwear": {
-                        "description": "Mens Footwear",
-                        "img" : "mens_footwear"
-                    },
-                    "Accesories": {
-                        "description": "Mens Accesories",
-                        "img" : "mens_accesories"
-                    },
-                    "Bags": {
-                        "description": "Mens Bags",
-                        "img" : "mens_bags"
-                    }
-                }
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        $log.error("Failed to fetch products" + status);
+                        $log.error("Failed to fetch mens products");
+                        return deferred.reject(data);
+                    };
+               })(this));
+            return deferred.promise;
             },
-            {
-                id:2,
-                "name": "Women",
-                "Subcategories": [
-                    {
-                        "Clothing": {
-                            "description": "Womens Clothing"
-                        },
-                        "Footwear": {
-                            "description": "Womens Footwear"
-                        },
-                        "Dresses": {
-                            "description": "Womens Dresses"
-                        }
-                    }
-                ]
+            
+            
+            getBdataSecond: function() {
+        
+            var deferred;
+            
+            deferred = bc.$q.defer();
+            $http.get('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/newProductcollection')
+                .success((function(_this) {
+                    return function(data, status) { //console.log(data);
+                       $log.debug("globalCompanyFields ffff " + (angular.toJson(data, true)));
+                        return deferred.resolve(data);
+                     };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        return deferred.reject(data);
+                    };
+               })(this));
+            return deferred.promise;
             },
-            {
-                id:3,
-                "name": "Kids",
-                "Subcategories": [
-                    {
-                        "Clothing": {
-                            "description": "Kids Clothing"
-                        },
-                        "Footwear": {
-                            "description": "Kids Footwear"
-                        },
-                        "Fashion": {
-                            "description": "Kids Fashion"
-                        }
-                    }
-                ]
-            },
-            {
-                id:4,
-                "name": "Accessories",
-                "Subcategories": [
-                    {
-                        "Stoles and Scarfs": {
-                            "description": "Stoles and Scarfs"
-                        },
-                        "Belts and Badges": {
-                            "description": "Belts and Badges"
-                        }
-                    }
-                ]
-            },
-            { 
-                id:5,
-                "name": "Handbags",
-                "Subcategories": [
-                    {
-                        "Leather handbags": {
-                            "description": "Leather handbags"
-                        },
-                        "Other handbags": {
-                            "description": "Other handbags"
-                        }
-                    }
-                ]
+            
+            getBdataSpecial: function() {
+        
+            var deferred;
+            
+            deferred = bc.$q.defer();
+            $http.get('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/specialProducts')
+                .success((function(_this) {
+                    return function(data, status) { //console.log(data);
+                       $log.debug("globalCompanyFields ffff " + (angular.toJson(data, true)));
+                        return deferred.resolve(data);
+                     };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        return deferred.reject(data);
+                    };
+               })(this));
+            return deferred.promise;
             }
-        ]
+}
 
-    
 
-    return bannerSrvc;
-});
+  return bannerSrvc;
+});  
 
-bannerModule.factory('bannerSrvc', bannerSrvc);
+bannerModule.factory('bannerSrvc', bannerSrvc)

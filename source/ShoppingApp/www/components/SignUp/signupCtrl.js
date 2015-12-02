@@ -2,8 +2,12 @@ var signupCtrl;
 
 signupCtrl = (function() {
     
-    function signupCtrl(signupSrvc) {
-
+    function signupCtrl(signupSrvc, $state) {
+        
+        if(localStorage.getItem("customer_id")){
+            $state.go("app.banner");
+            return;
+        }
         this.signupSrvc = signupSrvc;
         this.user = {};
         
@@ -11,7 +15,8 @@ signupCtrl = (function() {
     }
 
     signupCtrl.prototype.userLogin = function() {
-        this.signupSrvc.chkLogin(this.user.username, this.user.password);
+        var signup = this.signupSrvc.chkLogin(this.user.username, this.user.password, this.user.firstname, this.user.lastname)
+        alert("success"); console.log(signup);
         
     }
     return signupCtrl;

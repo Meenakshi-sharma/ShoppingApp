@@ -1,8 +1,18 @@
-<ion-view view-title="Product">
-    <ion-nav-title ng-show="!hasFilters">
-        <img src="img/icon-small.png" />
-    </ion-nav-title>
-    <search-bar ng-model="search"></search-bar>
+<ion-view view-title="Product" ng-controller="productCtrl as pd">
+    <ion-nav-title >
+        <img src="img/icon-small.png" style="height: 36px; width: 36px; margin-top: 4px; "/>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <div class="searchBar" >
+      <div class="searchTxt" ng-show="pd.showMe">
+            <div class="bgtxt">
+                <input type="text" ng-model="pd.searchproducts" placeholder="Search Products" >
+            </div>
+        </div>
+        <i class="icon ion-ios-search" ng-click="pd.showMeSearch()"></i> 
+    <i class="icon ion-android-cart" ui-sref="app.cart"></i>
+    </div>
+</ion-nav-buttons>
     
   <ion-content>
   <div class="product_detail">
@@ -10,7 +20,7 @@
     
     <ion-slide-box on-slide-changed="change(index)">
       <ion-slide>
-        <img src="img/slide1.png" />
+        <img src="{{pd.pdata[0].img}}" />
       </ion-slide>
       <ion-slide>
         <img src="img/slide2.jpg" />
@@ -24,16 +34,16 @@
     </ion-slide-box>
     
     <!-- Product Name, Likes -->
-    <div class="prodetail">
-        <h4>Volcom Shoes</h4>
-        <span><i class="icon ion-heart"></i> 100 Likes</span>
-        <div class="price">$120</div>
+    <div class="prodetail" ng-model="pd.pdata">
+        <h4>{{pd.pdata[0].name}}</h4>
+        <span><i class="icon ion-heart"></i>Add to Cart</span>
+        <div class="price">{{pd.pdata[0].price}}</div>
     </div>
     
     <!-- Product Size -->
     <div class="prodetail">
         <h5>Sizes Available</h5>
-        <span><i class="icon ion-help"></i> Sizing Help</span>
+        <span><i class="icon ion-help"></i>Sizing Help</span>
         <div class="price_box">
             <span>6</span>
             <span>7</span>
@@ -59,9 +69,10 @@
     <div class="prodetail">
         <h5>Description</h5>
         <div class="price_box">
-            <p>- Dolor ipsum dolor sit amit</p>
-            <p>- Dolor ipsum dolor sit amit</p>
-            <p>- Dolor ipsum dolor sit amit</p>
+            <p>Brand : {{pd.pdata[0].brand}}</p>
+            <p>Color : {{pd.pdata[0].color}}</p>
+            <p>Type : {{pd.pdata[0].type}}</p>
+            <p>Phone : {{pd.pdata[0].phone}}</p>
         </div>
         
         <h5>Material</h5>

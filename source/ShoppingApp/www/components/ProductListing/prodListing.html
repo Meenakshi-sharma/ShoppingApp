@@ -1,4 +1,4 @@
-<ion-view title="Product Listing">
+<ion-view title="Product Listing" ng-controller="prodListingCtrl as pc">
  <ion-nav-title >
         <img src="img/icon-small.png" style="height: 36px; width: 36px; margin-top: 4px; "/>
   </ion-nav-title>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <i class="icon ion-ios-search" ng-click="pc.showMeSearch()"></i>
-    <i class="icon ion-android-cart"></i>
+    <i ui-sref="app.cart" class="icon ion-android-cart"></i>
     </div>
 </ion-nav-buttons>
 
@@ -41,7 +41,7 @@
     
      <div  class="products" style="margin-top: 50px;">
         <div class="product" ng-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts ">
-            <div class="product_img"><img src="img/{{x.img}}" /></div>
+            <div class="product_img"><a ng-click="pc.fetchDetail({{x.id}})"><img src="{{x.img}}" /></a></div>
             <div class="product_name">{{x.name}}</div>
             <div class="product_price">{{x.price | currency:"$":0}}</div>
         </div>

@@ -1,48 +1,28 @@
 var homeCtrl;
 
-homeCtrl = (function($scope,$ionicSideMenuDelegate,$state) {
-    function homeCtrl($scope,homeSrvc,$ionicSideMenuDelegate,$state) {
+homeCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state) {
+
+    function homeCtrl($rootScope,$scope,homeSrvc,$ionicSideMenuDelegate,$state) {
 
 
        
        console.log(homeSrvc.children[0].children);
        this.category = homeSrvc.children[0].children[window.localStorage['id']]; 
-       this.mcat = homeSrvc.children[0].children[window.localStorage['id']].name ; }
-       /*$scope.$on('scanner-started', function(event, args) {
+       this.mcat = homeSrvc.children[0].children[window.localStorage['id']].name ; 
+       this.showMe = true;
+       this.state = $state;
+       this.rootScope = $rootScope;
 
-    console.log(args);
-this.category = homeSrvc.children[0].children[2]; 
-       this.mcat = homeSrvc.children[0].children[1].name ;
-console.log(this.mcat);
-this.category = homeSrvc.children[0].children[2]; 
-       this.mcat = homeSrvc.children[0].children[1].name ;
-console.log(this.mcat);
-$state.go($state.current, {}, {reload: true});*/
+     }
 
-//}); 
-// this.cid = window.localStorage['id']; 
+     homeCtrl.prototype.showMeSearch = function(searchproducts){
 
-	  //console.log(window.localStorage['id']);
-/*this.subcat =  menuSrvc[this.cid].Subcategories ;
-    $scope.$watch(function () {
-    return $ionicSideMenuDelegate.isOpenLeft();
-  },
-     function (isOpen) {
-    if (isOpen){
-      console.log("open");
-    }
-    else{
-        console.log("close");
-        this.cid = window.localStorage['id'];
-         this.category = menuSrvc; 
-         this.subcat =  menuSrvc[this.cid].Subcategories ;
-        console.log(this);
-    }
+        this.rootScope.srch = this.searchproducts;
+    
+        this.state.go("app.prodListing");
 
-  });    
-    console.log(this);
-    }*/
- 
+     }
+       
     
 
     return homeCtrl;

@@ -1,15 +1,14 @@
 (function() {
     'use strict';
-    homeModule
+    cartModule
         .config(function($stateProvider) {
             $stateProvider
-                .state('app.home', {
-                    cache:'false',
-                    url: '/home',
+                .state('app.cart', {
+                    url: '/cart',
 
                     views: {
                 'menuContent' :{
-                    templateUrl: 'components/Home/home.html'
+                    templateUrl: 'components/Cart/cart.html'
                          }
             }
                 })

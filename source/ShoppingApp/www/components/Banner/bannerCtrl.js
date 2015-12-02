@@ -1,47 +1,40 @@
 var bannerCtrl;
 
-bannerCtrl = (function($scope,$ionicSideMenuDelegate) {
-    function bannerCtrl($scope,bannerSrvc,$ionicSideMenuDelegate) {
+bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state) {
+    function bannerCtrl($rootScope,$scope,bannerSrvc,$ionicSideMenuDelegate,$state) {
 
-       this.category= bannerSrvc;
-console.log(bannerSrvc);
-        } 
-     /*  console.log(bannerSrvc.children[0].children);
-       this.category = bannerSrvc.children[0].children[2]; 
-       this.mcat = bannerSrvc.children[0].children[2].name ;
-       $scope.$on('scanner-started', function(event, args) {
+       this.showMe = true;
+       this.state = $state;
+       this.rootScope = $rootScope;
+        
+        var self = this;
+      
+        bannerSrvc.getBdata().then(function(response) { //alert("d");
+            self.category = response ;
+        });
+       
+        bannerSrvc.getBdataSecond().then(function(response) { //alert("mybanner"); console.log(response);
+            self.categoryBanners = response ;
+        });
+        
+        bannerSrvc.getBdataSpecial().then(function(response) {// alert("mybanner"); console.log(response);
+            self.categoryBannersSpecial = response ;
+        });
 
-    console.log(args);
-this.category = bannerSrvc.children[0].children[2]; 
-       this.mcat = bannerSrvc.children[0].children[1].name ;
-console.log(this.mcat);
-
-}); 
-// this.cid = window.localStorage['id']; 
-//}
-	  //console.log(window.localStorage['id']);
-this.subcat =  menuSrvc[this.cid].Subcategories ;
-    $scope.$watch(function () {
-    return $ionicSideMenuDelegate.isOpenLeft();
-  },
-     function (isOpen) {
-    if (isOpen){
-      console.log("open");
-    }
-    else{
-        console.log("close");
-        this.cid = window.localStorage['id'];
-         this.category = menuSrvc; 
-         this.subcat =  menuSrvc[this.cid].Subcategories ;
-        console.log(this);
     }
 
-  });    
-    console.log(this);*/
-    
- 
-    
 
+      bannerCtrl.prototype.showMeSearch = function($rootScope,searchproducts){
+
+        console.log(this.searchproducts);
+
+        this.rootScope.srch = this.searchproducts;
+    
+        this.state.go("app.prodListing");
+        
+      
+    } 
+     
     return bannerCtrl;
 })();
 
