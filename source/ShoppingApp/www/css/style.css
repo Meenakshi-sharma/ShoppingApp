@@ -202,9 +202,9 @@ margin-left :-40px;
 .sidenav .item,.sidenav .item-complex .item-content, .item-radio .item-content{
     background-color: #666;
     color: #fff;
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 600;
-    line-height: 35px;
+    line-height: 5px;
     border-width:0px;
 }
 
@@ -231,4 +231,23 @@ margin-left :-40px;
 .min-valid{
 color:red;
 
+}
+
+.logintitle{
+color: #fff;
+
+
+}
+
+ .collapse-text-toggle {
+    font-size: 0.9em;
+    color: #FFF;
+    font-weight:600;
+    cursor: pointer;
+}
+.collapse-text-toggle:before {
+    content: '\00a0(';
+}
+.collapse-text-toggle:after {
+    content: ')';
 }

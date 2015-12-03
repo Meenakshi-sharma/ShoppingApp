@@ -6,13 +6,9 @@
     // angular.module is a global place for creating, registering and retrieving Angular modules
     // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
     // the 2nd parameter is an array of 'requires'
-<<<<<<< Updated upstream
-    angular.module('myApp', ['ionic', 'myApp.login', 'myApp.signup','myApp.home','myApp.menu','myApp.banner','myApp.product'])
-=======
 
-    angular.module('myApp', ['ionic', 'myApp.login', 'myApp.signup','myApp.home','myApp.menu','myApp.prodListing','myApp.filter','myApp.ngMessages'])
+    angular.module('myApp', ['ionic', 'myApp.login', 'myApp.signup','myApp.home','myApp.menu','myApp.banner','myApp.product','myApp.prodListing','myApp.filter','myApp.ngMessages','myApp.cart','myApp.checkout'])
 
->>>>>>> Stashed changes
         .run(runApp)
         .config(configure)
 
@@ -50,7 +46,9 @@
             };
         }
   }
-  }])  
+  }])
+  
+    
 
     function configure($stateProvider , $urlRouterProvider, $ionicConfigProvider) {
         

@@ -20,24 +20,24 @@
     
     <ion-slide-box on-slide-changed="change(index)">
       <ion-slide>
-        <img ng-src="{{pd.pdata[0].img}}" />
+        <img src="{{pd.pdata[0].img}}" />
       </ion-slide>
       <ion-slide>
-        <img ng-src="img/slide2.jpg" />
+        <img src="img/slide2.jpg" />
       </ion-slide>
       <ion-slide>
-        <img ng-src="img/slide3.jpg" />
+        <img src="img/slide3.jpg" />
       </ion-slide>
       <ion-slide>
-        <img ng-src="img/slide4.jpg" />
+        <img src="img/slide4.jpg" />
       </ion-slide>
     </ion-slide-box>
     
     <!-- Product Name, Likes -->
     <div class="prodetail" ng-model="pd.pdata">
-        <h4>{{pd.pdata.name}}</h4>
-        <span><a ng-click="pd.addCart({{pd.productid}})" href="javascript:;">Add to Cart</a></span>
-        <div class="price">{{pd.pdata.price | currency}}</div>
+        <h4>{{pd.pdata[0].name}}</h4>
+        <span><i class="icon ion-heart"></i>Add to Cart</span>
+        <div class="price">{{pd.pdata[0].price}}</div>
     </div>
     
     <!-- Product Size -->
@@ -68,12 +68,12 @@
 <!-- Product Description -->
     <div class="prodetail">
         <h5>Description</h5>
-        <div ng-bind-html=pd.pdata.short_description class="price_box">
-            <!--p>Brand : {{pd.pdata[0].brand}}</p>
+        <div class="price_box">
+            <p>Brand : {{pd.pdata[0].brand}}</p>
             <p>Color : {{pd.pdata[0].color}}</p>
             <p>Type : {{pd.pdata[0].type}}</p>
-            <p>Phone : {{pd.pdata[0].phone}}</p-->
-
+            <p>Phone : {{pd.pdata[0].phone}}</p>
+        </div>
         
         <h5>Material</h5>
         <div class="price_box">

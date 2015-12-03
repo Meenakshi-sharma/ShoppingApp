@@ -16,8 +16,8 @@ var productSrvc ;
             $log.debug("get globalCompanyFields service");
             //console.log(username);
             deferred = pd.$q.defer();
-            $http.post('http://localhost:8025/magento_1.9/index.php/phonegapapp/Product/ProductDetail/', {
-                    id: prid 
+            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/productDetail', {
+                    productId: prid 
                 })
                 .success((function(_this) {
                     return function(data, status) {
@@ -32,9 +32,32 @@ var productSrvc ;
                     };
                 })(this));
            return deferred.promise;
+        },
+        addToCart: function(products, customer) {
+            var deferred;
+            $log.debug("add to cart");
+            //console.log(username);
+            deferred = pd.$q.defer();
+            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/cart/addCart', {
+                    products: products,
+                    customer: customer
+                })
+                .success((function(_this) {
+                    return function(data, status) {
+                        $log.debug("globalCompanyFields " + (angular.toJson(data, true)));
+                        return deferred.resolve(data);
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        $log.error("Failed to product" + status);
+                        $log.error("Failed to product Service");
+                        return deferred.reject(data);
+                    };
+                })(this));
+           return deferred.promise;
+        }
 
-        
-    }
+    
 }
 
     return productSrvc;

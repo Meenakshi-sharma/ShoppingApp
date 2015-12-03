@@ -4,12 +4,12 @@
   </ion-nav-title>
   <ion-nav-buttons side="right">
     <div class="searchBar" >
-        <div class="searchTxt" ng-show="hc.showMe">
+        <div class="searchTxt" ng-show="cc.showMe">
             <div class="bgtxt">
-                <input type="text" ng-model="hc.searchproducts" placeholder="Search Products" >
+                <input type="text" ng-model="cc.searchproducts" placeholder="Search Products" >
             </div>
         </div>
-        <i class="icon ion-ios-search" ng-click="hc.showMeSearch()"></i>
+        <i class="icon ion-ios-search" ng-click="cc.showMeSearch()"></i>
     
     </div>
 </ion-nav-buttons>
@@ -21,6 +21,17 @@
     
     <div class="list" style="top: 44px;">
     
+    <a class="item item-thumbnail-left" href="#" ng-repeat="x in cc.cartProducts">
+          <img src="img/product2.png" />
+          <i style="float: right;" class="icon ion-trash-a"></i>
+          <h2>{{x.name}}</h2>
+          <p>Size: 38 | Color: Brown </p>
+         <div class="price" style="loat: LEFT; font-size: 20px;font-weight: 900;color: #6FD0D6;margin-top: 18px;margin-bottom: -7px;">$125</div>
+        <div class="pull-right" style="float: right; margin-bottom: -6px; margin-top: -15px;">
+            <i class="icon ion-plus icon-square" ng-click="cc.myquantity('1')"></i><span> {{cc.quantity}} </span><i class="icon ion-minus icon-square" ng-click="cc.myquantity('0')"></i>
+        </div>
+        </a>
+    <!--
         <a class="item item-thumbnail-left" href="#">
           <img src="img/product1.png">
           <i style="float: right;" class="icon ion-trash-a"></i>
@@ -28,7 +39,7 @@
           <p>Size: 38 | Color: Brown </p>
          <div class="price" style="loat: LEFT; font-size: 20px;font-weight: 900;color: #6FD0D6;margin-top: 18px;margin-bottom: -7px;">$125</div>
         <div class="pull-right" style="float: right; margin-bottom: -6px; margin-top: -15px;">
-            <i class="icon ion-plus icon-square" ng-click="myquantity('1')"></i><span> {{quantity}} </span><i class="icon ion-minus icon-square" ng-click="myquantity('0')"></i>
+            <i class="icon ion-plus icon-square" ng-click="hc.myquantity('1')"></i><span> {{quantity}} </span><i class="icon ion-minus icon-square" ng-click="hc.myquantity('0')"></i>
         </div>
         </a>
         
@@ -39,7 +50,7 @@
           <p>Size: 38 | Color: Brown </p>
           <div class="price" style="loat: LEFT; font-size: 20px;font-weight: 900;color: #6FD0D6;margin-top: 18px;margin-bottom: -7px;">$125</div>
         <div class="pull-right" style="float: right; margin-bottom: -6px; margin-top: -15px;">
-            <i class="icon ion-plus icon-square" ng-click="myquantity('1')"></i><span> {{quantity}} </span><i class="icon ion-minus icon-square" ng-click="myquantity('0')"></i>
+            <i class="icon ion-plus icon-square" ng-click="hc.myquantity('1')"></i><span> {{quantity}} </span><i class="icon ion-minus icon-square" ng-click="hc.myquantity('0')"></i>
         </div>
         </a>
         
@@ -50,19 +61,22 @@
           <p>Size: 38 | Color: Brown </p>
           <div class="price" style="loat: LEFT; font-size: 20px;font-weight: 900;color: #6FD0D6;margin-top: 18px;margin-bottom: -7px;">$125</div>
         <div class="pull-right" style="float: right; margin-bottom: -6px; margin-top: -15px;">
-            <i class="icon ion-plus icon-square" ng-click="myquantity('1')"></i><span> {{quantity}} </span><i class="icon ion-minus icon-square" ng-click="myquantity('0')"></i>
+            <i class="icon ion-plus icon-square" ng-click="hc.myquantity('1')"></i><span> {{quantity}} </span><i class="icon ion-minus icon-square" ng-click="hc.myquantity('0')"></i>
         </div>
         </a>
-    
+    -->
     </div>
    <div class="list" style="top: 23px;">
           <div class="item item-text-wrap">
             <div class="pull-right" >
+            <!--
                 <p style="padding-right:10px;">Sub Total  <span style="float: right;">$50</span></p> <br />
                 <p style="padding-right:10px;">Delivery Charges <span style="float: right;">$10</span></p> <br />
                 <p style="padding-right:10px;">Service Charges  <span style="float: right;">$5</span></p><br />
                 <hr />
                 <span style="padding-right:10px; font-weight:900;">Total Charges  <span style="float: right;">$65</span></p><br />
+            -->
+            <p style="padding-right:10px;" ng-repeat="x in cc.cartTotal">{{x.title}}  <span style="float: right;">{{x.amount | currency}}</span></p> <br /><hr />
             </div>
           </div>
         </div>

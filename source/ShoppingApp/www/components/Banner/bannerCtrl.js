@@ -1,7 +1,7 @@
 var bannerCtrl;
 
-bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state) {
-    function bannerCtrl($rootScope,$scope,bannerSrvc,$ionicSideMenuDelegate,$state) {
+bannerCtrl = (function($rootScope, $scope,$ionicLoading,$ionicSideMenuDelegate,$state) {
+    function bannerCtrl($rootScope,$scope,bannerSrvc,$ionicSideMenuDelegate,$state, $ionicLoading) {
 
        this.showMe = true;
        this.state = $state;
@@ -20,7 +20,6 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state) {
         bannerSrvc.getBdataSpecial().then(function(response) {// alert("mybanner"); console.log(response);
             self.categoryBannersSpecial = response ;
         });
-
     }
 
 
