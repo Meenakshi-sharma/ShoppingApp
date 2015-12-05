@@ -23,7 +23,7 @@
    <ion-content padding="true" class="has-header">
    
    <div class="bar bar-header bar-dark">
-      <h1 class="title">MEN'S FOOTWEAR</h1>
+      <h1 class="title">{{pc.categoryHeading}}</h1>
       <button ui-sref="app.filter" class="button button clear ion-arrow-swap"></button>
       <button class="button button-clear ion-funnel" ng-click="pc.showMeSelect()"></button>
     </div>
@@ -41,9 +41,9 @@
     
      <div  class="products" style="margin-top: 50px;">
         <div class="product" ng-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts ">
-            <div class="product_img"><a ng-click="pc.fetchDetail({{x.id}})"><img src="{{x.img}}" /></a></div>
+            <div class="product_img"><a ng-click="pc.fetchDetail({{x.productid}})"><img ng-src="{{x.image}}" /></a></div>
             <div class="product_name">{{x.name}}</div>
-            <div class="product_price">{{x.price | currency:"$":0}}</div>
+            <div class="product_price">{{x.regularprice | currency:"$":0}}</div>
         </div>
 	</div>
   </ion-content>

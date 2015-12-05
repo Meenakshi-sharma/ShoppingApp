@@ -6,30 +6,20 @@ prodListingCtrl = (function($rootScope, $state , prodListingSrvc) {
 	
 
 
-	//var shwoMe = (showMe == false)? true:false ;
-
-    function prodListingCtrl($rootScope, prodListingSrvc , $state , $stateParams) {
-    //console.log(this);
-	this.state = $state ;
-	//this.prodListing = prodListingSrvc;
- // console.log(prodListingSrvc);
-	var self = this;
-      
-prodListingSrvc.getCdata("6").then(function(response) {
+	function prodListingCtrl($rootScope, prodListingSrvc , $state , $stateParams) {
+        this.state = $state ;
+	    var self = this;
+    
+    if($stateParams.category_id){
+        var category_id = $stateParams.category_id;
+        var category_name = $stateParams.category_name;
+    }
   
- 
+    prodListingSrvc.getCdata(category_id).then(function(response) {
+        self.prodListing = response ;
+        self.categoryHeading = category_name;
+    })
 
- //alert(self.pdata[0].name+"dfsgdsfg");
-
-           //console.log(response);
-          self.prodListing = response ;
-//$scope.fname = this.pdata[0].name;
-          // alert(this.pdata[0].name);
-         
-       })
-
-console.log(this.prodListing);
-     
     
     this.showMe = false;
     this.showListing = true;
@@ -68,9 +58,9 @@ console.log(this.prodListing);
     }
 
 
-   prodListingCtrl.prototype.fetchDetail = function(Id){ 
-   	alert(Id);
-  this.state.go("product",{ pId:Id });
+   prodListingCtrl.prototype.fetchDetail = function(product_id){ 
+   
+  this.state.go("product",{ product_id:product_id });
 
    }
    

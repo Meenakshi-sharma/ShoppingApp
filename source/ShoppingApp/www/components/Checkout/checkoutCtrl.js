@@ -1,32 +1,35 @@
 var checkoutCtrl;
 
-checkoutCtrl = (function($scope,$ionicSideMenuDelegate,$state) {
+checkoutCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {
 
-    function checkoutCtrl($scope) {
-alert("InAppBrowser");
-//        
-            var ref = cordova.InAppBrowser.open('http://beta.eurocarparts.com/','_self', 'hardwareback=yes,directories=no,titlebar=no,toolbar=no,location=yes,status=no,menubar=no,scrollbars=no,resizable=no');
-            var myCallback = function(event) { 
-                cordova.InAppBrowser.open('http://beta.eurocarparts.com/','_self', 'hardwareback=yes,directories=no,titlebar=no,toolbar=no,location=yes,status=no,menubar=no,scrollbars=no,resizable=no'); }
-            ref.addEventListener('exit', myCallback);
+    function checkoutCtrl($scope,$state,cartSrvc) {
         
-       
-      /* console.log(checkoutSrvc.children[0].children);
-       this.category = checkoutSrvc.children[0].children[window.localStorage['id']]; 
-       this.mcat = checkoutSrvc.children[0].children[window.localStorage['id']].name ; 
-       this.showMe = true;
-       this.state = $state;*/
-
-     }
-
-     /*checkoutCtrl.prototype.showMeSearch = function(searchproducts){
-
-        window.localStorage['search'] = this.searchproducts;
-    
-        this.state.go("app.prodListing");
-
-     }*/
-       
+        this.state = $state;
+        var self = this;
+         
+         if(localStorage.getItem("cartid") && localStorage.getItem("cartid") != '' && localStorage.getItem("cartid") != 'undefined'){
+            var cartid = localStorage.getItem("cartid");// alert(cartid);   
+           
+            cartSrvc.getCartProducts(cartid).then(function(response) { console.log("CJEsdf sdfsdf sdf sdfCLPIT response"); console.log(response);
+                    response.productlist[0].quantity = 1;
+                    response.productlist[0].price = 130;
+                    response.productlist[0].subTotal = 130;
+                    
+                    self.cartProducts = response.productlist;
+                    
+                    var grandTotal = 0;
+                    for(i=0; i<self.cartProducts.length;i++){
+                        grandTotal = grandTotal+self.cartProducts[i].subTotal;
+                    }
+                    self.cartProducts.total = grandTotal;
+                    self.quantity = 1;
+             })            
+        }
+         
+         checkoutCtrl.prototype.GoToNav = function(route){
+            $state.go("app."+route);
+         }
+     }  
     
 
     return checkoutCtrl;

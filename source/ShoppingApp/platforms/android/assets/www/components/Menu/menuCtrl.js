@@ -14,8 +14,7 @@ menuCtrl = (function($state ,$rootScope,$scope,$timeout) {
         } else {
             this.username = "Guest";
         }
-
-    //console.log(homeSrvc.children[0].children);
+//console.log("categoryis");   console.log(homeSrvc.children[0].children);
     this.categories = homeSrvc.children[0].children;
     
     
@@ -23,21 +22,16 @@ menuCtrl = (function($state ,$rootScope,$scope,$timeout) {
 }
 
 
-menuCtrl.prototype.getSub = function( cid) {
+menuCtrl.prototype.getSub = function(position_id, category_id, category_name) { //alert(position_id); alert(category_id); alert(category_name);
 
 
-    var  listc = this.homeSrvc; 
-    console.log("duckl");
-    console.log(listc);
-    console.log("duck2");
-   
-          window.localStorage['id'] = cid;
-         if (listc.children[0].children[cid].children.length > 0){
-this.state.go("app.home");
-
-           } else {
-          //window.localStorage['id'] = cid;
-    this.state.go("app.prodListing"); }
+    var  listc = this.homeSrvc; //console.log(listc); console.log("duckssssssss");
+   //alert(listc.children[0].children[position_id].children.length);
+         if (listc.children[0].children[position_id].children.length > 0){
+                this.state.go("app.home", {position_id:position_id});
+            } else {
+              this.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});
+            }
         }
     
 menuCtrl.prototype.LogOut = function() {

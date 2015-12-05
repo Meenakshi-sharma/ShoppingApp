@@ -5,7 +5,7 @@
             $stateProvider
                 .state('product', {
                 	cache:'false',
-                    url: '/product',
+                    url: '/product:product_id',
                     templateUrl: 'components/Product/product.html'
                 })
         });

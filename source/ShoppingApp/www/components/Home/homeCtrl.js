@@ -2,13 +2,16 @@ var homeCtrl;
 
 homeCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state) {
 
-    function homeCtrl($rootScope,$scope,homeSrvc,$ionicSideMenuDelegate,$state) {
+    function homeCtrl($rootScope,$stateParams, $scope,homeSrvc,$ionicSideMenuDelegate,$state) {
 
-
+        if($stateParams.position_id){
+            var position_id = $stateParams.position_id;
+        } else {
+            var position_id = 1;
+        }
        
-       console.log(homeSrvc.children[0].children);
-       this.category = homeSrvc.children[0].children[window.localStorage['id']]; 
-       this.mcat = homeSrvc.children[0].children[window.localStorage['id']].name ; 
+       this.category = homeSrvc.children[0].children[position_id];
+       this.categoryHeading = homeSrvc.children[0].children[position_id].name ; 
        this.showMe = true;
        this.state = $state;
        this.rootScope = $rootScope;
@@ -22,6 +25,10 @@ homeCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state) {
         this.state.go("app.prodListing");
 
      }
+     
+     homeCtrl.prototype.showProducts = function(category_id, category_name){
+        this.state.go("app.prodListing",{ category_id:category_id, category_name:category_name });
+    }
        
     
 

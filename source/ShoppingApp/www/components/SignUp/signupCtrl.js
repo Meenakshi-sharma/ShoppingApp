@@ -4,7 +4,7 @@ signupCtrl = (function() {
     
     function signupCtrl(signupSrvc, $state) {
         
-        if(localStorage.getItem("customer_id")){
+        if(localStorage.getItem("customer_id") && localStorage.getItem("customer_id") != ''){
             $state.go("app.banner");
             return;
         }

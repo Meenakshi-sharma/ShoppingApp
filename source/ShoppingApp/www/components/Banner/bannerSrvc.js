@@ -8,18 +8,19 @@ bannerSrvc = (function($log, $http, $q) {
     bc.$q = $q;
 //bc.rdata = [];
      
-     var bannerSrvc = {
+     bannerSrvc = {
         
         getBdata: function() {
         
             var deferred;
-            $log.debug("get globalCompanyFields service");
+            //$log.debug("get globalCompanyFields service");
             //console.log(username);
             deferred = bc.$q.defer();
-            $http.get('http://localhost:8025/magento_1.9/index.php/phonegapapp/Banner/bdetail')
+            //$http.get('http://localhost:8025/magento_1.9/index.php/phonegapapp/Banner/bdetail')
+            $http.get('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/bannerSlider')
                 .success((function(_this) {
                     return function(data, status) {
-                        $log.debug("globalCompanyFields " + (angular.toJson(data, true)));
+                        //$log.debug("globalCompanyFields " + (angular.toJson(data, true)));
                         return deferred.resolve(data);
                        // bc.rdata = deferred.resolve(data);
 
@@ -43,7 +44,7 @@ bannerSrvc = (function($log, $http, $q) {
             $http.get('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/newProductcollection')
                 .success((function(_this) {
                     return function(data, status) { //console.log(data);
-                       $log.debug("globalCompanyFields ffff " + (angular.toJson(data, true)));
+                       //$log.debug("globalCompanyFields ffff " + (angular.toJson(data, true)));
                         return deferred.resolve(data);
                      };
                 })(this)).error((function(_this) {
@@ -62,7 +63,7 @@ bannerSrvc = (function($log, $http, $q) {
             $http.get('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/specialProducts')
                 .success((function(_this) {
                     return function(data, status) { //console.log(data);
-                       $log.debug("globalCompanyFields ffff " + (angular.toJson(data, true)));
+                       //$log.debug("globalCompanyFields ffff " + (angular.toJson(data, true)));
                         return deferred.resolve(data);
                      };
                 })(this)).error((function(_this) {

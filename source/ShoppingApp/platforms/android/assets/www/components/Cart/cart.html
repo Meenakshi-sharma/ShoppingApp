@@ -4,69 +4,42 @@
   </ion-nav-title>
   <ion-nav-buttons side="right">
     <div class="searchBar" >
-        <div class="searchTxt" ng-show="hc.showMe">
+        <div class="searchTxt" ng-show="cc.showMe">
             <div class="bgtxt">
-                <input type="text" ng-model="hc.searchproducts" placeholder="Search Products" >
+                <input type="text" ng-model="cc.searchproducts" placeholder="Search Products" >
             </div>
         </div>
-        <i class="icon ion-ios-search" ng-click="hc.showMeSearch()"></i>
+        <i class="icon ion-ios-search" ng-click="cc.showMeSearch()"></i>
     
     </div>
 </ion-nav-buttons>
-    
   <ion-content>
     <div class="bar bar-header bar-dark">
       <h1 class="title">CART</h1>
     </div>
     
-    <div class="list" style="top: 44px;">
-    
-        <a class="item item-thumbnail-left" href="#">
-          <img src="img/product1.png">
-          <i style="float: right;" class="icon ion-trash-a"></i>
-          <h2>Earthkeepers Sneakers</h2>
-          <p>Size: 38 | Color: Brown </p>
-         <div class="price" style="loat: LEFT; font-size: 20px;font-weight: 900;color: #6FD0D6;margin-top: 18px;margin-bottom: -7px;">$125</div>
-        <div class="pull-right" style="float: right; margin-bottom: -6px; margin-top: -15px;">
-            <i class="icon ion-plus icon-square" ng-click="myquantity('1')"></i><span> {{quantity}} </span><i class="icon ion-minus icon-square" ng-click="myquantity('0')"></i>
-        </div>
-        </a>
-        
-        <a class="item item-thumbnail-left" href="#">
-          <img src="img/product2.png">
-          <i style="float: right;" class="icon ion-trash-a"></i>
-          <h2>Perforated Oxfords</h2>
-          <p>Size: 38 | Color: Brown </p>
-          <div class="price" style="loat: LEFT; font-size: 20px;font-weight: 900;color: #6FD0D6;margin-top: 18px;margin-bottom: -7px;">$125</div>
-        <div class="pull-right" style="float: right; margin-bottom: -6px; margin-top: -15px;">
-            <i class="icon ion-plus icon-square" ng-click="myquantity('1')"></i><span> {{quantity}} </span><i class="icon ion-minus icon-square" ng-click="myquantity('0')"></i>
-        </div>
-        </a>
-        
-        <a class="item item-thumbnail-left" href="#">
-          <img src="img/product3.png">
-          <i style="float: right;" class="icon ion-trash-a"></i>
-          <h2>G.H Bas & Co. Oxfords</h2>
-          <p>Size: 38 | Color: Brown </p>
-          <div class="price" style="loat: LEFT; font-size: 20px;font-weight: 900;color: #6FD0D6;margin-top: 18px;margin-bottom: -7px;">$125</div>
-        <div class="pull-right" style="float: right; margin-bottom: -6px; margin-top: -15px;">
-            <i class="icon ion-plus icon-square" ng-click="myquantity('1')"></i><span> {{quantity}} </span><i class="icon ion-minus icon-square" ng-click="myquantity('0')"></i>
-        </div>
-        </a>
-    
+    <div class="list" style="top: 44px;" ng-if="cc.cartProducts">
+        <a class="item item-thumbnail-left" href="#" ng-repeat="x in cc.cartProducts">
+              <img src="img/product2.png" />
+              <i style="float: right;" class="icon ion-trash-a" ng-click="cc.deleteProduct({{x.product_id}})"></i>
+              <h2>{{x.name}}</h2>
+              <p>Size: 38 | Color: Brown </p>
+                <div class="price" style="loat: LEFT; font-size: 20px;font-weight: 900;color: #6FD0D6;margin-top: 18px;margin-bottom: -7px;">$125</div>
+                <div class="pull-right" style="float: right; margin-bottom: -6px; margin-top: -15px;">
+                    <i class="icon ion-plus icon-square" style="background: #ddd;color: #fff;padding: 2px 3px;" ng-click="cc.myquantity({{x.product_id}},'1')"></i><span> {{cc.quantity}} </span><i style="background: #ddd;color: #fff;padding: 2px 3px;" class="icon ion-minus icon-square" ng-click="cc.myquantity({{x.product_id}}, '0')"></i>
+                </div>
+         </a>
     </div>
-   <div class="list" style="top: 23px;">
-          <div class="item item-text-wrap">
-            <div class="pull-right" >
-                <p style="padding-right:10px;">Sub Total  <span style="float: right;">$50</span></p> <br />
-                <p style="padding-right:10px;">Delivery Charges <span style="float: right;">$10</span></p> <br />
-                <p style="padding-right:10px;">Service Charges  <span style="float: right;">$5</span></p><br />
-                <hr />
-                <span style="padding-right:10px; font-weight:900;">Total Charges  <span style="float: right;">$65</span></p><br />
-            </div>
-          </div>
-        </div>
-        <button class="button button-full button-calm" style="color: #fff;" ui-sref="app.checkout">NEXT STEP</button>
     
+   <div class="list" style="top: 23px;" ng-if="cc.cartProducts">
+      <div class="item item-text-wrap">
+        <div class="pull-right" >
+        <p style="padding-right:10px;">SubTotal <span style="float: right;">{{cc.cartProducts.subTotal}}</span></p> <br /><hr />
+        <p style="padding-right:10px;">Total <span style="float: right;">{{cc.cartProducts.total}}</span></p> <br /><hr />
+        </div>
+      </div>
+    </div>
+    
+    <button class="button button-full button-calm" ng-click="cc.updateCart()">Update Cart</button>
   </ion-content>
 </ion-view>

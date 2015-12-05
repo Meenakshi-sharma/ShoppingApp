@@ -2,8 +2,9 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"/>
+    <meta http-equiv="Content-Security-Policy"/>
+    <title>Cloth Shopping</title>
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     
    <link href="components/Home/style.css" rel="stylesheet">
@@ -65,17 +66,17 @@
         <script src="components/Cart/cartSrvc.js"></script>   
         <script src="components/Checkout/config.route.js"></script> 
         <script src="components/Checkout/checkoutCtrl.js"></script>       
-
+        <script src="components/Checkout/checkoutSrvc.js"></script>
+        
     <script src="components/Product/config.route.js"></script>       
     <script src="components/Product/productCtrl.js"></script>
     <script src="components/Product/productSrvc.js"></script> 
 
   </head>
   <body ng-app="myApp">
-    <ion-nav-view></ion-nav-view>
-    <ion-nav-bar class="bar-positive" animation="nav-title-slide-ios7">
+  <ion-nav-bar class="bar-positive" animation="nav-title-slide-ios7">
         <ion-nav-back-button></ion-nav-back-button>
-    </ion-nav-bar>    
-    <ion-nav-view ></ion-nav-view>
+    </ion-nav-bar> 
+    <ion-nav-view></ion-nav-view>
   </body>
 </html>

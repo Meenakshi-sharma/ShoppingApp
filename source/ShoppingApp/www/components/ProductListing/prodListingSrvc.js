@@ -16,7 +16,8 @@ prodListingSrvc = (function($log, $http, $q) {
             $log.debug("get globalCompanyFields service");
             //console.log(username);
             deferred = pc.$q.defer();
-            $http.post('http://localhost:8025/magento_1.9/index.php/phonegapapp/categories/categoryDetail/', {
+           // $http.post('http://localhost:8025/magento_1.9/index.php/phonegapapp/categories/categoryDetail/', {
+                $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/categories/getAllProducts', {
                   catId: catid
                 })
                 .success((function(_this) {

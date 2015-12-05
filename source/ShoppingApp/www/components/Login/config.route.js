@@ -4,7 +4,7 @@
         .config(function($stateProvider) {
             $stateProvider
                 .state('login', {
-                    url: '/login',
+                    url: '/login:route',
                     templateUrl: 'components/Login/login.html'
                 })
         });

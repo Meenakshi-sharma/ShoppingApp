@@ -44,6 +44,30 @@
     color: #489E4C;  
 }
 
+.product_detail .price span{
+    float: left;
+    padding: 0 10px;
+}
+
+.price .regularPrice{
+    font-size: 18px;
+    text-decoration: line-through;
+    color: red;
+    font-style: initial;
+}
+
+.price .specialPrice{
+    font-size:20px;
+    font-weight:600;
+}
+
+.price .discount{
+    padding: 5px;
+    background-color: #F4FF28;
+    border: 1px solid #FF9600;
+    border-radius: 10px;
+}
+
 
 /* ------- SEARCH ----*/
 .searchBar {

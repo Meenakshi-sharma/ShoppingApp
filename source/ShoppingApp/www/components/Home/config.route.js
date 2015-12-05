@@ -5,7 +5,7 @@
             $stateProvider
                 .state('app.home', {
                     cache:'false',
-                    url: '/home',
+                    url: '/home:position_id',
 
                     views: {
                 'menuContent' :{

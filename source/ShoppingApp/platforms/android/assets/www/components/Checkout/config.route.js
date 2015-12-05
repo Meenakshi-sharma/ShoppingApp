@@ -12,14 +12,21 @@
                          }
             }
                 })
-        .state('app.payment', {
+                .state('app.payment', {
                     url: '/payment',
-
                     views: {
-                'menuContent' :{
-                    templateUrl: 'components/Checkout/payment.html'
-                         }
-            }
+                        'menuContent' :{
+                            templateUrl: 'components/Checkout/payment.html'
+                        }
+                    }
+                })
+                .state('app.shipping', {
+                    url: '/shipping',
+                    views: {
+                        'menuContent' :{
+                            templateUrl: 'components/Checkout/shipping.html'
+                        }
+                    }
                 })
 
         });

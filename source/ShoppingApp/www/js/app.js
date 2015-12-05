@@ -55,6 +55,8 @@
         // Add initial config stuff here such as view caching refinements.
         $ionicConfigProvider.views.maxCache(10); // Default is 10 anyway.
         $urlRouterProvider.otherwise('/login'); // Default route for ui-router
+        if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
+        $ionicConfigProvider.backButton.previousTitleText(false);
     }
 
     function runApp($ionicPlatform) {

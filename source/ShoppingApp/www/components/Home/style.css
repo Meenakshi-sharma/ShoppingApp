@@ -270,7 +270,7 @@ RawBlameHistory     201 lines (176 sloc)  3.08 KB
 /* Product Details */
 .slider-slides img {
     width: 100%;
-    height: 280px;
+    /*height: 280px; */
 }
 
 .prodetail{

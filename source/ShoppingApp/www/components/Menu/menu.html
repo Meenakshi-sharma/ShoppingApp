@@ -22,7 +22,7 @@
             <h1>
             </h1>
             <ion-list ng-repeat="x in mc.categories" >
-            <ion-item menu-close ng-click="mc.getSub({{x.position}})" class="item-icon-right" ng-if="x.level===2">
+            <ion-item menu-close ng-click="mc.getSub({{x.position}}, {{x.category_id}}, '{{x.name}}')" class="item-icon-right" ng-if="x.level===2">
             {{x.name}}
              
            <i class="icon ion-plus-round"></i>

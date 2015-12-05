@@ -33,6 +33,7 @@
                 </label>
                 <p ng-show="userForm.password.$invalid && !userForm.password.$pristine && userForm.password.$error.required" class="help-block"><span class="min-valid">Password is required.</span></p>
                  <ion-checkbox name="chkPassword" ng-click="sp.ShowPassword = (sp.ShowPassword == 'password') ? 'text' : 'password'">Show Password</ion-checkbox>
+                 </div>
             </ion-list>
             <button class="button button-positive button-block " ng-disabled="userForm.$invalid" ng-click="sp.userLogin()">Sign up</button>
             <div style="width:70%; margin:0 15%">

@@ -11,13 +11,13 @@ var deferred ;
   
 var menuSrvc ;
            
-            $log.debug("get globalCompanyFields service");
+            //$log.debug("get globalCompanyFields service");
             //console.log(username);
             deferred = mc.$q.defer();
             $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/categories/categories')
                 .success((function(_this) {
                     return function(data, status) {
-                        $log.debug("globalCompanyFields " + (angular.toJson(data, true)));
+                        //$log.debug("globalCompanyFields " + (angular.toJson(data, true)));
                         var menuSrvc= data ;
                         return deferred.resolve(data);
                     };
