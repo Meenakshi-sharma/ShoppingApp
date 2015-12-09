@@ -54,7 +54,16 @@
         
         // Add initial config stuff here such as view caching refinements.
         $ionicConfigProvider.views.maxCache(10); // Default is 10 anyway.
+       /*
+        if(localStorage.getItem('customer_id') && localStorage.getItem('customer_id') != '' && localStorage.getItem('customer_id') != 'undefined' && localStorage.getItem('customer_id') != null){ alert("HI");
+        alert(localStorage.getItem('customer_id'));
+            $urlRouterProvider.otherwise('#/app/banner'); // Default route for ui-router
+        } else {
+            $urlRouterProvider.otherwise('/login'); // Default route for ui-router
+        } */
+        
         $urlRouterProvider.otherwise('/login'); // Default route for ui-router
+        
         if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
         $ionicConfigProvider.backButton.previousTitleText(false);
     }

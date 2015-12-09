@@ -3,10 +3,14 @@
     productModule
         .config(function($stateProvider) {
             $stateProvider
-                .state('product', {
-                	cache:'false',
+                .state('app.product', {
+                    cache: 'false',
                     url: '/product:product_id',
-                    templateUrl: 'components/Product/product.html'
+                    views: {
+                    'menuContent' :{
+                        templateUrl: 'components/Product/product.html'
+                             }
+                    },
                 })
         });
 })();

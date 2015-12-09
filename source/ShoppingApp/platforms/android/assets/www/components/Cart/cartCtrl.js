@@ -7,81 +7,40 @@ cartCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {
         var self = this;
         
         if(localStorage.getItem("cartid") && localStorage.getItem("cartid") != '' && localStorage.getItem("cartid") != 'undefined'){
-            var cartid = localStorage.getItem("cartid"); alert(cartid);   
+            var cartid = localStorage.getItem("cartid");// alert(cartid);   
            
             cartSrvc.getCartProducts(cartid).then(function(response) { console.log("cart response"); console.log(response);
-                response.productlist[0].quantity = 1;
-                    self.cartProducts = response.productlist;
-                    self.cartProducts.subTotal = '$200';
-                    self.cartProducts.total = '$200'; alert("HI");console.log(self.cartProducts);
-                    self.quantity = 1;
-             })
-           
-           cartSrvc.getCartTotal(cartid).then(function(response) {console.log("Cart Total"); console.log(response);
-                    self.cartTotal = response; 
-            })
-
-             function updateCart(){
-                
-                 var options = {};
-                
-                if(self.pdata.optionid){
-                    var options1 = {};
-                    var options2 = {};
-                    var options3 = {};
-    
-                    var opt = {};
-                    for(i=0; i<self.pdata.optionid.length; i++){ 
-                        var oid = self.pdata.optionid[i].option_id;
-                        var ovalue = self.pdata.optionid[i].title;
-                        
-                        if(i == 0){
-                            options1['key'] = oid;
-                            options1['value'] = self.Color;
-                        } else if(i == 1){
-                            options2['key'] = oid;
-                            options2['value'] = self.Manufacturer;
-                            
-                        } else if(i == 2){
-                            options3['key'] = oid;
-                            options3['value'] = self.Size;
+                    self.cartProducts = response.products;
+                    
+                    var grandTotal = 0;
+                    
+                    if(self.cartProducts){
+                        for(i=0; i<self.cartProducts.length;i++){
+                            grandTotal = grandTotal+self.cartProducts[i].subTotal;
                         }
+                        self.cartProducts.grandTotal = grandTotal;
                     }
                     
-                    options = options1;
-                    options = options2;
-                    options = options3; console.log(options);
-                
-               } else {
-                    options = null;
-               }
-               
-                var products = {};
-                 var response = {};
-                products['product_id'] = self.productid;
-                products['quantity'] = '1';
-                products['sku'] = response.sku;
-                products['options'] = options;
-                products['bundle_option'] = null;
-                products['bundle_option_qty'] = null;
-                products['links'] = null;
-                
-                
-                cartSrvc.updateCartProducts(products).then(function(response) {
-                    self.cartProducts = response; 
-                    self.quantity = 1; 
+             })
+
+             function updateCart(){
+                var customer_id = localStorage.getItem("customer_id");              
+                console.log("Request data update product..");
+                console.log(self.cartProducts); console.log(cartid); console.log(customer_id);
+                cartSrvc.updateCartProducts(self.cartProducts, cartid, customer_id).then(function(response) {
+                    console.log(response); alert(response.errorMsg);
                 })
              }
              
              
              cartCtrl.prototype.myquantity = function(product_id, type){
              
-             
-             if(!self.quantity){
-                self.quantity = 1; 
+             for(i=0; i<=self.cartProducts.length; i++){
+                if(self.cartProducts[i].product_id == product_id){
+                    var quantity = self.cartProducts[i].qty;  
+                }
              }
-              
-               var quantity = self.quantity;
+
                 if(type == 1){
                     quantity = quantity + 1;
                 }
@@ -94,12 +53,22 @@ cartCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {
                     quantity = 1;
                 }
                 
-                self.quantity = quantity;
+                for(i=0; i<=self.cartProducts.length; i++){
+                    if(self.cartProducts[i].product_id == product_id){
+                        self.cartProducts[i].qty = quantity;  
+                    }
+                 }
+                 
+
                 
+                var grandTotal = 0;
                 for(i=0; i<=self.cartProducts.length; i++ ){
                     if(self.cartProducts[i]){
                         if(self.cartProducts[i].product_id == product_id){
-                            self.cartProducts[i].quantity = quantity;
+                           self.cartProducts[i].quantity = quantity;
+                           self.cartProducts[i].subTotal = self.cartProducts[i].price * self.cartProducts[i].quantity;
+                           grandTotal = grandTotal + self.cartProducts[i].subTotal;
+                           self.cartProducts.grandTotal = grandTotal;
                         }
                     }
                 }
@@ -114,14 +83,13 @@ cartCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {
                         if(self.cartProducts[i].product_id == product_id){
                             self.cartProducts.splice(i,1);
                         }
+                        self.cartProducts.total = '';
                     }
-                }  console.log("final array"); console.log( self.cartProducts);
+                }
             }
             
             cartCtrl.prototype.updateCart = function(){
-                
-                alert("UPdate Cart");   
-                
+                updateCart();   
             }
             
             
@@ -131,12 +99,20 @@ cartCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {
         
         
         cartCtrl.prototype.GoToCheckOut = function(){
-                if(localStorage.getItem("customer_id") && localStorage.getItem("customer_id") != ''){
-                    $state.go("app.checkout");
-                } else {
-                    $state.go("app.login");
-                }
+            if(localStorage.getItem("customer_id") && localStorage.getItem("customer_id") != ''){
+                $state.go("app.checkout");
+            } else {
+                $state.go("app.login");
             }
+        }
+            
+        cartCtrl.prototype.clearShoppingCart = function(){
+            var customer_id = localStorage.getItem("customer_id");              
+            self.cartProducts = [];
+            cartSrvc.updateCartProducts(self.cartProducts, cartid, customer_id).then(function(response) {
+                console.log(response); alert(response.errorMsg);
+            })
+        }
      }
 
     return cartCtrl;

@@ -25,13 +25,13 @@
           </li>
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="radio"  ng-model="np.card" value="check" checked/>
+               <input type="radio"  ng-model="chc.payment.card" value="check" checked="checked" />
              </label>
              Check / Money order
           </li>
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="radio"  ng-model="np.card" value="card" />
+               <input type="radio"  ng-model="chc.payment.card" value="card" />
              </label>
             Credit Card (saved)
           </li>
@@ -39,7 +39,7 @@
     </div>
     
     <div class="list" style="margin-top: 50px;">
-    <div class="card"  ng-repeat="x in chc.cartProducts">
+    <div class="card" ng-repeat="x in chc.cartProducts">
         <a class="item item-thumbnail-left" href="#" >
               <img src="img/product2.png" />
               <h2>{{x.name}}</h2>
@@ -52,7 +52,7 @@
     </div>
         
     </div>
-        <button ng-disabled="userForm.$invalid" class="button button-full button-calm" style="color: #fff; margin-top:35px" ng-click="chc.GoToNav('success')" >Place Order</button>
+        <button class="button button-full button-calm" style="color: #fff; margin-top:35px" ng-click="chc.PaymentInfo()" >Place Order</button>
     
   </ion-content>
 </ion-view>

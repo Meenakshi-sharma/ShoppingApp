@@ -72,12 +72,13 @@ cartSrvc = (function($log, $http, $q) {
            return deferred.promise;
         },
 //Update Cart..
-        updateCartProducts: function(products, quoteId) {
+        updateCartProducts: function(products, quoteId, customer_id) {
             var deferred;
             deferred = pd.$q.defer();
             $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/cart/UpdateProduct', {
                     products: products,
-                    quoteId: quoteId
+                    quoteId: quoteId, 
+                    customerId: customer_id
                 })
                 .success((function(_this) {
                     return function(data, status) {

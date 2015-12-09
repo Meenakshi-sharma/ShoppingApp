@@ -9,11 +9,10 @@
                     cache: 'false',
                     url: '/prodListing/:category_id/:category_name',
                     views: {
-                'menuContent' :{
-                    templateUrl: 'components/ProductListing/prodListing.html'
-                         }
-            },
-                    
+                    'menuContent' :{
+                        templateUrl: 'components/ProductListing/prodListing.html'
+                             }
+                    },
                 })
         });
 })();

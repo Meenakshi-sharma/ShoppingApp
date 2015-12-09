@@ -41,7 +41,7 @@
     
      <div  class="products" style="margin-top: 50px;">
         <div class="product" ng-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts ">
-            <div class="product_img"><a ng-click="pc.fetchDetail({{x.productid}})"><img ng-src="{{x.image}}" /></a></div>
+            <div class="product_img"><a ng-click="pc.fetchDetail({{x.productid}})"><img src="{{x.image}}" /></a></div>
             <div class="product_name">{{x.name}}</div>
             <div class="product_price">{{x.regularprice | currency:"$":0}}</div>
         </div>

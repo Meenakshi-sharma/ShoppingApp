@@ -40,10 +40,11 @@
 </div>
     
      <div  class="products" style="margin-top: 50px;">
-        <div class="product" ng-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts ">
-            <div class="product_img"><a ng-click="pc.fetchDetail({{x.productid}})"><img ng-src="{{x.image}}" /></a></div>
-            <div class="product_name">{{x.name}}</div>
-            <div class="product_price">{{x.regularprice | currency:"$":0}}</div>
+        <div class="product" ng-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts " style="border-right:1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9;">
+            <div class="product_img"><a ng-click="pc.fetchDetail({{x.productid}})"><img src="{{x.image}}" /></a></div>
+            <div class="product_name">{{x.name | cut:true:50:' ..'}}</div>
+            <div class="price" ng-if="x.specialprice" style="text-align: center;"><span class="regularPrice">{{x.regularprice | currency}}</span><span class="product_price">{{x.specialprice | currency}}</span></div>
+            <div class="price" ng-if="!x.specialprice" style="text-align: center;"><span class="product_price">{{x.regularprice | currency}}</span></div>
         </div>
 	</div>
   </ion-content>

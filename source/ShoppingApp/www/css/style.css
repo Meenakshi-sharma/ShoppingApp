@@ -19,14 +19,15 @@
 
 .products .product{
     float: left;
-    width:49%;
+    width:50%;
+    min-height: 256px;
 }
 
 .product .product_img{
     text-align:center;
 }
 .product .product_img img{
-    width: 180px !important;
+    width: 167px !important;
     height: 190px;
 }
 
@@ -50,9 +51,10 @@
 }
 
 .price .regularPrice{
-    font-size: 18px;
+    font-size: 12px;
     text-decoration: line-through;
     color: red;
+    margin-right: 10px;
     font-style: initial;
 }
 
@@ -115,12 +117,13 @@
 }
 .searchBar .searchTxt input {
     text-align:center;
-    width: 100%;
+    width: 90%;
     color: #000;
     padding-left: 5px;
     padding-right: 5px;
     border: 1px solid #9E9E9E;
     border-radius: 15px;
+    margin-left:25px;
 }
 
 .buttn{

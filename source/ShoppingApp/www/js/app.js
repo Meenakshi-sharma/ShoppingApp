@@ -48,13 +48,42 @@
   }
   }])
   
+  .filter('cut', function () {
+        return function (value, wordwise, max, tail) {
+            if (!value) return '';
+
+            max = parseInt(max, 10);
+            if (!max) return value;
+            if (value.length <= max) return value;
+
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace != -1) {
+                    value = value.substr(0, lastspace);
+                }
+            }
+
+            return value + (tail || ' …');
+        };
+    })
+  
     
 
     function configure($stateProvider , $urlRouterProvider, $ionicConfigProvider) {
         
         // Add initial config stuff here such as view caching refinements.
         $ionicConfigProvider.views.maxCache(10); // Default is 10 anyway.
+       /*
+        if(localStorage.getItem('customer_id') && localStorage.getItem('customer_id') != '' && localStorage.getItem('customer_id') != 'undefined' && localStorage.getItem('customer_id') != null){ alert("HI");
+        alert(localStorage.getItem('customer_id'));
+            $urlRouterProvider.otherwise('#/app/banner'); // Default route for ui-router
+        } else {
+            $urlRouterProvider.otherwise('/login'); // Default route for ui-router
+        } */
+        
         $urlRouterProvider.otherwise('/login'); // Default route for ui-router
+        
         if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
         $ionicConfigProvider.backButton.previousTitleText(false);
     }

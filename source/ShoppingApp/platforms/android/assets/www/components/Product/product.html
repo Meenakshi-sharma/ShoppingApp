@@ -33,7 +33,7 @@
     <!-- Product Name, Likes -->
     <div class="prodetail" ng-model="pd.pdata">
         <h4>{{pd.pdata.name}}</h4>
-       <div class="product-price"><span class="regularPrice">MRP: {{pd.pdata.price | currency}}</span> <!-- <span class="specialPrice">{{pd.pdata.specialprice | currency}}</span> <span class="discount">90{{discount}}% Off</span> --></div>
+       <div class="product-price"><span class="regularPrice">MRP: {{pd.pdata.price | currency}}</span><span class="specialPrice">{{pd.pdata.special_price | currency}}</span> <span class="discount" ng-if="pd.discount">{{pd.discount | number : 1}}% Off</span></div>
     </div>
     
     <!-- Product Size -->
@@ -53,39 +53,19 @@
         </div>
     </div>
     
-    <h3 style="margin-top:50px;background: rgba(0, 212, 204, 0.49);float: left;border: 1px solid rgb(46, 231, 255);width: 100%;border-radius: 5px;padding: 0 5px 5px 5px;color: #fff;">You may also like this</h3>
+   <h3 style="float: left;border-bottom: 7px solid rgb(145, 146, 146);width: 100%;padding: 0 5px 0px 0px;color: #000;">Related Products</h3>
    <div class="products" style="display: flex; overflow-y: hidden; overflow-x: visible;">
-        <div class="product" style="border: 1px solid rgba(17, 243, 199, 0.43);">
-            <div class="product_img"><a ui-sref="app.prodListing"><img style="width: 168px !important;" src="img/product2.png" /></a></div>
-            <div class="product_name">Fun On XXL Bean</div>
-            <div class="product_price">$123</div>
-        </div>
-        <div class="product" style="border: 1px solid rgba(17, 243, 199, 0.43);">
-            <div class="product_img"><a ui-sref="app.prodListing"><img style="width: 168px !important;" src="img/product2.png" /></a></div>
-            <div class="product_name">Fun On XXL Bean</div>
-            <div class="product_price">$123</div>
-        </div>
-        <div class="product" style="border: 1px solid rgba(17, 243, 199, 0.43);">
-            <div class="product_img"><a ui-sref="app.prodListing"><img style="width: 168px !important;" src="img/product2.png" /></a></div>
-            <div class="product_name">Fun On XXL Bean</div>
-            <div class="product_price">$123</div>
-        </div>
-        <div class="product" style="border: 1px solid rgba(17, 243, 199, 0.43);">
-            <div class="product_img"><a ui-sref="app.prodListing"><img style="width: 168px !important;" src="img/product2.png" /></a></div>
-            <div class="product_name">Fun On XXL Bean</div>
-            <div class="product_price">$123</div>
-        </div>
-        <div class="product" style="border: 1px solid rgba(17, 243, 199, 0.43);">
-            <div class="product_img"><a ui-sref="app.prodListing"><img style="width: 168px !important;" src="img/product2.png" /></a></div>
-            <div class="product_name">Fun On XXL Bean</div>
-            <div class="product_price">$123</div>
+        <div class="product" style="border: 1px solid rgba(223, 226, 226, 0.431373)" ng-repeat="x in pd.pdata.related_products">
+            <div class="product_img"><a href="javascript:;"  ng-click="pd.fetchDetail(x.productid)"><img style="width: 168px !important;" src="img/product2.png" ng-src="{{x.image}}" /></a></div>
+            <div class="product_name">{{x.name}}</div>
+            <div class="product_price">{{x.regularprice}}</div>
         </div>
    </div>
 
   </div>
 </div>
   </ion-content>
-  <ion-footer-bar>
+  <ion-footer-bar style="margin-bottom:5px;">
     <button class="button button-full button-balanced" ng-click="pd.addCart({{pd.productid}})" style="color: #fff;">Add To Cart</button>
     </ion-footer-bar>
 </ion-view>

@@ -2,25 +2,30 @@ var productCtrl;
 
 productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDelegate) {
 
-    function productCtrl($rootScope,$scope,productSrvc,$state,$stateParams, $ionicSideMenuDelegate) {
-           // console.log($stateParams);
+    function productCtrl($rootScope,$scope,productSrvc,$state,$stateParams, $ionicSideMenuDelegate, $ionicLoading) {
             
             if($stateParams.product_id){
                 var product_id = $stateParams.product_id;
             } else {
                 var product_id = 1;
             }
+            
            this.state = $state;
            var self = this;
            
-            productSrvc.getData(product_id).then(function(response) { console.log("RERERERE"); console.log(response); //return;
-                    self.pdata = response; console.log(self.pdata.productimage[1].url);console.log(self.pdata.productimage[0].url);console.log(self.pdata.productimage[2].url);
+            productSrvc.getData(product_id).then(function(response) { console.log(response);
+                
+                    self.pdata = response;
                     self.productid = response.product_id;
+                    if(self.pdata.special_price){
+                        self.discount = (1 - (self.pdata.special_price / self.pdata.price)) * 100;
+                    }
+                    
              })
            
-           productCtrl.prototype.addCart = function(id){ console.log($scope);
-                var options = {};
-                
+           productCtrl.prototype.addCart = function(id){
+                $scope.options = [];
+                // console.log("selft"); console.log(self);
                 if(self.pdata.optionid){
                 var options1 = {};
                 var options2 = {};
@@ -34,30 +39,31 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
                     if(i == 0){
                         options1['key'] = oid;
                         options1['value'] = self.Color;
+                        $scope.options.push(options1);
                     } else if(i == 1){
                         options2['key'] = oid;
-                        options2['value'] = self.Manufacturer;
+                        options2['value'] = self.Manufacturers;
+                        $scope.options.push(options2);
                         
                     } else if(i == 2){
                         options3['key'] = oid;
                         options3['value'] = self.Size;
+                        $scope.options.push(options3);
                     }
                 }
                 
-                options[0] = options1;
-                options[1] = options2;
-                options[2] = options3; console.log(options);
+                //options = {[options1], [options2], [options3]};
                 
                } else {
-                options = null;
+                $scope.options = null;
                }
-               
+               //console.log($scope.options);
                 var products = {};
                  var request = {};
-                products['product_id'] = self.productid;
+                products['product_id'] = self.pdata.product_id;
                 products['quantity'] = '1';
-                products['sku'] = request.sku;
-                products['options'] = [options];
+                products['sku'] = self.pdata.sku;
+                products['options'] = $scope.options;
                 products['bundle_option'] = null;
                 products['bundle_option_qty'] = null;
                 products['links'] = null;
@@ -70,16 +76,18 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
                 if(localStorage.getItem("cartid") && localStorage.getItem("cartid") != '' && localStorage.getItem("cartid") != 'undefined'){
                     var cartid = localStorage.getItem("cartid");
                 } else {
-                    var cartid = '';
+                    var cartid = null;
                 } 
                 
-                request["products"]= products1 ;
-                request["customer"]= customer ;
-                request["shopping_cart_id"]= cartid ;
-               console.log(request);
-                productSrvc.addToCart(request).then(function(response) { console.log(response); alert("ad to cart respone");
+                request["products"]= products1;
+                request["customer"]= customer;
+                request["shopping_cart_id"]= cartid;
+                console.log(self.pdata);
+                console.log(request);
+
+                productSrvc.addToCart(request).then(function(response) { console.log(response);
                     localStorage.setItem("cartid", response.cart_id);
-                   //$state.go("app.cart");
+                  
                    alert("Product is add to cart successfully.");
                 }); 
          }
@@ -88,9 +96,11 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
             window.localStorage['search'] = this.searchproducts;
             this.state.go("app.prodListing");
          }
+         
+         productCtrl.prototype.fetchDetail = function(product_id){
+            this.state.go("app.product",{ 'product_id':product_id });
+         }
     }
-
-    
 
     return productCtrl;
 })();

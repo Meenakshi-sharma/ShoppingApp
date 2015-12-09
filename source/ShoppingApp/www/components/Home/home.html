@@ -6,7 +6,7 @@
     <div class="searchBar" >
         <div class="searchTxt" ng-show="hc.showMe">
             <div class="bgtxt">
-                <input type="text" ng-model="hc.searchproducts" placeholder="Search Products" >
+                <input type="text" ng-model="hc.searchproducts" placeholder="Search Products" />
             </div>
         </div>
         <i class="icon ion-ios-search" ng-click="hc.showMeSearch()"></i>
@@ -22,7 +22,6 @@
         <div class="product" ng-repeat="x in hc.category.children ">
             <div class="product_img"><a href="javascript:;" ng-click="hc.showProducts(x.category_id, x.name)"><img src="img/product1.png" ng-src="{{x.img}}" alt="{{x.name}}" title="{{x.name}}"/></a></div>
             <div class="product_name">{{x.name}}</div>
-            
         </div>
    </div>
   </ion-content>
