@@ -1,0 +1,78 @@
+<ion-view view-title="Banner" ng-controller="bannerCtrl as bc">
+ <ion-nav-title >
+        <a ui-sref="app.banner" href="javascript:;" ><img src="img/icon-small.png" class="appLogo"/></a>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+<!-- User Section -->
+    <div class="searchBar" >
+      <button class="button button-icon button-clear ion-person" ng-click="bc.showMeProfile()"></button>
+      <i ng-click="bc.goToCart()" class="icon ion-android-cart"><span class="badge badge-assertive cbadge" ng-if="bc.cartTotal">{{bc.cartTotal}}</span></i>
+    </div>
+    <ul class="usernav" ng-show="bc.showProfile">
+     <a class="links" href="#" ui-sref="app.login"><li class="item-sort">Login</li></a>
+     <a class="links" href="#" ui-sref="app.profile"><li class="item-sort">My Account</li></a>
+     <a class="links" href="#"  ui-sref="app.wishlist"><li class="item-sort" style="padding:7px">Wishlist</li></a>
+     <a class="links" href="#"  ui-sref="app.trackorder"><li class="item-sort" style="padding:7px">Track Order</li></a>
+     <a class="links" href="#" ><li class="item-sort" style="padding:7px">Rate the app</li></a>
+   </ul>
+
+</ion-nav-buttons> 
+
+<ion-modal-view>
+
+   <ion-content padding="true" class="has-header" style="margin-bottom:10px;" ng-click="bc.hideProf()" ng-blur="bc.hideProf()" >
+   <!-- User Navigation -->
+   
+   <ion-slide-box on-slide-changed="change(index)" >
+    <ion-slide>
+        <img ng-src="{{bc.category[0]}}"/>
+      </ion-slide>
+      <ion-slide>
+        <img ng-src="{{bc.category[1]}}"/>
+      </ion-slide>
+    <ion-slide>
+        <img ng-src="{{bc.category[2]}}"/>
+      </ion-slide>
+   </ion-slide-box>
+    
+   
+   <h3 style="float: left;margin-top:0px; width: 100%;padding: 0 5px 0px 0px;color: #000;margin-top:10px;">Special Offers</h3>
+   <hr/>
+   <div class="products" style="display: flex; overflow-y: hidden; overflow-x: visible;border-bottom:5px solid #ddd; width:100%; float:left;">
+        <div class="product" style="" ng-repeat="x in bc.categoryBannersSpecial">
+            <div class="product_img"><a href="javascript:;" ng-click="bc.fetchDetail(x.productid)"><img style="width: 168px !important; height:auto !important;"  ng-src="{{x.image}}" /></a></div>
+            <div class="product_name">{{x.name | cut:true:50:' ..'}}</div>
+            <div class="price" ng-if="x.specialprice" style="text-align: center;"><span class="regularPrice">{{x.regularprice | currency}}</span><span class="product_price">{{x.specialprice | currency}}</span></div>
+            <div class="price" ng-if="!x.specialprice" style="text-align: center;"><span class="product_price">{{x.regularprice | currency}}</span></div>
+        </div>
+   </div>
+   
+
+   <h3 style="float: left;margin-top: 0px;width: 100%;padding: 0 5px 0px 0px;color: #000;margin-top:10px;">New Products</h3><hr/>
+   <div class="products" style="display: flex; overflow-y: hidden; overflow-x: visible;border-bottom:5px solid #ddd; width:100%; float:left;">
+        <div class="product" ng-repeat="x in bc.categoryBanners" style="">
+            <div class="product_img"><a href="javascript:;" ng-click="bc.fetchDetail(x.productid)"><img style="width: 168px !important; height:auto !important;" ng-src="{{x.image}}" /></a></div>
+            <div class="product_name">{{x.name | cut:true:50:' ..'}}</div>
+            <div class="price" ng-if="x.specialprice" style="text-align: center;"><span class="regularPrice">{{x.regularprice | currency}}</span><span class="product_price">{{x.specialprice | currency}}</span></div>
+            <div class="price" ng-if="!x.specialprice" style="text-align: center;"><span class="product_price">{{x.regularprice | currency}}</span></div>
+        </div>
+   </div>
+   <div  ng-repeat="y in bc.prodCatListing" style="margin-top:10px;float:left;width:100%;">
+      <h3 style="float: left;margin-top: 0px;width: 80%;padding: 0 5px 0px 0px;color: #000;">{{y.name}}</h3>
+      <a href="javascript:;" ng-click="bc.getSub({{y.category_id}}, '{{y.name}}')"><h6 style="float: left;margin-top: 0px;width: 20%; font-size: 16px;
+padding: 0 5px 0px 0px;color: #45BDAE;line-height: 28px;">View All</h6></a>
+      <hr style="width:100%;"/>
+     <div class="products" style="display: flex; overflow-y: hidden; overflow-x: visible;border-bottom:5px solid #ddd; width:100%; float:left;">
+          <div class="product" ng-repeat="x in y" style="">
+              <div class="product_img"><a href="javascript:;" ng-click="bc.fetchDetail(x.productid)"><img style="width: 168px !important; height:auto !important;" ng-src="{{x.image}}" /></a></div>
+              <div class="product_name">{{x.name | cut:true:50:' ..'}}</div>
+              <div class="price" ng-if="x.specialprice" style="text-align: center;"><span class="regularPrice">{{x.regularprice | currency}}</span><span class="product_price">{{x.specialprice | currency}}</span></div>
+              <div class="price" ng-if="!x.specialprice" style="text-align: center;"><span class="product_price">{{x.regularprice | currency}}</span></div>
+          </div>
+     </div>
+     
+   </div>
+   
+  </ion-content>
+  <ion-modal-view>
+</ion-view>
