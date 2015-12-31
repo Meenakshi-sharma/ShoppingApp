@@ -1,7 +1,7 @@
 var bannerSrvc;
 
-bannerSrvc = (function($log, $http, $q) {
-    
+bannerSrvc = (function($log, $http, $q, $ionicLoading, constants) {
+
     var bc = this;
     bc.$log = $log;
     bc.$http = $http;
@@ -13,15 +13,16 @@ bannerSrvc = (function($log, $http, $q) {
         
             var deferred;
             deferred = bc.$q.defer();
-            $http.get('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/bannerSlider')
+            $http.get(constants.API_URL+'products/bannerSlider')
                 .success((function(_this) {
+                    //$ionicLoading.hide();
                     return function(data, status) {
                         return deferred.resolve(data);
                     };
                 })(this)).error((function(_this) {
+                    //$ionicLoading.hide();
                     return function(data, status, headers) {
                         $log.error("Failed to fetch products" + status);
-                        $log.error("Failed to fetch mens products");
                         return deferred.reject(data);
                     };
                })(this));
@@ -33,12 +34,14 @@ bannerSrvc = (function($log, $http, $q) {
                 var deferred;
                 
                 deferred = bc.$q.defer();
-                $http.get('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/newProductcollection')
+                $http.get(constants.API_URL+'products/newProductcollection')
                     .success((function(_this) {
+                       // $ionicLoading.hide();
                         return function(data, status) {
                            return deferred.resolve(data);
                          };
                     })(this)).error((function(_this) {
+                      //  $ionicLoading.hide();
                         return function(data, status, headers) {
                             return deferred.reject(data);
                         };
@@ -50,16 +53,19 @@ bannerSrvc = (function($log, $http, $q) {
                 var deferred;
                 
                 deferred = bc.$q.defer();
-                $http.get('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/specialProducts')
+                $http.get(constants.API_URL+'products/specialProducts')
                     .success((function(_this) {
+                      //  $ionicLoading.hide();
                         return function(data, status) {
                            return deferred.resolve(data);
                          };
                     })(this)).error((function(_this) {
+                      //  $ionicLoading.hide();
                         return function(data, status, headers) {
                             return deferred.reject(data);
                         };
                    })(this));
+                    
                 return deferred.promise;
             }
 }

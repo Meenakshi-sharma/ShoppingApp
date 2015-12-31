@@ -12,5 +12,14 @@
                              }
                     },
                 })
+                .state('app.productsCompare', {
+                    cache: 'false',
+                    url: '/productsCompare',
+                    views: {
+                    'menuContent' :{
+                        templateUrl: 'components/Product/productsCompare.html'
+                             }
+                    },
+                })
         });
 })();

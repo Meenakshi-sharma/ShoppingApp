@@ -39,7 +39,7 @@ homeSrvc = (function($log, $http, $q) {
                         {
                             "category_id": 7,
                             "parent_id": 6,
-                            "name": "Kids",
+                            "name": "Kids 123",
                             "is_active": 1,
                             "position": 1,
                             "level": 3,

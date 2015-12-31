@@ -1,16 +1,35 @@
 var cartCtrl;
 
-cartCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {   
-        function cartCtrl($scope,$ionicSideMenuDelegate,$state, cartSrvc, $ionicLoading) {
+cartCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state, cartSrvc) {   
+        function cartCtrl($rootScope, $scope,$ionicSideMenuDelegate,$state, cartSrvc, $ionicLoading) {
         
         this.state = $state;
         var self = this;
+        
+        $ionicLoading.show();
+
+        if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
+            self.cartTotal = localStorage.getItem("cartTotal");    
+        } else {
+            self.cartTotal = 0;
+        }
         
         if(localStorage.getItem("cartid") && localStorage.getItem("cartid") != '' && localStorage.getItem("cartid") != 'undefined'){
             var cartid = localStorage.getItem("cartid");// alert(cartid);   
            
             cartSrvc.getCartProducts(cartid).then(function(response) { console.log("cart response"); console.log(response);
                     self.cartProducts = response.products;
+
+                    /*
+                    if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
+                        
+                        if(self.cartProducts){
+                            self.cartTotal = self.cartProducts.length;
+                            localStorage.setItem("cartTotal", self.cartTotal);
+                        }else {
+                            self.cartTotal = 0; 
+                        }
+                    } */
                     
                     var grandTotal = 0;
                     
@@ -21,7 +40,9 @@ cartCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {
                         self.cartProducts.grandTotal = grandTotal;
                     }
                     
-             })
+             }).finally(function(){
+                $ionicLoading.hide();
+            });
 
              function updateCart(){
                 var customer_id = localStorage.getItem("customer_id");              
@@ -33,8 +54,8 @@ cartCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {
              }
              
              
-             cartCtrl.prototype.myquantity = function(product_id, type){
-             
+             cartCtrl.prototype.myquantity = function(product_id, type){ alert(product_id);
+             console.log(self.cartProducts);
              for(i=0; i<=self.cartProducts.length; i++){
                 if(self.cartProducts[i].product_id == product_id){
                     var quantity = self.cartProducts[i].qty;  
@@ -86,6 +107,10 @@ cartCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {
                         self.cartProducts.total = '';
                     }
                 }
+                
+                    var cartTotal = self.cartProducts.length;
+                    localStorage.setItem("cartTotal", cartTotal);
+                    self.cartTotal = cartTotal;
             }
             
             cartCtrl.prototype.updateCart = function(){
@@ -94,15 +119,16 @@ cartCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc) {
             
             
         } else { alert("cart id not");
+            $ionicLoading.hide();
             cartSrvc.showToastBanner("Your Cart Is Empty.", "short", "center");
         }
         
         
-        cartCtrl.prototype.GoToCheckOut = function(){
+        cartCtrl.prototype.GoToCheckOut = function(){  console.log(localStorage.getItem("customer_id"));
             if(localStorage.getItem("customer_id") && localStorage.getItem("customer_id") != ''){
                 $state.go("app.checkout");
             } else {
-                $state.go("app.login");
+                $state.go("app.login",{ 'route': 'cart' });
             }
         }
             

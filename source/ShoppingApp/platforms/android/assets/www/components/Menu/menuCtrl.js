@@ -16,8 +16,7 @@ menuCtrl = (function($state ,$rootScope,$scope,$timeout) {
         }
 //console.log("categoryis");   console.log(homeSrvc.children[0].children);
     this.categories = homeSrvc.children[0].children;
-    
-    
+
    this.rootscope = $rootScope; 
 }
 
@@ -33,7 +32,10 @@ menuCtrl.prototype.getSub = function(position_id, category_id, category_name) { 
               this.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});
             }
         }
-    
+
+menuCtrl.prototype.nav = function(state) {
+    this.state.go(state);
+}
 menuCtrl.prototype.LogOut = function() {
     localStorage.setItem("email", '');
     localStorage.setItem("firstname", '');

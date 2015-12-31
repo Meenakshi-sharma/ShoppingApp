@@ -1,50 +1,47 @@
 <ion-view title="Product Listing" ng-controller="prodListingCtrl as pc">
+
+<!-- Title -->
  <ion-nav-title >
-        <img src="img/icon-small.png" style="height: 36px; width: 36px; margin-top: 4px; "/>
+        <a ui-sref="app.banner" href="javascript:;" ><img src="img/icon-small.png" class="appLogo"/></a>
   </ion-nav-title>
-	<!-- <ion-nav-buttons side="right"  >
-      <input type="search" ng-model="pc.searchproducts" />
-      <i style="color: white;font-size: 24px; padding: 5px 10px 5px 10px;" class="icon ion-home" ng-click="goHome()"></i>
-    </ion-nav-buttons>
--->
+
+<!-- Navigation Button -->
 <ion-nav-buttons side="right">
     <div class="searchBar" >
-        <div class="searchTxt" ng-show="pc.showMe">
-            <div class="bgtxt">
-                <input type="text" ng-model="pc.searchproducts" placeholder="Search Products" >
-            </div>
-        </div>
+        
         <i class="icon ion-ios-search" ng-click="pc.showMeSearch()"></i>
-    <i ui-sref="app.cart" class="icon ion-android-cart"></i>
+        <i ui-sref="app.cart" class="icon ion-android-cart"><span class="badge badge-assertive cbadge" ng-if="pc.cartTotal">{{pc.cartTotal}}</span></i>
     </div>
 </ion-nav-buttons>
 
-
+  <!-- Content Area -->
    <ion-content padding="true" class="has-header">
    
+   <!-- Top Heading and sorting filter -->
    <div class="bar bar-header bar-dark">
       <h1 class="title">{{pc.categoryHeading}}</h1>
       <button ui-sref="app.filter" class="button button clear ion-arrow-swap"></button>
       <button class="button button-clear ion-funnel" ng-click="pc.showMeSelect()"></button>
     </div>
-  <ul class="dropdown" ng-hide="pc.showListing">
-    <li class="item-sort">
-      <a class="links" href="#" ng-click="pc.myclick('+price')">PRICE-HIGH TO LOW </a>
-    </li>
-    <li class="item-sort" style="padding:7px">
-      <a class="links" href="#" ng-click="pc.myclick('-price')">PRICE-LOW TO HIGH </a>
-    </li>
-</ul>
-  </div>
+    <ul class="dropdown" ng-hide="pc.showListing">
+       <a class="links" href="#" ng-click="pc.myclick('+regularprice')"><li class="item-sort"> PRICE-HIGH TO LOW </li></a>
+       <a class="links" href="#" ng-click="pc.myclick('-regularprice')"><li class="item-sort" style="padding:7px">PRICE-LOW TO HIGH </li></a>
+   </ul>
 
-</div>
-    
-     <div  class="products" style="margin-top: 50px;">
-        <div class="product" ng-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts ">
-            <div class="product_img"><a ng-click="pc.fetchDetail({{x.productid}})"><img src="{{x.image}}" /></a></div>
-            <div class="product_name">{{x.name}}</div>
-            <div class="product_price">{{x.regularprice | currency:"$":0}}</div>
+  <!-- Search -->
+   <div class="searchTxt" ng-show="pc.showMe">
+        <input class="searchT" type="text" ng-model="pc.searchproducts" placeholder="Search Products" >
+    </div>
+    <div style="width:100%;height:35px;" ng-hide="pc.showMe"></div>
+
+    <!-- Product Listing -->
+     <div  class="products">
+        <div class="product" ng-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts"  ng-class-odd="'borderodd'" ng-class-even="'bordereven'">
+            <div class="product_img" ><a ng-click="pc.fetchDetail({{x.productid}})"><img src="{{x.image}}" /></a></div>
+            <div class="product_name">{{x.name | cut:true:46:' ..'}}</div>
+            <div class="price" ng-if="x.specialprice" style="text-align: center;"><span class="regularPrice">{{x.regularprice | currency}}</span><span class="product_price">{{x.specialprice | currency}}</span></div>
+            <div class="price" ng-if="!x.specialprice" style="text-align: center;"><span class="product_price">{{x.regularprice | currency}}</span></div>
         </div>
-	</div>
+	    </div>
   </ion-content>
 </ion-view>

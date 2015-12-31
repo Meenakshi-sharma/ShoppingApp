@@ -3081,8 +3081,9 @@ a.subdued {
       background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%); }
   .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #666666;
-    background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
+   /* background-color: #666666; */
+   background-color: #61D1C6;
+    background-image: linear-gradient(0deg, #61D1C6, #61D1C6 50%, transparent 50%);
     color: #444; }
     .bar.bar-stable .title {
       color: #fff; }
@@ -7693,3 +7694,16 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+
+  .productCompare .card{
+    padding:5px;
+  }
+  .productCompare .card span{
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .productCompare .card, .list-inset {
+    margin: 0px !important;
+    
+}

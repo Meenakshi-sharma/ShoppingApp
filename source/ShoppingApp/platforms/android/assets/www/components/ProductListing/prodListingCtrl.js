@@ -2,27 +2,39 @@ var prodListingCtrl;
 
 
 
-prodListingCtrl = (function($rootScope, $state , prodListingSrvc) {
-	
+prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListingSrvc) {
 
-
-	function prodListingCtrl($rootScope, prodListingSrvc , $state , $stateParams) {
-        this.state = $state ;
-	    var self = this;
+	function prodListingCtrl($rootScope,  $scope, prodListingSrvc , $state , $stateParams, $ionicLoading) {
+        $ionicLoading.show();
+        this.state = $state;
+        var self = this;
         this.showMe = false;
         this.showListing = true;
+        this.scope = $scope;
 
-        this.searchproducts = $rootScope.srch;
-    
-    if($stateParams.category_id){
-        var category_id = $stateParams.category_id;
-        var category_name = $stateParams.category_name;
-    }
-  
-    prodListingSrvc.getCdata(category_id).then(function(response) {
-        self.prodListing = response ;
-        self.categoryHeading = category_name;
-    })
+        //this.scope.$on('$ionicView.beforeEnter', function () {
+
+                this.searchproducts = $rootScope.srch;
+                
+        if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
+            self.cartTotal = localStorage.getItem("cartTotal");    
+        } else {
+            self.cartTotal = '0';
+        }
+            
+            if($stateParams.category_id){ console.log($stateParams);
+                var category_id = $stateParams.category_id;
+                var category_name = $stateParams.category_name;
+            }
+          
+            prodListingSrvc.getCdata(category_id).then(function(response) {
+                self.prodListing = response ;
+                self.categoryHeading = category_name;
+            }).finally(function(){
+                $ionicLoading.hide();
+            });
+       // });
+       
 
     
     
@@ -44,6 +56,7 @@ prodListingCtrl = (function($rootScope, $state , prodListingSrvc) {
     }
 
     prodListingCtrl.prototype.myclick = function(val){
+        this.showListing = true;
         this.selectPrice = val;
     }
 

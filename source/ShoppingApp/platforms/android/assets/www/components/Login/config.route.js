@@ -3,9 +3,21 @@
     loginModule
         .config(function($stateProvider) {
             $stateProvider
-                .state('login', {
+                .state('app.login', {
                     url: '/login:route',
-                    templateUrl: 'components/Login/login.html'
+                    views: {
+                        'menuContent' :{
+                            templateUrl: 'components/Login/login.html'
+                                 }
+                        }
+                })
+                .state('app.forgotPassword', {
+                    url: '/forgotPassword',
+                    views: {
+                        'menuContent' :{
+                            templateUrl: 'components/Login/forgotPassword.html'
+                                 }
+                        }
                 })
         });
 })();

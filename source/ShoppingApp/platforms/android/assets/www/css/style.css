@@ -10,6 +10,16 @@
 	display:inline
 }
 
+.borderodd{
+    border-right:1px solid #A9A9A9 !important; 
+    border-bottom: 1px solid #A9A9A9 !important;
+}
+
+.bordereven{
+    border-bottom: 1px solid #A9A9A9 !important;
+}
+
+
 /  Product listing /
 .products{
     float:left;
@@ -19,15 +29,17 @@
 
 .products .product{
     float: left;
-    width:49%;
+    width:50%;
+    min-height: 256px;
 }
 
 .product .product_img{
     text-align:center;
 }
 .product .product_img img{
-    width: 180px !important;
-    height: 190px;
+    width: 167px !important;
+    /* height: 190px; */
+    height: auto !important;
 }
 
 .product .product_name{
@@ -62,16 +74,26 @@
     font-weight:600;
 }
 
-.price .discount{
-    padding: 5px;
-    background-color: #F4FF28;
-    border: 1px solid #FF9600;
-    border-radius: 10px;
+.product_detail .discount{
+    position: absolute;
+    margin: 0 25px 37px 65px;
+    z-index: 999;
+    padding: 5px 10px 5px 10px;
+    border: 1px solid #DC5C5C;
+    background: #FF2B2B;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 0 0 30px 0px;
+    font-weight: 900;
+    word-break: normal;
 }
 
-
+.discount span{
+    
+}
 /* ------- SEARCH ----*/
-.searchBar {
+/*.searchBar {
     color: #fff;
     margin: 0 !important;
     padding: 0;
@@ -116,13 +138,22 @@
 }
 .searchBar .searchTxt input {
     text-align:center;
-    width: 90%;
+    width: 60%;
     color: #000;
     padding-left: 5px;
     padding-right: 5px;
     border: 1px solid #9E9E9E;
     border-radius: 15px;
-    margin-left:25px;
+    margin-left:60px;
+} */
+.searchTxt{
+    margin-top: 35px;
+}
+.searchTxt .searchT{
+    border: 1px solid #ddd !important;
+    padding: 0px 10px 0 10px !important;
+    border-radius: 6px !important;
+    color:#000 !important;
 }
 
 .buttn{
@@ -150,11 +181,17 @@ font-family: inherit;
 }
 
 .dropdown{
-    position: absolute; 
-    z-index: 999; 
-    margin: 35px 0 0 250px;
+    position: absolute;
+    z-index: 999;
     float: right;
+    width: 40%;
+    margin-right: 5px;
+    margin-top: 35px;
+    right: 5px;
+}
 
+.dropdown li{
+    border-bottom:2px solid #ddd;
 }
 /* Side Menu */
 
@@ -163,35 +200,35 @@ font-family: inherit;
 }
 
 .filter-options{
-color: #fff;
-width: 100%;
-font-size: 1.2em;
-float: left;
-text-decoration: none;
-padding: 7px;
-border-bottom:2px solid #ccc;
-font-weight: 600;
-text-align: center;
-margin-top: 35px;
+    color: #fff;
+    width: 100%;
+    font-size: 1.2em;
+    float: left;
+    text-decoration: none;
+    padding: 7px;
+    border-bottom: 2px solid #ccc;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 5px;
 
 }
 
 .filer-main{
-float: left;
-width: 26%;
-background-color:#444444;
-color: white;
-margin-left: -10px;
-height: 500px;
-margin-top: 27px;
+    float: left;
+    width: 36%;
+    background-color: #444444;
+    color: white;
+    /* margin-left: -10px; */
+    /* height: 489px; */
+    margin-top: 35px;
 }
 
 .filter-sub{
-float: left;
-margin-top: 32px;
-width: 76%; 
-background: rgba(170, 170, 170, 0.12);
-height: 500px;
+    float: left;
+    margin-top: 32px;
+    width: 64%;
+    background: rgba(170, 170, 170, 0.12);
+    height: 500px;
 }
 .filter-list{   
     background-color: rgba(170, 170, 170, 0.12); 
@@ -265,6 +302,17 @@ color: #fff;
 
 }
 
+.cbadge{
+    margin-left: -5px !important;
+    float:right;
+    display: inline-block;
+}
+.appLogo{
+    height: 36px;
+    width: 36px;
+    margin-top: 4px;
+}
+
  .collapse-text-toggle {
     font-size: 0.9em;
     color: #FFF;
@@ -276,4 +324,74 @@ color: #fff;
 }
 .collapse-text-toggle:after {
     content: ')';
+}
+
+.usernav{
+    position: absolute;
+    float: right;
+    right: 0px;
+    line-height: 30px;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    top: 40px;
+}
+
+.usernav li{
+    border-bottom: 2px solid #ddd;
+}
+.usernav li a{
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0px 8px 0 8px;
+    line-height: 15px;
+}
+.formbk {
+   /* margin-top: -40px !important; */
+    padding: 40px 0 0 0;
+    background: url('../img/splash.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+.formbk input[placeholder], .formbk input[text], .formbk input[password], .formbk input[checkbox], .formbk [placeholder], .formbk  *[placeholder] {
+    background: transparent;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    color: #fff !important;
+}
+
+.formbk .item {
+    background: transparent;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    color: #fff !important;
+}
+.formbk .link-button{
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+.sidenav .list{
+    border-bottom:1px solid #EFEFEF !important;
+}
+.sidenav .item{
+    background-color: #FDFDFD !important;
+    color: #0C0C0C !important;
+}
+.home-banners{
+    width: 100%;
+    border-top: 5px solid #ddd;
+}
+.home-banners h3{
+    float: left;
+    margin-top:0px; 
+    padding: 10px 5px 0px 0px;
+    color: #000;
+}
+.formbk .item{
+    border:none !important;
 }

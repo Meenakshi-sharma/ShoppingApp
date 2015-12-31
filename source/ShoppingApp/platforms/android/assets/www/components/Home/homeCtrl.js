@@ -3,7 +3,13 @@ var homeCtrl;
 homeCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state) {
 
     function homeCtrl($rootScope,$stateParams, $scope,homeSrvc,$ionicSideMenuDelegate,$state) {
-
+        
+        if(localStorage.getItem("cartTotal") && localStorage.getItem("cartid")){
+            this.cartTotal = localStorage.getItem("cartTotal");    
+        } else {
+            this.cartTotal = 0;
+        }
+        
         if($stateParams.position_id){
             var position_id = $stateParams.position_id;
         } else {

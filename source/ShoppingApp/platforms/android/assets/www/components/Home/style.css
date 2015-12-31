@@ -272,6 +272,10 @@ RawBlameHistory     201 lines (176 sloc)  3.08 KB
     width: 100%;
     /*height: 280px; */
 }
+.product_detail .slider-slides img {
+     width: 65%;
+    margin-left: 17.5%;
+}
 
 .prodetail{
     float: left;
@@ -333,8 +337,8 @@ RawBlameHistory     201 lines (176 sloc)  3.08 KB
 
 
 .item .badge {
-    top: 25px !important;
-    right: 50px !important;
+    top: 5px !important;
+    right: 0px !important;
 }
 Status API Training Shop Blog About Pricing
 © 2015 GitHub, Inc. Terms Privacy Security Contact Help

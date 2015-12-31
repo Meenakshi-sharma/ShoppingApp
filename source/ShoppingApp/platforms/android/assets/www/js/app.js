@@ -7,10 +7,14 @@
     // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
     // the 2nd parameter is an array of 'requires'
 
-    angular.module('myApp', ['ionic', 'myApp.login', 'myApp.signup','myApp.home','myApp.menu','myApp.banner','myApp.product','myApp.prodListing','myApp.filter','myApp.ngMessages','myApp.cart','myApp.checkout'])
+    angular.module('myApp', ['ionic', 'myApp.login', 'myApp.signup','myApp.home','myApp.profile','myApp.menu','myApp.banner','myApp.product','myApp.prodListing','myApp.filter','myApp.ngMessages','myApp.cart','myApp.checkout'])
 
         .run(runApp)
         .config(configure)
+        .constant('constants', {
+            APP_NAME: 'CLOTH SHOPPING',
+            API_URL: 'http://hybdmobi-test.netsolutions.in/index.php/phonegapapp/'
+        })
 
      .directive('searchBar', [function () {
     return {
@@ -48,6 +52,26 @@
   }
   }])
   
+  .filter('cut', function () {
+        return function (value, wordwise, max, tail) {
+            if (!value) return '';
+
+            max = parseInt(max, 10);
+            if (!max) return value;
+            if (value.length <= max) return value;
+
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace != -1) {
+                    value = value.substr(0, lastspace);
+                }
+            }
+
+            return value + (tail || ' …');
+        };
+    })
+  
     
 
     function configure($stateProvider , $urlRouterProvider, $ionicConfigProvider) {
@@ -62,10 +86,11 @@
             $urlRouterProvider.otherwise('/login'); // Default route for ui-router
         } */
         
-        $urlRouterProvider.otherwise('/login'); // Default route for ui-router
+        $urlRouterProvider.otherwise('/app/banner'); // Default route for ui-router
         
         if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
         $ionicConfigProvider.backButton.previousTitleText(false);
+
     }
 
     function runApp($ionicPlatform) {
@@ -83,7 +108,7 @@
         });
         // Initialize caching services if required (You need to add DSCacheFactory as an argument to runApp() to do this)
         // I sometimes have to initialize the cache within a factory/service as it is required immediately.
-        // DSCacheFactory("codes", { storageMode: 'localStorage' });
+         //DSCacheFactory("codes", { storageMode: 'localStorage' });
     }
 
 })();

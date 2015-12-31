@@ -1,6 +1,6 @@
 var loginSrvc;
 
-loginSrvc = (function($log, $http, $q, $state) {
+loginSrvc = (function($log, $http, $q, $state, constants) {
 
     var ls = this;
     ls.$log = $log;
@@ -10,31 +10,32 @@ loginSrvc = (function($log, $http, $q, $state) {
     $log.debug("constructing loginSrvc");
 
     var loginSrvc = {
+
+        showToastBanner: function(message, duration, position) { 
+            window.plugins.toast.showWithOptions(
+            {
+              message: message,
+              duration: duration,
+              position: position,
+              addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+            }//,
+            //onSuccess, // optional
+            //onError    // optional
+          );
+        },
         chkLogin: function(username, password) { //alert("fu");
         
             var deferred;
             $log.debug("get globalCompanyFields service");
             //console.log(username);
             deferred = ls.$q.defer();
-            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/users/login', {
+            $http.post(constants.API_URL+'users/login', {
                     email: username,
                     password: password
                 })
                 .success((function(_this) {
                     return function(data, status) { //console.log(data); alert("success");
-                        if(data.error == 0){
-                            //alert("Your Login Successfully.");
-                             
-                            localStorage.setItem("email", data.email);
-                            localStorage.setItem("firstname", data.firstname);
-                            localStorage.setItem("lastname", data.lastname);
-                            localStorage.setItem("customer_id", data.entity_id);
-                            
-                            $state.go("app.banner");
-                        } else {
-                            alert("Error");
-                        }
-                        $log.debug("globalCompanyFields " + (angular.toJson(data, true)));
+                        $log.debug("Login info " + (angular.toJson(data, true)));
                         return deferred.resolve(data);
                     };
                 })(this)).error((function(_this) {
@@ -45,7 +46,6 @@ loginSrvc = (function($log, $http, $q, $state) {
                     };
                 })(this));
             return deferred.promise;
-
         }
     }
 

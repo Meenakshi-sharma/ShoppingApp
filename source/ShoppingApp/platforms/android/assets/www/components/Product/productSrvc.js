@@ -1,6 +1,6 @@
 var productSrvc;
 
-productSrvc = (function($log, $http, $q) {
+productSrvc = (function($log, $http, $q, constants) {
 
     var pd = this;
     pd.$log = $log;
@@ -12,7 +12,7 @@ var productSrvc ;
         getData: function(prid) {
             var deferred;
             deferred = pd.$q.defer();
-            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/products/productDetail', {
+            $http.post(constants.API_URL+'products/productDetail', {
                     productId: prid 
                 })
                 .success((function(_this) {
@@ -31,7 +31,7 @@ var productSrvc ;
         addToCart: function(response) {
             var deferred;
              deferred = pd.$q.defer();
-            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/cart/addCart', {
+            $http.post(constants.API_URL+'cart/addCart', {
                    "products":response["products"],
                    "customer":response["customer"],
                    "shopping_cart_id":response["shopping_cart_id"]

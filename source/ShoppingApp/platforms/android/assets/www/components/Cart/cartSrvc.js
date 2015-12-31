@@ -1,6 +1,6 @@
 var cartSrvc;
 
-cartSrvc = (function($log, $http, $q) {
+cartSrvc = (function($log, $http, $q, constants) {
 
     
     var pd = this;
@@ -26,12 +26,12 @@ cartSrvc = (function($log, $http, $q) {
           );
         },
         
-        getCartProducts: function(quoteId) {
+        getCartProducts: function(quoteId) { console.log("cart id" + quoteId);
             var deferred;
             //$log.debug("get globalCompanyFields service");
             //console.log(username);
             deferred = pd.$q.defer();
-            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/cart/getCartProducts', {
+            $http.post(constants.API_URL+'cart/getCartProducts', {
                     quoteId: quoteId 
                 })
                 .success((function(_this) {
@@ -54,7 +54,7 @@ cartSrvc = (function($log, $http, $q) {
             //$log.debug("get globalCompanyFields service");
             //console.log(username);
             deferred = pd.$q.defer();
-            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/cart/getCartTotal', {
+            $http.post(constants.API_URL+'cart/getCartTotal', {
                     quoteId: quoteId 
                 })
                 .success((function(_this) {
@@ -75,7 +75,7 @@ cartSrvc = (function($log, $http, $q) {
         updateCartProducts: function(products, quoteId, customer_id) {
             var deferred;
             deferred = pd.$q.defer();
-            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/cart/UpdateProduct', {
+            $http.post(constants.API_URL+'cart/UpdateProduct', {
                     products: products,
                     quoteId: quoteId, 
                     customerId: customer_id

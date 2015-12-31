@@ -1,6 +1,6 @@
 var menuSrvc;
 
-menuSrvc = (function($log, $http, $q) {
+menuSrvc = (function($log, $http, $q, constants) {
 
     
     var mc = this;
@@ -9,12 +9,11 @@ menuSrvc = (function($log, $http, $q) {
     mc.$q = $q;
 var deferred ;
   
-var menuSrvc ;
-           
-            //$log.debug("get globalCompanyFields service");
-            //console.log(username);
+var menuSrvc  = {
+        
+        getCategories: function() {
             deferred = mc.$q.defer();
-            $http.post('http://magento-netsol.netsol.local/magento_1.9/index.php/phonegapapp/categories/categories')
+            $http.post(constants.API_URL+'categories/categories')
                 .success((function(_this) {
                     return function(data, status) {
                         //$log.debug("globalCompanyFields " + (angular.toJson(data, true)));
@@ -29,10 +28,8 @@ var menuSrvc ;
                     };
                 })(this));
             return deferred.promise;
-
-       
-    
- 
+        }
+    }
 
     return menuSrvc;
 });
