@@ -10,12 +10,15 @@
     </div>
     <ul class="usernav" ng-show="bc.showProfile">
      <a class="links" href="#" ui-sref="app.login"><li class="item-sort">Login</li></a>
+     <a class="links" href="#" ng-click="app.LogOut()"><li class="item-sort">Logout</li></a>
+     <a class="links" href="#" ui-sref="app.profile"><li class="item-sort">My Account</li></a>
      <a class="links" href="#"  ui-sref="app.wishlist"><li class="item-sort" style="padding:7px">Wishlist</li></a>
      <a class="links" href="#"  ui-sref="app.trackorder"><li class="item-sort" style="padding:7px">Track Order</li></a>
      <a class="links" href="#" ><li class="item-sort" style="padding:7px">Rate the app</li></a>
    </ul>
 
 </ion-nav-buttons> 
+
    <ion-content padding="true" class="has-header" style="margin-bottom:10px;" ng-click="bc.hideProf()" ng-blur="bc.hideProf()" >
    <!-- User Navigation -->
    
@@ -70,4 +73,5 @@ padding: 0 5px 0px 0px;color: #45BDAE;line-height: 28px;">View All</h6></a>
    </div>
    
   </ion-content>
+
 </ion-view>

@@ -5,40 +5,35 @@ cartCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state, cartSrvc) 
         
         this.state = $state;
         var self = this;
-        
+         var grandTotal = 0;
+
         $ionicLoading.show();
 
-        if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
-            self.cartTotal = localStorage.getItem("cartTotal");    
-        } else {
-            self.cartTotal = 0;
-        }
-        
         if(localStorage.getItem("cartid") && localStorage.getItem("cartid") != '' && localStorage.getItem("cartid") != 'undefined'){
             var cartid = localStorage.getItem("cartid");// alert(cartid);   
-           
-            cartSrvc.getCartProducts(cartid).then(function(response) { console.log("cart response"); console.log(response);
+
+            cartSrvc.getCartProducts(cartid).then(function(response) { //console.log("cart response"); console.log(response.products.length);
                     self.cartProducts = response.products;
 
-                    /*
                     if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
-                        
+
                         if(self.cartProducts){
-                            self.cartTotal = self.cartProducts.length;
+                            self.cartTotal = response.products.length;
                             localStorage.setItem("cartTotal", self.cartTotal);
                         }else {
                             self.cartTotal = 0; 
                         }
-                    } */
-                    
-                    var grandTotal = 0;
+
+                    }
+                
                     
                     if(self.cartProducts){
                         for(i=0; i<self.cartProducts.length;i++){
-                            grandTotal = grandTotal+self.cartProducts[i].subTotal;
+                            grandTotal += parseInt(self.cartProducts[i].subTotal);
                         }
                         self.cartProducts.grandTotal = grandTotal;
                     }
+                    console.log(self.cartProducts);
                     
              }).finally(function(){
                 $ionicLoading.hide();
@@ -46,19 +41,21 @@ cartCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state, cartSrvc) 
 
              function updateCart(){
                 var customer_id = localStorage.getItem("customer_id");              
-                console.log("Request data update product..");
-                console.log(self.cartProducts); console.log(cartid); console.log(customer_id);
+                //console.log("Request data update product..");
+                //console.log(self.cartProducts); console.log(cartid); console.log(customer_id);
                 cartSrvc.updateCartProducts(self.cartProducts, cartid, customer_id).then(function(response) {
-                    console.log(response); alert(response.errorMsg);
+                    //console.log(response); alert(response.errorMsg);
                 })
              }
              
              
-             cartCtrl.prototype.myquantity = function(product_id, type){ alert(product_id);
-             console.log(self.cartProducts);
-             for(i=0; i<=self.cartProducts.length; i++){
-                if(self.cartProducts[i].product_id == product_id){
-                    var quantity = self.cartProducts[i].qty;  
+             cartCtrl.prototype.myquantity = function(product_id, type){ //alert(product_id);
+             //console.log(" before update "); console.log(self.cartProducts);
+             for(i=0; i<self.cartProducts.length; i++){
+                if(self.cartProducts[i]){ //console.log(self.cartProducts[i]);
+                    if(self.cartProducts[i].product_id  && self.cartProducts[i].product_id == product_id){
+                        var quantity = self.cartProducts[i].qty;  
+                    }
                 }
              }
 
@@ -73,22 +70,22 @@ cartCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state, cartSrvc) 
                 if(quantity < 1){
                     quantity = 1;
                 }
-                
-                for(i=0; i<=self.cartProducts.length; i++){
-                    if(self.cartProducts[i].product_id == product_id){
+                alert(quantity);
+                for(i=0; i<self.cartProducts.length; i++){
+                    if(self.cartProducts[i].product_id && self.cartProducts[i].product_id == product_id){
                         self.cartProducts[i].qty = quantity;  
                     }
                  }
-                 
+                  console.log(" after update "); console.log(self.cartProducts);
 
                 
-                var grandTotal = 0;
-                for(i=0; i<=self.cartProducts.length; i++ ){
+               
+                for(i=0; i<self.cartProducts.length; i++ ){
                     if(self.cartProducts[i]){
                         if(self.cartProducts[i].product_id == product_id){
                            self.cartProducts[i].quantity = quantity;
-                           self.cartProducts[i].subTotal = self.cartProducts[i].price * self.cartProducts[i].quantity;
-                           grandTotal = grandTotal + self.cartProducts[i].subTotal;
+                           self.cartProducts[i].subTotal = self.cartProducts[i].price * self.cartProducts[i].quantity; //alert(grandTotal); alert(self.cartProducts[i].subTotal);
+                           grandTotal += self.cartProducts[i].subTotal; //alert(grandTotal);
                            self.cartProducts.grandTotal = grandTotal;
                         }
                     }

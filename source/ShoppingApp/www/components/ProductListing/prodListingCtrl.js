@@ -14,7 +14,7 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
 
         //this.scope.$on('$ionicView.beforeEnter', function () {
 
-                this.searchproducts = $rootScope.srch;
+        this.searchproducts = $rootScope.srch;
                 
         if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
             self.cartTotal = localStorage.getItem("cartTotal");    

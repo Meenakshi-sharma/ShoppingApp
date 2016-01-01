@@ -1,51 +1,64 @@
 var menuCtrl;
 //menuModule.$inject = [$state];
-menuCtrl = (function($state ,$rootScope,$scope,$timeout) {
+menuCtrl = (function($state ,$rootScope,$scope,$timeout, $ionicLoading, menuSrvc) {
 
     
-    function menuCtrl($scope , $rootScope,  homeSrvc , $state,$timeout) {
+    function menuCtrl($scope , $rootScope,  homeSrvc , $state,$timeout, $ionicLoading, menuSrvc) {
 //console.log($scope); 
         this.state = $state ;
-        this.homeSrvc= homeSrvc;
-        this.scope = $scope;
+        this.menuSrvc= menuSrvc;
+        var mycategories = {};
+        var self = this;
         
         if(localStorage.getItem("customer_id")){
-            this.username = localStorage.getItem("firstname");
+            self.username = localStorage.getItem("firstname");
         } else {
-            this.username = "Guest";
+            self.username = "Guest";
         }
-//console.log("categoryis");   console.log(homeSrvc.children[0].children);
-    this.categories = homeSrvc.children[0].children;
 
-   this.rootscope = $rootScope; 
-}
+        $ionicLoading.show();
+        self.menuSrvc.getCategories().then(function(response) {  console.log(response);
+            menushowCat(response)
+        }).finally(function(){
+            $ionicLoading.hide();
+        });
 
+        var i = 0;
 
-menuCtrl.prototype.getSub = function(position_id, category_id, category_name) { //alert(position_id); alert(category_id); alert(category_name);
+        function menushowCat(response){ //console.log('i'); console.log(response)
+            if(response.length > 0 ){ 
+                if(response[i]){
+                    if(response[i].parent_id == 2){
+                        mycategories[i] = response[i];
+                        self.youcategories = mycategories;
+                        //console.log("youcategories"); console.log(self.youcategories);
+                    }
 
+                    i++;
+                    menushowCat(response);
+                }
+            }            
+        }
 
-    var  listc = this.homeSrvc; //console.log(listc); console.log("duckssssssss");
-   //alert(listc.children[0].children[position_id].children.length);
-         if (listc.children[0].children[position_id].children.length > 0){
-                this.state.go("app.home", {position_id:position_id});
-            } else {
-              this.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});
+        self.rootscope = $rootScope; 
+
+           menuCtrl.prototype.getSub = function(index, position_id, category_id, category_name) { alert(index); //alert(category_id); alert(category_name);
+console.log(self.youcategories);
+var abc = self.youcategories; console.log(abc[0]); 
+
+                     if (self.youcategories[index].children_count > 0){
+                            self.state.go("app.home", {position_id:position_id});
+                        } else {
+                          self.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});
+                        }
+                    }
+
+            menuCtrl.prototype.nav = function(state) {
+                self.state.go(state);
             }
-        }
 
-menuCtrl.prototype.nav = function(state) {
-    this.state.go(state);
-}
-menuCtrl.prototype.LogOut = function() {
-    localStorage.setItem("email", '');
-    localStorage.setItem("firstname", '');
-    localStorage.setItem("lastname", '');
-    localStorage.setItem("customer_id", '');
-    alert("You Logout Successfully");
-    this.state.go("login");
-    return;
-}
-    
+    }
+ 
 
 return menuCtrl;
     

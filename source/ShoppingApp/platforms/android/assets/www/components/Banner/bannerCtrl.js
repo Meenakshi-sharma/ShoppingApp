@@ -1,7 +1,7 @@
 var bannerCtrl;
 
 bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc) {
-    function bannerCtrl($rootScope,$scope,bannerSrvc,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc) {
+    function bannerCtrl($rootScope,$scope,bannerSrvc,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc, $ionicModal) {
 
        this.state = $state;
        this.scope = $scope;
@@ -10,6 +10,15 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicL
         
         var self = this;
 
+/*
+        $ionicModal.fromTemplateUrl('components/Banner/banner.html', {
+            scope: this.scope,
+            animation: 'slide-in-up'
+          }).then(function(modal) {
+            this.scope.modal = modal;
+          });
+
+*/
         $ionicHistory.nextViewOptions({
           disableAnimate: true,
           disableBack: true
@@ -44,9 +53,7 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicL
                                 self.prodCatListing = prodCatListing;
                             }
                         }
-
                         i++;
-
                         showCat(categories);
                     });
                 }
@@ -63,7 +70,7 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicL
             bannerSrvc.getBdataSpecial().then(function(response) {
                 self.categoryBannersSpecial = response;
             }).finally(function(){
-                $ionicLoading.hide();
+              $ionicLoading.hide();
             });
 
         bannerCtrl.prototype.goToCart = function(product_id){
@@ -95,6 +102,16 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicL
             }
         
          }
+
+         bannerCtrl.prototype.LogOut = function() {
+            localStorage.setItem("email", '');
+            localStorage.setItem("firstname", '');
+            localStorage.setItem("lastname", '');
+            localStorage.setItem("customer_id", '');
+            alert("You Logout Successfully");
+            this.state.go("login");
+            return;
+        }
 
         bannerCtrl.prototype.getSub = function(category_id, category_name) {
             this.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});
