@@ -4,12 +4,6 @@
   </ion-nav-title>
   <ion-nav-buttons side="right">
     <div class="searchBar" >
-        <div class="searchTxt" ng-show="hc.showMe">
-            <div class="bgtxt">
-                <input type="text" ng-model="hc.searchproducts" placeholder="Search Products" />
-            </div>
-        </div>
-        <i class="icon ion-ios-search" ng-click="hc.showMeSearch()"></i>
         <i ui-sref="app.cart" class="icon ion-android-cart"><span class="badge badge-assertive cbadge" ng-if="bc.cartTotal">{{bc.cartTotal}}</span></i>
     </div>
 </ion-nav-buttons>

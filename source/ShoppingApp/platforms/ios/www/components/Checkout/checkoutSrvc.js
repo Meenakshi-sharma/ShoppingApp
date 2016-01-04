@@ -88,7 +88,25 @@ checkoutSrvc = (function($log, $http, $q, constants) {
                     };
                 })(this));
            return deferred.promise;
+        },
+        getUserCheckoutMethods: function() {
+            var deferred;
+            deferred = chk.$q.defer();
+            $http.post(constants.API_URL+'checkout/getShippingAndPaymentMethods')
+                .success((function(_this) {
+                    return function(data, status) {
+                        return deferred.resolve(data);
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        $log.error("Failed to payment method" + status);
+                        $log.error("Failed to product Service");
+                        return deferred.reject(data);
+                    };
+                })(this));
+           return deferred.promise;
         }
+
 }
     return checkoutSrvc;
 });

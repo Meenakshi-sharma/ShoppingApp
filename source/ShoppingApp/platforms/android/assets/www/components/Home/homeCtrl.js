@@ -31,13 +31,11 @@ homeCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state) {
         this.state.go("app.prodListing");
 
      }
-     
+
      homeCtrl.prototype.showProducts = function(category_id, category_name){
         this.state.go("app.prodListing",{ category_id:category_id, category_name:category_name });
     }
        
-    
-
     return homeCtrl;
 })();
 

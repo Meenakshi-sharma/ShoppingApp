@@ -68,6 +68,11 @@ checkoutCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkou
                     self.billing.phone = response.shipping.telephone;
              });
 
+        checkoutSrvc.getUserCheckoutMethods().then(function(response) { console.log(" payment....");console.log(response);
+
+
+        });
+
          $ionicLoading.hide();   
          
          checkoutCtrl.prototype.GoToNav = function(route){
