@@ -2,70 +2,57 @@
     <ion-nav-title >
         <a ui-sref="app.banner" href="javascript:;" ><img src="img/icon-small.png" class="appLogo"/></a>
   </ion-nav-title>
-  <ion-nav-buttons side="right">
-    <div class="searchBar" >
-        <i ui-sref="app.cart" class="icon ion-android-cart"><span class="badge badge-assertive cbadge" ng-if="bc.cartTotal">{{bc.cartTotal}}</span></i>
-    </div>
-</ion-nav-buttons> 
-    
-  <ion-content>
-    <div class="bar bar-header bar-dark">
+  <ion-content style="top:35px; bottom: 15px;">
+    <div class="bar bar-header bar-dark" style="top:-11px;">
       <h1 class="title">BILLING DETAILS</h1>
     </div>
-    <div class="list" style="top: 35px;"  ng-class="{ 'has-error' : checkoutForm.name.$invalid && !checkoutForm.name.$pristine }">
+    <div class="card list" style="top: 35px; bottom:0px;"  ng-class="{ 'has-error' : checkoutForm.name.$invalid && !checkoutForm.name.$pristine }">
       <label class="item item-input item-floating-label">
         <span class="input-label">First Name</span>
-        <input type="text" ng-model="chc.billing.fname" name="fname" placeholder="Name" ng-minlength="3" ng-maxlength="15" required/>
-        <p ng-show="checkoutForm.fname.$invalid && !checkoutForm.fname.$pristine && checkoutForm.fname.$error.minlength" class="help-block"><span class="min-valid">Name is too short</span></p>
-        <p ng-show="checkoutForm.fname.$invalid && !checkoutForm.fname.$pristine && checkoutForm.fname.$error.maxlength" class="help-block"><span class="min-valid">Name is too long.</span></p>
-        <p ng-show="checkoutForm.fname.$invalid && !checkoutForm.fname.$pristine && checkoutForm.fname.$error.required" class="help-block"><span class="min-valid">Name is required.</span></p>
+        <input type="text" ng-model="chc.billing.shipping.firstname" name="firstname" placeholder="First Name" ng-minlength="3" ng-maxlength="15" required/>
       </label>
 
       <label class="item item-input item-floating-label">
         <span class="input-label">Last Name</span>
-        <input type="text" ng-model="chc.billing.lname" name="lname" placeholder="Last Name" ng-minlength="3" ng-maxlength="15" required />
-        <p ng-show="checkoutForm.lname.$invalid && !checkoutForm.lname.$pristine && checkoutForm.lname.$error.minlength" class="help-block"><span class="min-valid">Last Name is too short</span></p>
-        <p ng-show="checkoutForm.lname.$invalid && !checkoutForm.lname.$pristine && checkoutForm.lname.$error.maxlength" class="help-block"><span class="min-valid">Last Name is too long.</span></p>
-        <p ng-show="checkoutForm.lname.$invalid && !checkoutForm.lname.$pristine && checkoutForm.lname.$error.required" class="help-block"><span class="min-valid">Last Name is required.</span></p>
-      </label>
+        <input type="text" ng-model="chc.billing.shipping.lastname" name="lastname" placeholder="Last Name" ng-minlength="3" ng-maxlength="15" required />
+     </label>
 
       <label class="item item-input item-floating-label">
         <span class="input-label">Address Line 1</span>
-        <input type="text" ng-model="chc.billing.address1" name="address1" placeholder="Address Line 1" required/>
-        <p ng-show="checkoutForm.address1.$invalid && !checkoutForm.address1.$pristine && checkoutForm.address1.$error.required" class="help-block"><span class="min-valid">Address1 is required.</span></p>
+        <input type="text" ng-model="chc.billing.shipping.street1" name="street1" placeholder="Address Line 1" required/>
       </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">Address Line 2</span>
-        <input ng-model="chc.billing.address2" name="address2" type="text" placeholder="Address Line 2"/>
+        <input type="text" ng-model="chc.billing.shipping.street2" name="street2" placeholder="Address Line 2" required/>
       </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">City/Town</span>
-        <input type="text" ng-model="chc.billing.city" name="city"  placeholder="City/Town"/>
-        <p ng-show="checkoutForm.city.$invalid && !checkoutForm.city.$pristine && checkoutForm.city.$error.required" class="help-block"><span class="min-valid">City is required.</span></p>
+        <input type="text" ng-model="chc.billing.shipping.city" name="city"  placeholder="City/Town"/>
       </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">State</span>
-        <input type="text" ng-model="chc.billing.state" name="state"  placeholder="State"/>
-        <p ng-show="checkoutForm.state.$invalid && !checkoutForm.state.$pristine && checkoutForm.state.$error.required" class="help-block"><span class="min-valid">State is required.</span></p>
+        <input type="text" ng-model="chc.billing.shipping.region" name="region"  placeholder="State"/>
       </label>
-      <label class="item item-input item-floating-label">
-        <span class="input-label">Countary</span>
-        <input type="text" ng-model="chc.billing.countary" name="countary"  placeholder="Countary"/>
-        <p ng-show="checkoutForm.countary.$invalid && !checkoutForm.countary.$pristine && checkoutForm.countary.$error.required" class="help-block"><span class="min-valid">Countary is required.</span></p>
+       <input type="hidden" ng-model="chc.billing.shipping.country_id" name="country_id"/>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Country
+        </div>
+        <select name="countary_name" ng-init="chc.billing.shipping.country_id = chc.billing.shipping.country_id || 'IN'" ng-model="chc.billing.shipping.country_id" style="right:5px;" ng-options="x.country_id as x.name for x in chc.billing.country_list"></select>
       </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">Pin Code</span>
-        <input type="text" ng-model="chc.billing.pincode" name="pincode" placeholder="Pin Code"/>
-        <p ng-show="checkoutForm.pincode.$invalid && !checkoutForm.pincode.$pristine && checkoutForm.pincode.$error.required" class="help-block"><span class="min-valid">Pincode is required.</span></p>
+        <input type="text" ng-model="chc.billing.shipping.postcode" name="postcode" placeholder="Pin Code"/>
       </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">Phone Number</span>
-        <input type="text" ng-model="chc.billing.phone" name="phone"  placeholder="Phone Number"/>
-        <p ng-show="checkoutForm.phone.$invalid && !checkoutForm.phone.$pristine && checkoutForm.phone.$error.required" class="help-block"><span class="min-valid">Phone is required.</span></p>
+        <input type="number" ng-model="chc.billing.shipping.telephone" name="telephone"  placeholder="Phone Number"/>
       </label>
-      
     </div>
-        <button ng-disabled="checkoutForm.$invalid" class="button button-full button-calm" ng-click="chc.BillingInfo()" style="color: #fff; margin-top:35px">CONTINUE</button>
+        
     
   </ion-content>
+  <ion-footer-bar>
+    <button ng-disabled="checkoutForm.$invalid" class="button button-full button-calm" ng-click="chc.BillingInfo()" style="color: #fff;margin:0px;">CONTINUE</button>
+</ion-footer-bar>
 </ion-view>

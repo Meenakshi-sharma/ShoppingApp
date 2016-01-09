@@ -15,7 +15,9 @@
 </ion-nav-buttons>
     
   <ion-content>
+
   <div class="product_detail">
+    <div class="list card">
     <!-- Image Slider -->
     <div class="discount"  ng-if="pd.discount">
         <span>{{pd.discount | number : 0}}% </span><br />
@@ -36,28 +38,32 @@
     
     <!-- Product Name, Likes -->
     <div class="prodetail" ng-model="pd.pdata" style="float: left; width: 100%;">
-        <h4>{{pd.pdata.name}}</h4>
+        <h4 style="width:100%; text-align:center;">{{pd.pdata.name}}</h4>
        <div class="price" ng-if="pd.pdata.special_price" style="text-align: center;"><span class="regularPrice">{{pd.pdata.price | currency}}</span><span class="product_price">{{pd.pdata.special_price | currency}}</span></div>
        <div class="price" ng-if="!pd.pdata.special_price" style="text-align: center;"><span class="product_price">{{pd.pdata.price | currency}}</span></div>
     </div>
     
     <!-- Product Size -->
-    <div ng-if="pd.pdata.optionid.length > 0" class="prodetail" ng-repeat="x in pd.pdata.optionid">
-        <h5>{{x.title}}</h5>
-        <!-- <select name="{{x.title}}" ng-model="pd[x.title]" style="right:5px;"> -->
-        <select ng-init="pd[x.title] = pd[x.title] || pd.pdata.optionvalue[x.option_id][0].value_id" name="{{x.title}}" ng-model="pd[x.title]" style="right:5px;" ng-options="y.value_id as y.title.toUpperCase() for y in pd.pdata.optionvalue[x.option_id]">
-        </select>
-        
+    <div class="list">
+        <div ng-if="pd.pdata.optionid.length > 0" class="prodetail" ng-repeat="x in pd.pdata.optionid">
+            <label class="item item-input item-select">
+            <div class="input-label">
+              <h3>{{x.title}}</h3>
+            </div>
+            <select ng-init="pd[x.title] = pd[x.title] || pd.pdata.optionvalue[x.option_id][0].value_id" name="{{x.title}}" ng-model="pd[x.title]" style="right:5px;" ng-options="y.value_id as y.title.toUpperCase() for y in pd.pdata.optionvalue[x.option_id]">
+            </select>
+          </label>
+        </div>
     </div>
 <!-- Product Description -->
-    <div class="prodetail" style="border-bottom:5px solid #ddd;">
+    <div class="prodetail">
         <h5 style="float: left; width: 100%;">Description</h5>
         <div ng-bind-html=pd.pdata.short_description class="price_box"></div>
     </div>
-
+</div>
  <!-- Related Products --> 
-  <h3 style="float: left;margin-top: 0px;width: 100%;padding: 0 5px 0px 5px;color: #000;margin-top:10px;">Related Products</h3><hr/>
-   <div class="products" style="display: flex; overflow-y: hidden; overflow-x: visible;border-bottom:5px solid #ddd; width:100%; float:left;">
+  <h3 style="float:left; margin:0px; width:100%; padding:5px; color:#000; margin-top:10px;background:#fff;">Related Products</h3>
+   <div class="products" style="display: flex; overflow-y: hidden; overflow-x: visible; width:100%; float:left;">
         <div class="product" ng-repeat="x in pd.pdata.related_products">
             <div class="product_img"><a href="javascript:;"  ng-click="pd.fetchDetail(x.productid)"><img style="width: 168px !important; height:auto !important;" src="img/product2.png" ng-src="{{x.image}}" /></a></div>
             <div class="product_name">{{x.name | cut:true:50:' ..'}}</div>
@@ -66,9 +72,10 @@
         </div>
    </div>
 <!-- Related Products End --> 
-<button ng-click="pd.goToCompare()" class="button button-full button-assertive">Go To Compare</button>
+<!-- <button ng-click="pd.goToCompare()" class="button button-full button-assertive">Go To Compare</button> -->
   </div>
-</div>
+
+
   </ion-content>
   <ion-footer-bar style="margin-bottom:5px;">
     <div class="tabs tabs-icon-top">

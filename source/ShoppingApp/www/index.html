@@ -6,18 +6,15 @@
     <meta http-equiv="Content-Security-Policy"/>
     <title>Cloth Shopping</title>
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-   <!-- <link href="lib/ionicmaterial/ionic.material.css" rel="stylesheet"> -->
     
    <link href="components/Home/style.css" rel="stylesheet">
    <link href="css/style.css" rel="stylesheet">
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-  <!--  <script src="llib/ionicmaterial/ionic.material.js"></script> --?
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>  -->
-  <!--  <link href='https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic' rel='stylesheet' type='text/css'> -->
+
     <!-- your app's js -->
    
      <script src="js/app.module.js"></script>
@@ -33,7 +30,6 @@
     <script src="components/Home/homeCtrl.js"></script>
     <script src="components/Home/homeSrvc.js"></script>  
 
-     
     <script src="components/Menu/config.route.js"></script>     
     <script src="components/Menu/menuCtrl.js"></script>    
     <script src="components/Menu/menuSrvc.js"></script>  
@@ -59,7 +55,6 @@
     <script src="components/Filter/filterCtrl.js"></script>
     <script src="components/Filter/filterSrvc.js"></script> 
 
-
     <!-- Cart -->
     <script src="components/Cart/config.route.js"></script> 
     <script src="components/Cart/cartCtrl.js"></script>  
@@ -67,7 +62,11 @@
 
     <!-- Checkout -->
     <script src="components/Checkout/config.route.js"></script> 
-    <script src="components/Checkout/checkoutCtrl.js"></script>       
+    <script src="components/Checkout/checkoutCtrl.js"></script>
+    <script src="components/Checkout/paymentCtrl.js"></script>       
+    <script src="components/Checkout/shippingCtrl.js"></script> 
+    <script src="components/Checkout/orderReviewCtrl.js"></script> 
+    <script src="components/Checkout/orderSuccessCtrl.js"></script> 
     <script src="components/Checkout/checkoutSrvc.js"></script>
      
      <!-- Product -->   
@@ -75,11 +74,13 @@
     <script src="components/Product/productCtrl.js"></script>
     <script src="components/Product/productSrvc.js"></script> 
     
-        <!-- Profile Component -->
-    
+     <!-- Profile Component -->
     <script src="components/Profile/config.route.js"></script>     
     <script src="components/Profile/profileCtrl.js"></script>
-    <script src="components/Profile/profileSrvc.js"></script> 
+    <script src="components/Profile/orderCtrl.js"></script>
+    <script src="components/Profile/changePasswordCtrl.js"></script>
+    <script src="components/Profile/profileSrvc.js"></script>
+
 
   </head>
   <body ng-app="myApp">

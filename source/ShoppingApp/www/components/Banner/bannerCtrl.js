@@ -1,7 +1,7 @@
 var bannerCtrl;
 
-bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc) {
-    function bannerCtrl($rootScope,$scope,bannerSrvc,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc, $ionicModal) {
+bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc, $ionicPopover,$timeout) {
+    function bannerCtrl($rootScope,$scope,bannerSrvc,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc, $ionicModal, $ionicPopover, $timeout) {
 
        this.state = $state;
        this.scope = $scope;
@@ -9,20 +9,6 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicL
        this.showProfile = false;
         
         var self = this;
-
-/*
-        $ionicModal.fromTemplateUrl('components/Banner/banner.html', {
-            scope: this.scope,
-            animation: 'slide-in-up'
-          }).then(function(modal) {
-            this.scope.modal = modal;
-          });
-
-*/
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true,
-          disableBack: true
-        });
         
         if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
             self.cartTotal = localStorage.getItem("cartTotal");    
@@ -93,7 +79,7 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicL
         
         }
 
-        bannerCtrl.prototype.showMeProfile = function(){
+        bannerCtrl.prototype.showMeProfile = function(){ //alert("HI");
 
             if(this.showProfile == false){
                 this.showProfile = true;
@@ -103,19 +89,32 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicL
         
          }
 
-         bannerCtrl.prototype.LogOut = function() {
-            localStorage.setItem("email", '');
-            localStorage.setItem("firstname", '');
-            localStorage.setItem("lastname", '');
-            localStorage.setItem("customer_id", '');
-            alert("You Logout Successfully");
-            this.state.go("login");
-            return;
-        }
-
         bannerCtrl.prototype.getSub = function(category_id, category_name) {
             this.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});
         }
+
+        bannerCtrl.prototype.userNav = function(nav) {
+            $scope.popover.hide();
+            if(nav == 'logout'){
+                localStorage.setItem("email", '');
+                localStorage.setItem("firstname", '');
+                localStorage.setItem("lastname", '');
+                localStorage.setItem("customer_id", '');
+                alert("You Logout Successfully");
+                this.state.go("app.login");
+                return;
+            } else {
+                this.state.go(nav);
+            }
+            
+        }
+//User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
+
     }
     return bannerCtrl;
 })();

@@ -161,6 +161,10 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
                         cartSrvc.showToastBanner(response.msg, "short", "center");
                     }
                 }); 
+
+                $ionicHistory.nextViewOptions({
+                  disableBack: true
+                });
          }
          
          productCtrl.prototype.showMeSearch = function(searchproducts){ 
@@ -208,21 +212,29 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
            
             if(product_id){
                 var product_one = window.localStorage.getItem('compare_product_one_id');
-
-                if(product_one == product_id){
-                    window.localStorage.removeItem('compare_product_one_id');
-                }else {
-                    window.localStorage.removeItem('compare_product_two_id');
-                }
-                cartSrvc.showToastBanner("Product removed successfully.", "short", "center");
-                var product_one = window.localStorage.getItem('compare_product_one_id');
                 var product_two = window.localStorage.getItem('compare_product_two_id');
-                if(product_one || product_two){
-                    
-                } else { alert("d");
-                    this.state.go("app.banner");
-                    return;
-                }
+
+                    if(product_one == product_id){
+                        window.localStorage.removeItem('compare_product_one_id');
+
+                        if(product_two){
+                            window.localStorage.setItem('compare_product_one_id',product_two);
+
+                            window.localStorage.removeItem('compare_product_two_id');
+                        }
+
+                    } else {
+                        window.localStorage.removeItem('compare_product_two_id');
+                    }
+
+                cartSrvc.showToastBanner("Product removed successfully.", "short", "center");
+                
+                    if(product_one || product_two){
+                        
+                    } else {
+                        this.state.go("app.banner");
+                        return;
+                    }
             } else {
                 cartSrvc.showToastBanner("Server Error.", "short", "center");
             }
@@ -257,6 +269,8 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
             }
 
         }
+
+
     }
 
     return productCtrl;

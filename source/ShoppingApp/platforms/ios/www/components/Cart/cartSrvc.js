@@ -26,7 +26,7 @@ cartSrvc = (function($log, $http, $q, constants) {
           );
         },
         
-        getCartProducts: function(quoteId) { console.log("cart id" + quoteId);
+        getCartProducts: function(quoteId) {
             var deferred;
             //$log.debug("get globalCompanyFields service");
             //console.log(username);
@@ -79,6 +79,27 @@ cartSrvc = (function($log, $http, $q, constants) {
                     products: products,
                     quoteId: quoteId, 
                     customerId: customer_id
+                })
+                .success((function(_this) {
+                    return function(data, status) {
+                        return deferred.resolve(data);
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        $log.error("Failed to product" + status);
+                        $log.error("Failed to product Service");
+                        return deferred.reject(data);
+                    };
+                })(this));
+           return deferred.promise;
+        },
+//Apply Coupan Code..
+        applyCoupanCode: function(quoteId, couponCode) {
+            var deferred;
+            deferred = pd.$q.defer();
+            $http.post(constants.API_URL+'checkout/addCoupon', {
+                    quoteId: quoteId, 
+                    couponCode: couponCode
                 })
                 .success((function(_this) {
                     return function(data, status) {

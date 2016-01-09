@@ -12,11 +12,21 @@
 </div>
   
    <ion-content padding="true" class="has-header">  
-     <div class="products" style="margin-top: 50px;">
+ <!--    <div class="products" style="margin-top: 50px;">
         <div class="product" ng-repeat="x in hc.category.children ">
             <div class="product_img"><a href="javascript:;" ng-click="hc.showProducts(x.category_id, x.name)"><img src="img/product1.png" ng-src="{{x.img}}" alt="{{x.name}}" title="{{x.name}}"/></a></div>
             <div class="product_name">{{x.name}}</div>
         </div>
-   </div>
+   </div> -->
+<div class="plist products" style="margin-top: 50px; ">
+  <div class="card product" style="min-height: 180px !important;" ng-class-odd="'borderodd'" ng-class-even="'bordereven'" ng-repeat="x in hc.category.children ">
+    <div class="product_img">
+      <a href="javascript:;" ng-click="hc.showProducts(x.category_id, x.name)">
+        <img src="img/product1.png" ng-src="{{x.img}}" alt="{{x.name}}" title="{{x.name}}"/>
+      </a>
+    </div>
+    <div class="product_name">{{x.name}}</div>
+  </div>
+</div>
   </ion-content>
 </ion-view>

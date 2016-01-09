@@ -14,7 +14,7 @@
 .products{
     float:left;
     width:100%;
-    margin: 3px;
+    margin: 0px;
 }
 
 .products .product{
@@ -121,20 +121,6 @@ color: #fff;
 text-decoration: initial;
 }
 
-Skip to content
-This repository  
-Pull requests
-Issues
-Gist
- @piyush14g
- Watch 1
-  Star 0
-  Fork 0 kumarsuresh521-netsol/ShoppingCart
- Branch: master  ShoppingCart/www/css/style.css
-050237f  22 minutes ago
-@kumarsuresh521-netsol kumarsuresh521-netsol filter, sidemenu
-1 contributor
-RawBlameHistory     201 lines (176 sloc)  3.08 KB
 /* Empty. Add your own CSS if you like */
 .bar.bar-stable{
     border-width: 0px;
@@ -183,7 +169,7 @@ RawBlameHistory     201 lines (176 sloc)  3.08 KB
 .products{
     float:left;
     width:100%;
-    margin: 3px;
+    margin: 0px;
 }
 
 .products .product{
@@ -340,5 +326,3 @@ RawBlameHistory     201 lines (176 sloc)  3.08 KB
     top: 5px !important;
     right: 0px !important;
 }
-Status API Training Shop Blog About Pricing
-© 2015 GitHub, Inc. Terms Privacy Security Contact Help

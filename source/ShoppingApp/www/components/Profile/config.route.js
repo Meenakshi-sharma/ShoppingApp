@@ -31,5 +31,14 @@
                          }
                     }
                 })
+
+                .state('app.changepassword', {
+                    url: '/changepassword',
+                    views: {
+                        'menuContent' :{
+                            templateUrl: 'components/Profile/changepassword.html'
+                         }
+                    }
+                })
         });
 })();

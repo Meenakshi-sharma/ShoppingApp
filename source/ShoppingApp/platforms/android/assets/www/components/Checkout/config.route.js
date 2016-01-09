@@ -22,7 +22,7 @@
                 })
                 
                 .state('app.success', {
-                    url: '/success',
+                    url: '/success:order_id',
                     views: {
                         'menuContent' :{
                             templateUrl: 'components/Checkout/success.html'
@@ -35,6 +35,15 @@
                     views: {
                         'menuContent' :{
                             templateUrl: 'components/Checkout/shipping.html'
+                        }
+                    }
+                })
+
+                .state('app.orderreview', {
+                    url: '/orderreview',
+                    views: {
+                        'menuContent' :{
+                            templateUrl: 'components/Checkout/orderreview.html'
                         }
                     }
                 })

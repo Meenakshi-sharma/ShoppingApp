@@ -21,9 +21,11 @@
   
   <ion-content class="sidenav" padding="true" scroll="false" class="has-header" style="background: #fff;">
     <ion-list ng-repeat="x in mc.youcategories" ng-if="x.parent_id == 2">
-        <ion-item menu-close ng-click="mc.getSub($index, {{x.position}}, {{x.category_id}}, '{{x.name}}')" class="item-icon-right">
+        <a href="javascript:;" style="text-decoration:none;"> 
+          <ion-item menu-close ng-click="mc.getSub($index, {{x.position}}, {{x.category_id}}, '{{x.name}}')" class="item-icon-right">
             {{x.name | uppercase}}  <span class="badge badge-dark" ng-if="x.product_totalcount">{{x.product_totalcount}}</span>
-        </ion-item>
+         </ion-item>
+        </a>
     </ion-list>    
  <!--   
     <div class="space"></div>

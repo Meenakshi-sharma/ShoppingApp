@@ -456,7 +456,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	
 	                //Wrap input inside <i> tag
-	                var selectors = '.ink,.tab-item,.button-fab,.button-raised,.button-flat,.button-clear,a.item,.popup .button';
+	                var selectors = '.ink,.tab-item,.button-fab,.button-raised,.button-flat,.button-clear,a.item,.popup .button, .tab .tab-item';
 	                Effect.wrapInput($$(selectors));
 	
 	                Array.prototype.forEach.call($$(selectors), function(i) {

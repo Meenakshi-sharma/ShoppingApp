@@ -5,7 +5,7 @@
         .config(function($stateProvider) {
 
             $stateProvider
-                .state('app.filter', {
+                .state('app.filter_old', {
                     url: '/filter',
                     views: {
                 'menuContent' :{

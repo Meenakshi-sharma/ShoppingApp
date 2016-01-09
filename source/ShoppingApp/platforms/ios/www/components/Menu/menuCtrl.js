@@ -17,46 +17,46 @@ menuCtrl = (function($state ,$rootScope,$scope,$timeout, $ionicLoading, menuSrvc
         }
 
         $ionicLoading.show();
-        self.menuSrvc.getCategories().then(function(response) {  console.log(response);
-            menushowCat(response)
+        self.menuSrvc.getCategories().then(function(response) {
+            //menushowCat(response);
+            self.youcategories = response;
         }).finally(function(){
             $ionicLoading.hide();
         });
 
         var i = 0;
 
-        function menushowCat(response){ //console.log('i'); console.log(response)
-            if(response.length > 0 ){ 
+        function menushowCat(response){
+            if(response.length > 0 ){
                 if(response[i]){
                     if(response[i].parent_id == 2){
                         mycategories[i] = response[i];
                         self.youcategories = mycategories;
-                        //console.log("youcategories"); console.log(self.youcategories);
                     }
-
                     i++;
                     menushowCat(response);
                 }
-            }            
+            }
         }
 
         self.rootscope = $rootScope; 
 
-           menuCtrl.prototype.getSub = function(index, position_id, category_id, category_name) { alert(index); //alert(category_id); alert(category_name);
-console.log(self.youcategories);
-var abc = self.youcategories; console.log(abc[0]); 
-
-                     if (self.youcategories[index].children_count > 0){
-                            self.state.go("app.home", {position_id:position_id});
-                        } else {
-                          self.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});
-                        }
-                    }
-
-            menuCtrl.prototype.nav = function(state) {
-                self.state.go(state);
+       menuCtrl.prototype.getSub = function(index, position_id, category_id, category_name) {
+            var myarray = [];
+            for(x in self.youcategories){
+                myarray.push(self.youcategories[x]);
             }
 
+            if (myarray[index].children_count > 0){
+                self.state.go("app.home", {position_id:position_id});
+            } else {
+              self.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});
+            }
+        }
+
+        menuCtrl.prototype.nav = function(state) {
+            self.state.go(state);
+        }
     }
  
 

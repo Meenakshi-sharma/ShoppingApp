@@ -16,7 +16,7 @@ profileSrvc = (function($log, $http, $q, $state, constants) {
             $log.debug("get profile service");
             deferred = pro.$q.defer();
             $http.post(constants.API_URL+'users/getUserDetail', {
-                    customer_id: customer_id
+                    customerId: customer_id
                 })
                 .success((function(_this) {
                     return function(data, status) {
@@ -41,6 +41,48 @@ profileSrvc = (function($log, $http, $q, $state, constants) {
                     "fax":"0123456987"
                 }
                 return userInfo; */
+        },
+        getMyOrder: function(customer_id) {
+           
+            var deferred;
+            $log.debug("get profile service");
+            deferred = pro.$q.defer();
+            $http.post(constants.API_URL+'users/getOrderListing', {
+                    customerId: customer_id
+                })
+                .success((function(_this) {
+                    return function(data, status) {
+                        return deferred.resolve(data);
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        $log.error("Failed to Login" + status);
+                        $log.error("Failed to Login Service");
+                        return deferred.reject(data);
+                    };
+                })(this));
+            return deferred.promise;
+        },
+        getMyOrderDetail: function(orderId) {
+           
+            var deferred;
+            $log.debug("get profile service");
+            deferred = pro.$q.defer();
+            $http.post(constants.API_URL+'users/getOrderDetails', {
+                    orderId: orderId
+                })
+                .success((function(_this) {
+                    return function(data, status) {
+                        return deferred.resolve(data);
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        $log.error("Failed to Login" + status);
+                        $log.error("Failed to Login Service");
+                        return deferred.reject(data);
+                    };
+                })(this));
+            return deferred.promise;
         }
     }
 

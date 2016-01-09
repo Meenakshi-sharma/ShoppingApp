@@ -9,6 +9,8 @@ profileCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, ba
        this.rootScope = $rootScope;
         
         var self = this;
+
+        var customer_id = localStorage.getItem('customer_id');
         
         if(localStorage.getItem("cartTotal") && localStorage.getItem("cartid")){
             self.cartTotal = localStorage.getItem("cartTotal");    
@@ -16,14 +18,8 @@ profileCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, ba
             self.cartTotal = 0;
         }
         
-        profileSrvc.getProfile().then(function(response) { console.log("Hello"); console.log(response);
+        profileSrvc.getProfile(customer_id).then(function(response) { console.log("profile response"); console.log(response);
             self.profileInfo = response;
-        });
-
-        bannerSrvc.getBdataSpecial().then(function(response) { console.log(response);
-            self.categoryBannersSpecial = response;
-        }).finally(function(){
-            $ionicLoading.hide();
         });
     }
 

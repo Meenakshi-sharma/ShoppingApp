@@ -31,12 +31,7 @@
   
         <div class="list" style="padding-top: 92px;">
 
-          <a class="item item-avatar" ng-repeat="x in pl.categoryBannersSpecial" href="#">
-            <img ng-src="{{x.image}}">
-            <h2>{{x.name | cut:true:50:' ..'}}</h2>
-            <p class="price" ng-if="x.specialprice" style="text-align: center;"><span class="regularPrice">{{x.regularprice | currency}}</span><span class="product_price">{{x.specialprice | currency}}</span></p>
-            <p class="price" ng-if="!x.specialprice" style="text-align: center;"><span class="product_price">{{x.regularprice | currency}}</span></p>
-          </a>
+          
 
         </div>
   </ion-content>

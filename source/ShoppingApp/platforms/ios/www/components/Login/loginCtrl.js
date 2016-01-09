@@ -16,7 +16,6 @@ loginCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoading, $rootS
           var path = 'banner';
         }
         
-alert("Route Path=" + path);
 
         
        this.loginSrvc = loginSrvc;
