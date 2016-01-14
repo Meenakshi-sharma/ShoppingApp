@@ -20,7 +20,7 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
                 self.cartTotal = '0';
             }
            
-            productSrvc.getData(product_id).then(function(response) { //console.log('response');console.log(response);
+            productSrvc.getData(product_id).then(function(response) { console.log('response');console.log(response);
                 self.pdata = response;
                 self.productid = response.product_id;
                 if(self.pdata.special_price){
@@ -177,7 +177,9 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
          }
 
          productCtrl.prototype.addToWishlist = function(product_id){
-            alert("Wishlist Added");
+            productSrvc.addToWishlist(request).then(function(response) { console.log("add to wishlist response");console.log(response);
+
+            });
         }
 
         productCtrl.prototype.goToProductDetails = function(product_id){

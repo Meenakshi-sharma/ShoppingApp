@@ -29,6 +29,7 @@ orderReviewCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, chec
             checkoutSrvc.placeOrder(cartid).then(function(response) {
                console.log("order placed"); console.log(response);
                $ionicLoading.hide();
+               localStorage.removeItem("cartTotal");
                 cartSrvc.showToastBanner("Your Order is placed successfully.", "short", "center");
                 $state.go("app.success", {"order_id":response.order_id}); 
             });

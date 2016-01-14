@@ -31,8 +31,13 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
                 var category_name = $stateParams.category_name;
             }
           
-            prodListingSrvc.getCdata(category_id).then(function(response) {
-                self.prodListing = response ;
+            prodListingSrvc.getCdata(category_id).then(function(response) { console.log(response);
+              if(response.success == 1){
+                  self.prodListing = response.data.products;
+              } else {
+                return;
+              }
+                
                 self.categoryHeading = category_name;
             }).finally(function(){
                 $ionicLoading.hide();

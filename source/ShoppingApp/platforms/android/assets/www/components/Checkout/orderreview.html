@@ -9,7 +9,7 @@
     </div>
 <div style="width:100%; height:50px;"></div>
 <div class="card" style="margin-bottom:20px;">
-      <div ng-repeat="x in por.cartProducts.products">
+      <div ng-repeat="x in por.cartProducts.products" >
         <a class="item item-thumbnail-left" href="#" >
               <img src="img/product2.png" ng-src="{{x.small_image}}"/>
               <h2>{{x.name}}</h2>
@@ -22,8 +22,8 @@
          </a>
        </div>
        <div  style="margin-top:20px;" ng-if="por.cartProducts" class="item item-text-wrap" >
-        <div ng-repeat="x in por.cartProducts" ng-if="x.title">
-          {{x.title}} <span style="float:right;">{{x.amount | currency}}</span>
+        <div ng-repeat="x in por.cartProducts" ng-if="x.title" style="width:100%;">
+          <span style="float:left;width:80%;">{{x.title}}</span> <span style="float:right;width:20%;">{{x.amount | currency}}</span>
         </div>
       </div>
 </div>

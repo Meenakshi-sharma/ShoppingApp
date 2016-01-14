@@ -17,9 +17,12 @@ checkoutCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkou
         var customerId = localStorage.getItem("customer_id");
         
             $ionicLoading.show();
-            checkoutSrvc.getUserBillingData(customerId, cartid).then(function(response) {console.log(" billing123....");
-                self.billing = response; console.log(self.billing);
-                self.billing.shipping.telephone = parseInt(response.shipping.telephone);
+            checkoutSrvc.getUserBillingData(customerId, cartid).then(function(response) {//console.log(" billing123...."); console.log(response);
+                if(response.success == 1){
+                    self.billing = response.data; //console.log(self.billing);
+                    self.billing.shipping.telephone = parseInt(response.data.shipping.telephone);
+                }
+                
             }).finally(function(){
                 $ionicLoading.hide();
             });

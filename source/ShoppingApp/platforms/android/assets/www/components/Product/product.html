@@ -39,6 +39,9 @@
     <!-- Product Name, Likes -->
     <div class="prodetail" ng-model="pd.pdata" style="float: left; width: 100%;">
         <h4 style="width:100%; text-align:center;">{{pd.pdata.name}}</h4>
+        <h6 style="width:100%;" ng-if="pd.pdata.inventory_data[0].is_in_stock == 1">Availability: <label style="color:green">In Stock</label></h6>
+        <h6 style="width:100%; " ng-if="pd.pdata.inventory_data[0].is_in_stock == 0">Availability: <label style="color:red">Our Of Stock</label></h6>
+        <h6 style="width:100%; " ng-if="pd.pdata.inventory_data[0].is_in_stock == 1"><label style="color:#ddd">Only {{pd.pdata.inventory_data[0].qty | number}} Left.</label></h6>
        <div class="price" ng-if="pd.pdata.special_price" style="text-align: center;"><span class="regularPrice">{{pd.pdata.price | currency}}</span><span class="product_price">{{pd.pdata.special_price | currency}}</span></div>
        <div class="price" ng-if="!pd.pdata.special_price" style="text-align: center;"><span class="product_price">{{pd.pdata.price | currency}}</span></div>
     </div>

@@ -14,9 +14,21 @@
    padding: 6px 16px 16px 16px!important;
 }
 
+.popup-container{
+    background: rgba(0, 0, 0, 0.51) !important;
+}
+
+.popup-container .popup{
+    width:90% !important;
+}
 .borderodd{
     border-right:1px solid #A9A9A9 !important; 
     border-bottom: 1px solid #A9A9A9 !important;
+}
+
+.account p {
+    float:left;
+    width:100%;
 }
 
 .bordereven{

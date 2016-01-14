@@ -1,9 +1,10 @@
 var profileCtrl;
 
-profileCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, bannerSrvc) {
+profileCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading) {
 
-    function profileCtrl($state, $stateParams,$rootScope, $scope, profileSrvc, bannerSrvc) {
-        
+    function profileCtrl($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading) {
+    
+        $ionicLoading.show();
        this.showMe = true;
        this.state = $state;
        this.rootScope = $rootScope;
@@ -19,15 +20,13 @@ profileCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, ba
         }
         
         profileSrvc.getProfile(customer_id).then(function(response) { console.log("profile response"); console.log(response);
-            self.profileInfo = response;
-        });
-
-        profileSrvc.getMyOrder(customer_id).then(function(response) { console.log("order response"); console.log(response);
-            self.orderInfo = response;
-        });
-
-        bannerSrvc.getBdataSpecial().then(function(response) { console.log(response);
-            self.categoryBannersSpecial = response;
+            if(response.success == 1){
+                self.profileInfo = response.data;
+            } else {
+                cartSrvc.showToastBanner("Server Error occcurs.", "short", "center");
+                return;
+            }
+            
         }).finally(function(){
             $ionicLoading.hide();
         });
