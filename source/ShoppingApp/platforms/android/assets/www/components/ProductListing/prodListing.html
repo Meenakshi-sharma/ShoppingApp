@@ -33,19 +33,22 @@
         <input class="searchT" type="text" ng-model="pc.searchproducts" placeholder="Search Products" style="width: 98%;">
     </div>
     <div style="width:100%;height:35px;" ng-hide="pc.showMe"></div>
+    
+    <div class="card"  ng-hide="pc.ShowProducts">
+          <h4 style="text-align: center;">No Product Found.</h4>
+    </div>
 
     <!-- Product Listing -->
      <div  class="plist products">
       <!-- Collection Repeat  -->
     <!-- <div class="card product" ng-class-odd="'borderodd'" ng-class-even="'bordereven'" collection-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts" collection-item-width="'50%'" collection-item-height="256px"> -->
-      <div class="card product" ng-class-odd="'borderodd'" ng-class-even="'bordereven'" ng-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts">
-
-            <div class="product_img" style="width:158px;"><a ng-click="pc.fetchDetail({{x.productid}})"><img src="{{x.image}}" /></a></div>
-            <div class="product_name">{{x.name | cut:true:46:' ..'}}</div>
+      <div class="card product" ng-show="pc.ShowProducts" ng-class-odd="'borderodd'" ng-class-even="'bordereven'" ng-repeat="x in pc.prodListing | orderBy:pc.selectPrice | filter:pc.searchproducts">
+            <div class="product_img" style="width:158px;"><a ng-click="pc.fetchDetail({{x.productid}})"><img  src="img/no-thumb.png" ng-src="{{x.image}}" /></a></div>
+            <div class="product_name">{{x.name | cut:true:42:'..'}}</div>
             <div class="price" ng-if="x.specialprice" style="text-align: center;"><span class="regularPrice">{{x.regularprice | currency}}</span><span class="product_price">{{x.specialprice | currency}}</span></div>
             <div class="price" ng-if="!x.specialprice" style="text-align: center;"><span class="product_price">{{x.regularprice | currency}}</span></div>
-
       </div>
+      
 	    </div>
   </ion-content>
 </ion-view>

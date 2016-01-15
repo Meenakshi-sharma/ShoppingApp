@@ -15,7 +15,7 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
         this.colorShow = false;
         this.priceShow = true;
 
-        //this.scope.$on('$ionicView.beforeEnter', function () {
+        self.ShowProducts = true;
 
         this.searchproducts = $rootScope.srch;
 
@@ -26,20 +26,22 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
             self.cartTotal = '0';
         }
             
-            if($stateParams.category_id){ console.log($stateParams);
+            if($stateParams.category_id){ //console.log($stateParams);
                 var category_id = $stateParams.category_id;
                 var category_name = $stateParams.category_name;
             }
           
-            prodListingSrvc.getCdata(category_id).then(function(response) { console.log(response);
-              if(response.success == 1){
+            prodListingSrvc.getCdata(category_id).then(function(response) { //console.log(response);
+              if(response.success == 1 && response.data.products.length > 0){ //alert(response.data.products.length);
                   self.prodListing = response.data.products;
-              } else {
-                return;
+                  self.ShowProducts = true; //alert(self.ShowProducts);
+              } else { //alert('false');
+                self.ShowProducts = false; //alert(self.ShowProducts);
+                //return;
               }
                 
                 self.categoryHeading = category_name;
-            }).finally(function(){
+            }).finally(function(){ alert(self.ShowProducts);
                 $ionicLoading.hide();
             });
        // });
@@ -83,8 +85,8 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
    }
 
    prodListingCtrl.prototype.showList = function(){
-        console.log(this.showMe);
-        console.log(this.priceShow);
+        //console.log(this.showMe);
+        //console.log(this.priceShow);
 
       if(this.showMe == false && this.priceShow == true){
 
@@ -100,8 +102,8 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
     }
 
   prodListingCtrl.prototype.showPrice = function(){
-     console.log(this.showMe);
-     console.log(this.priceShow);
+     //console.log(this.showMe);
+     //console.log(this.priceShow);
     if(this.showMe == true && this.priceShow == false){
 
       this.showMe = false;
@@ -116,8 +118,8 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
   }  
 
   prodListingCtrl.prototype.showColor = function(){
-    console.log(this.showMe);
-        console.log(this.priceShow);
+    //console.log(this.showMe);
+    //    console.log(this.priceShow);
     if(this.showMe == true || this.priceShow == true && this.colorShow == false){
 
       this.showMe = false;

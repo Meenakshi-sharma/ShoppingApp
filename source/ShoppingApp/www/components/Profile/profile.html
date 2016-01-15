@@ -36,7 +36,7 @@
             <p>Email:- {{pl.profileInfo.customer_profile_info.email}}</p>
             <hr/>
             <div class="" ng-repeat="x in pl.profileInfo.addresses" ng-show="x.is_default_billing">
-              <h2 style="width:80%;float:left;">Billing Address</h2><span style="float:right;width:20%;"><a href="#" ng-click="pl.showBillingPopup(x)">Edit</a></span>
+              <h2 style="width:80%;float:left;">Billing Address</h2><span style="float:right;width:20%;"><a href="#" ng-click="pl.showBillingPopup({{$index}})">Edit</a></span>
                 <p>Company: {{x.company}}</p>
                 <p>City: {{x.city}}</p>
                 <p>Region: {{x.region}}</p>
@@ -47,7 +47,7 @@
             </div>
             <hr/>
             <div class="" ng-repeat="x in pl.profileInfo.addresses" ng-show="x.is_default_shipping">
-              <h2 style="width:80%;float:left;">Shipping Address</h2><span style="float:right;width:20%;"><a href="#" ng-click="pl.showShippingPopup(x.customer_address_id)">Edit</a></span>
+              <h2 style="width:80%;float:left;">Shipping Address</h2><span style="float:right;width:20%;"><a href="#" ng-click="pl.showBillingPopup({{$index}})">Edit</a></span>
                 <p>Company: {{x.company}}</p>
                 <p>City: {{x.city}}</p>
                 <p>Region: {{x.region}}</p>
@@ -56,7 +56,7 @@
                 <p>Telephone: {{x.telephone}}</p>
                 <p>Fax: {{x.fax}}</p>
             </div>
-            
+
           </div>
         </div>
         <a  style="float:left;width:100%;margin-top: 100px;" href="#" ui-sref="app.changepassword" class="button button-full button-calm">Change Password</a>

@@ -7,6 +7,8 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
         var self = this;
          var grandTotal = 0;
 
+        self.ShowCartProducts = true;
+
         $ionicLoading.show();
 
         if(localStorage.getItem("cartid") && localStorage.getItem("cartid") != '' && localStorage.getItem("cartid") != 'undefined'){
@@ -16,42 +18,40 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
                     self.cartProducts = response.products;
 
                     if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
-
-                        if(self.cartProducts){
+                        if(self.cartProducts.length > 0){
                             self.cartTotal = response.products.length;
-                            localStorage.setItem("cartTotal", self.cartTotal);
+                            //localStorage.setItem("cartTotal", self.cartTotal);
+                            // Grand Total ==> sum of products subtotal.. :-)
+                            for(i=0; i<self.cartProducts.length;i++){
+                                grandTotal += parseInt(self.cartProducts[i].subTotal);
+                            }
+                            self.cartProducts.grandTotal = grandTotal;
+                            self.ShowCartProducts = true; alert("1"+self.ShowCartProducts);
                         }else {
+                            self.ShowCartProducts = false; alert("2"+self.ShowCartProducts);
                             self.cartTotal = 0; 
                         }
-
+                        localStorage.setItem("cartTotal", self.cartTotal);
                     }
-                
-                    if(self.cartProducts){
-                        for(i=0; i<self.cartProducts.length;i++){
-                            grandTotal += parseInt(self.cartProducts[i].subTotal);
-                        }
-                        self.cartProducts.grandTotal = grandTotal;
-                    }
-                    console.log(self.cartProducts);
                     
              }).finally(function(){
+
                 $ionicLoading.hide();
             });
         } else {
+            self.ShowCartProducts = false; alert("3"+self.ShowCartProducts);
             $ionicLoading.hide();
             cartSrvc.showToastBanner("Your Cart Is Empty.", "long", "center");
         }
 
 
             function updateCart(msg_id){
-                $ionicLoading.show();
+                //$ionicLoading.show();
                 var customer_id = localStorage.getItem("customer_id");              
                 cartSrvc.updateCartProducts(self.cartProducts, cartid, customer_id).then(function(response) {
                 }).finally(function(){
-                    $ionicLoading.hide();
-                    if(msg_id == 2){
-                    cartSrvc.showToastBanner("Product deleted from cart successfully.", "long", "center");
-                    }
+                 //   $ionicLoading.hide();
+                    
                 });
              }
              
@@ -117,10 +117,24 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
                         self.cartProducts.total = '';
                     }
                 }
-                    updateCart(2); 
+//alert(self.cartProducts.length);
+                 var grandTotal2 = 0;   
+                for(i=0; i<self.cartProducts.length;i++){ //alert(i);
+                    grandTotal2 += parseInt(self.cartProducts[i].subTotal); //alert(grandTotal2);
+                }
+                self.cartProducts.grandTotal = grandTotal2;
+
+                if(self.cartProducts.length = 0){
+                    self.ShowCartProducts = false; alert("4"+self.ShowCartProducts);
+                }
+                
+                    //updateCart(2); 
                     var cartTotal = self.cartProducts.length;
                     localStorage.setItem("cartTotal", cartTotal);
                     self.cartTotal = cartTotal;
+                    //if(msg_id == 2){
+                    cartSrvc.showToastBanner("Product deleted from cart successfully.", "long", "center");
+                    //}
             }
       /*      
             cartCtrl.prototype.updateCart = function(){

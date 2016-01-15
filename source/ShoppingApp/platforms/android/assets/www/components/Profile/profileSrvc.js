@@ -114,7 +114,7 @@ profileSrvc = (function($log, $http, $q, $state, constants) {
                 })(this));
             return deferred.promise;
         },
-        changePassword: function(customerId, current_password, password) {
+        changePassword: function(customerId, current_password, password) { 
            
             var deferred;
             deferred = pro.$q.defer();
@@ -122,6 +122,51 @@ profileSrvc = (function($log, $http, $q, $state, constants) {
                     customerId: customerId,
                     current_password: current_password,
                     password: password
+                })
+                .success((function(_this) {
+                    return function(data, status) {
+                        return deferred.resolve(data);
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        $log.error("Failed to Login" + status);
+                        $log.error("Failed to Login Service");
+                        return deferred.reject(data);
+                    };
+                })(this));
+            return deferred.promise;
+        },
+        updateProfile: function(customerId, firstname, lastname, email) {
+           
+            var deferred;
+            deferred = pro.$q.defer();
+            $http.post(constants.API_URL+'users/editProfile', {
+                    customerId: customerId,
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email
+                })
+                .success((function(_this) {
+                    return function(data, status) {
+                        return deferred.resolve(data);
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        $log.error("Failed to Login" + status);
+                        $log.error("Failed to Login Service");
+                        return deferred.reject(data);
+                    };
+                })(this));
+            return deferred.promise;
+        },
+        updateBillingAddress: function(customerId, addressId, billingAddress) {
+           
+            var deferred;
+            deferred = pro.$q.defer();
+            $http.post(constants.API_URL+'users/updateAddress', {
+                    customerId: customerId,
+                    addressId: addressId,
+                    address: billingAddress
                 })
                 .success((function(_this) {
                     return function(data, status) {

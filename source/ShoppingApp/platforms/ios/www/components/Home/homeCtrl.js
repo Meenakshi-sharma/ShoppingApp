@@ -1,35 +1,46 @@
 var homeCtrl;
 
-homeCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state) {
+homeCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state, $ionicLoading) {
 
-    function homeCtrl($rootScope,$stateParams, $scope,homeSrvc,$ionicSideMenuDelegate,$state) {
-        
+    function homeCtrl($rootScope,$stateParams, $scope,menuSrvc,$ionicSideMenuDelegate,$state, $ionicLoading) {
+        $ionicLoading.show();
+
+       this.showMe = true;
+       this.state = $state;
+       this.rootScope = $rootScope;
+       var self = this;
+
         if(localStorage.getItem("cartTotal") && localStorage.getItem("cartid")){
             this.cartTotal = localStorage.getItem("cartTotal");    
         } else {
             this.cartTotal = 0;
         }
         
-        if($stateParams.position_id){
-            var position_id = $stateParams.position_id;
+        if($stateParams.category_id){
+            var category_id = $stateParams.category_id;
         } else {
-            var position_id = 1;
+            var category_id = 1;
         }
-       
-       this.category = homeSrvc.children[0].children[position_id];
-       this.categoryHeading = homeSrvc.children[0].children[position_id].name ; 
-       this.showMe = true;
-       this.state = $state;
-       this.rootScope = $rootScope;
 
+       self.categoryHeading = $stateParams.category_name;
+var myarray = [];
+       menuSrvc.getCategories().then(function(response) {
+         
+            for(i=0; i<response.length; i++){ 
+                if(response[i].parent_id == category_id){
+                    myarray.push(response[i]);
+                    
+                }
+            } 
+        }).finally(function(){ 
+            self.category = myarray; console.log(myarray);
+            $ionicLoading.hide();
+        });
      }
 
      homeCtrl.prototype.showMeSearch = function(searchproducts){
-
         this.rootScope.srch = this.searchproducts;
-    
         this.state.go("app.prodListing");
-
      }
 
      homeCtrl.prototype.showProducts = function(category_id, category_name){
