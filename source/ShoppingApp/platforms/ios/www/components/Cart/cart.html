@@ -13,7 +13,10 @@
     </div>
 <div style="width:100%; height:50px;"></div>
 <div class="cart" style="margin-bottom:20px;">
-      <div class="card" ng-repeat="x in cc.cartProducts">
+  <div class="card" ng-show="cc.ShowCartProducts">
+    <h4 style="text-align:center;">No Products On Cart.</h4>
+  </div>
+      <div class="card" ng-show="cc.ShowCartProducts" ng-repeat="x in cc.cartProducts">
         <a class="item item-thumbnail-left" href="#" >
               <img src="img/no-thumb.png" ng-src="{{x.small_image}}"/>
               <i style="float: right;" class="icon ion-trash-a" ng-click="cc.deleteProduct({{x.product_id}})"></i>

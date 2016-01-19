@@ -1,7 +1,7 @@
 var bannerCtrl;
 
-bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc, $ionicPopover,$timeout) {
-    function bannerCtrl($rootScope,$scope,bannerSrvc,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc, $ionicModal, $ionicPopover, $timeout) {
+bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicNavBarDelegate, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc, $ionicPopover,$timeout) {
+    function bannerCtrl($rootScope,$scope,bannerSrvc,$ionicNavBarDelegate, $ionicSideMenuDelegate,$state, $ionicLoading, $ionicHistory, homeSrvc, prodListingSrvc, cartSrvc, $ionicModal, $ionicPopover, $timeout) {
 
        this.state = $state;
        this.scope = $scope;
@@ -9,14 +9,14 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicL
        this.showProfile = false;
         
         var self = this;
+// Hide back button on page..
+        $ionicNavBarDelegate.showBackButton(false);
         
         if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
             self.cartTotal = localStorage.getItem("cartTotal");    
         } else {
             self.cartTotal = '0';
         }
-
-        
         
             $ionicLoading.show();
 
@@ -114,7 +114,7 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicL
                 localStorage.setItem("lastname", '');
                 localStorage.setItem("customer_id", '');
                 alert("You Logout Successfully");
-                this.state.go("app.login");
+                //this.state.go("app.login");
                 return;
             } else {
                 this.state.go(nav);

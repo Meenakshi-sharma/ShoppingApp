@@ -1,8 +1,8 @@
 var homeCtrl;
 
-homeCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state, $ionicLoading) {
+homeCtrl = (function($rootScope,$scope,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicPopover, cartSrvc) {
 
-    function homeCtrl($rootScope,$stateParams, $scope,menuSrvc,$ionicSideMenuDelegate,$state, $ionicLoading) {
+    function homeCtrl($rootScope,$stateParams, $scope,menuSrvc,$ionicSideMenuDelegate,$state, $ionicLoading, $ionicPopover, cartSrvc) {
         $ionicLoading.show();
 
        this.showMe = true;
@@ -36,12 +36,28 @@ var myarray = [];
             self.category = myarray; console.log(myarray);
             $ionicLoading.hide();
         });
+
+        //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
      }
 
      homeCtrl.prototype.showMeSearch = function(searchproducts){
         this.rootScope.srch = this.searchproducts;
         this.state.go("app.prodListing");
      }
+
+      // Go To Cart
+        homeCtrl.prototype.goToCart = function(){
+            if(self.cartTotal > 0){
+                this.state.go("app.cart");
+            } else {
+                cartSrvc.showToastBanner("Cart is empty.", "short", "center");
+            }
+        }
 
      homeCtrl.prototype.showProducts = function(category_id, category_name){
         this.state.go("app.prodListing",{ category_id:category_id, category_name:category_name });

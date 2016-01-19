@@ -1,8 +1,8 @@
 var shippingCtrl;
 
-shippingCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkoutSrvc, $ionicLoading) {
+shippingCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkoutSrvc, $ionicLoading, $ionicPopover) {
 
-    function shippingCtrl($scope,$state,cartSrvc, checkoutSrvc, $ionicLoading) { //console.log("$scope"); console.log($scope);
+    function shippingCtrl($scope,$state,cartSrvc, checkoutSrvc, $ionicLoading, $ionicPopover) { //console.log("$scope"); console.log($scope);
         $ionicLoading.show();
         this.state = $state;
         var self = this;
@@ -125,6 +125,12 @@ shippingCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkou
             });
             
          }
+                  //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
      }
     
     return shippingCtrl;

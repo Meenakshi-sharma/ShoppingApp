@@ -1,8 +1,8 @@
 var checkoutCtrl;
 
-checkoutCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkoutSrvc, $ionicLoading) {
+checkoutCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkoutSrvc, $ionicLoading, $ionicPopover) {
 
-    function checkoutCtrl($scope,$state,cartSrvc, checkoutSrvc, $ionicLoading) { //console.log("$scope"); console.log($scope);
+    function checkoutCtrl($scope,$state,cartSrvc, checkoutSrvc, $ionicLoading, $ionicPopover) { //console.log("$scope"); console.log($scope);
         
         this.state = $state;
         var self = this;
@@ -116,6 +116,12 @@ checkoutCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkou
                 $state.go("app.shipping");
             });
          }
+         //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
         }
 
     return checkoutCtrl;

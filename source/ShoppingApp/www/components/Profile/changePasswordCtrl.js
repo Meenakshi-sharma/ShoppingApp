@@ -1,8 +1,8 @@
 var changePasswordCtrl;
 
-changePasswordCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, bannerSrvc, signupSrvc) {
+changePasswordCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, bannerSrvc, signupSrvc, $ionicPopover) {
 
-    function changePasswordCtrl($state, $stateParams,$rootScope, $scope, profileSrvc, bannerSrvc, signupSrvc) {
+    function changePasswordCtrl($state, $stateParams,$rootScope, $scope, profileSrvc, bannerSrvc, signupSrvc, $ionicPopover) {
         
        this.showMe = true;
        this.state = $state;
@@ -77,6 +77,13 @@ changePasswordCtrl = (function($state, $stateParams,$rootScope, $scope, profileS
             });
             
         }
+
+        //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
         
     }
 

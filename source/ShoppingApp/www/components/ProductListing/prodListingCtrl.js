@@ -2,9 +2,9 @@ var prodListingCtrl;
 
 
 
-prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListingSrvc) {
+prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListingSrvc, $ionicPopover, cartSrvc) {
 
-	function prodListingCtrl($rootScope,  $scope, prodListingSrvc , $state , $stateParams, $ionicLoading) {
+	function prodListingCtrl($rootScope,  $scope, prodListingSrvc , $state , $stateParams, $ionicLoading, $ionicPopover, cartSrvc) {
         $ionicLoading.show();
         this.state = $state;
         var self = this;
@@ -128,6 +128,21 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
       
     }
   }
+        // Go To Cart
+        prodListingCtrl.prototype.goToCart = function(){
+            if(self.cartTotal > 0){
+                this.state.go("app.cart");
+            } else {
+                cartSrvc.showToastBanner("Cart is empty.", "short", "center");
+            }
+        }
+
+  //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
 }
 
 

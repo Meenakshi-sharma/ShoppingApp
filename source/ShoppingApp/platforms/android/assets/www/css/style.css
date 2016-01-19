@@ -30,6 +30,26 @@
     float:left;
     width:100%;
 }
+/*
+.formbk .heading{
+    text-align: center;
+    font-size: 24px;
+    float:left;
+    background: rgba(0, 0, 0, 0.27);
+    padding: 5px 10px 5px 10px;
+    width: 100%;
+    color:#fff;
+    font-family: -webkit-body;
+    border: 1px solid #696969;
+    
+}
+*/
+
+.formbk form {
+    background: rgba(0, 0, 0, 0.39);
+    border: 1px solid #807474;
+    border-radius: 10px;
+}
 
 .bordereven{
     border-bottom: 1px solid #A9A9A9 !important;
@@ -186,6 +206,11 @@
     padding: 0px 10px 0 10px !important;
     border-radius: 6px !important;
     color:#000 !important;
+}
+
+.account .item a{
+    color: #61D1C6;
+    text-decoration: none;
 }
 
 .buttn{
@@ -391,16 +416,43 @@ color: #fff;
 .formbk input[placeholder], .formbk input[text], .formbk input[password], .formbk input[checkbox], .formbk [placeholder], .formbk  *[placeholder] {
     background: transparent;
     width: 100%;
-    border-bottom: 1px solid #fff;
     color: #fff !important;
 }
 
-.formbk .item {
-    background: transparent;
-    width: 100%;
-    border-bottom: 1px solid #fff;
-    color: #fff !important;
+.plcwhite:-ms-input-placeholder 
+{
+  color:    #fff;
 }
+
+.forgot .tabs .icon{
+    color:#fff;
+}
+
+.spacer{
+    float:left;
+    width:100%;
+}
+
+.main-heading{
+    text-align:center;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: 900;
+}
+
+.formbk .item {
+    background:rgba(255, 255, 255, 0.21);
+    color: #FFFFFF !important;
+    font-size: 30px !important;
+    border: 1px solid #888 !important;
+    border-radius: 30px;
+}
+
+.formbk .item .icon{
+    color:#fff;
+}
+.formbk input[type="text"]::-moz-placeholder {
+    color: #fff !important; }
 .formbk .link-button{
     color: #fff !important;
     font-size: 14px;

@@ -1,8 +1,8 @@
 var wishlistCtrl;
 
-wishlistCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading) {
+wishlistCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading, $ionicPopover) {
 
-    function wishlistCtrl($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading) {
+    function wishlistCtrl($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading, $ionicPopover) {
         $ionicLoading.show();
        this.showMe = true;
        this.state = $state;
@@ -21,7 +21,9 @@ wishlistCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, c
         profileSrvc.getWishlist(customer_id).then(function(response) { console.log("wishlist response"); console.log(response);
             if(response.success == 1 && response.wish_list_data.length > 0){
                 self.wishlist = response.wish_list_data;
+                self.isrecords = true;
             } else {
+                self.isrecords = false;
                 cartSrvc.showToastBanner("No Record Found.", "long", "center");
                 return;
             }
@@ -35,6 +37,9 @@ wishlistCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, c
                profileSrvc.removeWishlistItem(product_id).then(function(response) { console.log("remove profuct from wishlist response"); console.log(response);
                     //self.wishlist = response.wish_list;
                 });
+               if(self.wishlist.length == 0){
+                self.isrecords = false;
+               }
             }
         }
 //Add TO cart product
@@ -43,6 +48,20 @@ wishlistCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, c
                this.state.go("app.product",{'product_id':product_id});
             }
         }
+// Go To Cart
+        wishlistCtrl.prototype.goToCart = function(){
+            if(self.cartTotal > 0){
+                this.state.go("app.cart");
+            } else {
+                cartSrvc.showToastBanner("Cart is empty.", "short", "center");
+            }
+        }
+        //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
     }
 
     return wishlistCtrl;

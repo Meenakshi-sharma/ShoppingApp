@@ -4,13 +4,10 @@
   </ion-nav-title>
   <ion-nav-buttons side="right">
     <div class="searchBar" > 
-   <!--   <div class="searchTxt" ng-show="pd.showMe">
-            <div class="bgtxt">
-                <input type="text" ng-model="pd.searchproducts" placeholder="Search Products" />
-            </div>
-        </div>
-        <i class="icon ion-ios-search" ng-click="pd.showMeSearch()"></i>  -->
-        <i ng-click="pd.goToCart()" class="icon ion-android-cart"><span class="badge badge-assertive cbadge" ng-if="pd.cartTotal">{{pd.cartTotal}}</span></i>
+    <div class="searchBar" >
+      <i class="icon ion-android-more-vertical" ng-click="popover.show($event)" style="float:right;padding:0px 15px;"></i>
+      <i ng-click="pd.goToCart()" class="icon ion-android-cart" style="float:right;padding:0px 15px;"><span class="badge badge-assertive cbadge" ng-if="pd.cartTotal" style="margin-left:0px!important;">{{pd.cartTotal}}</span></i>
+    </div>
     </div>
 </ion-nav-buttons>
     

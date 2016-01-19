@@ -1,13 +1,14 @@
 var orderCtrl;
 
-orderCtrl = (function($state,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading) {
+orderCtrl = (function($state,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading, $ionicPopover) {
 
-    function orderCtrl($state,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading) {
+    function orderCtrl($state,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading, $ionicPopover) {
     
     $ionicLoading.show();
        this.showMe = true;
        this.state = $state;
        this.rootScope = $rootScope;
+
         
         var self = this;
 
@@ -21,8 +22,9 @@ orderCtrl = (function($state,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLo
         profileSrvc.getMyOrder(customer_id).then(function(response) { console.log("order response"); console.log(response);
             if(response.success == 1 && response.orders.length > 0){
                 self.orderInfo = response.orders;
-               
+               self.isrecords = true;
             } else {
+                self.isrecords = false;
                 cartSrvc.showToastBanner("No Record Found.", "long", "center");
                 return;
             }
@@ -37,6 +39,22 @@ orderCtrl = (function($state,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLo
             }
             
         }
+
+        // Go To Cart
+        orderCtrl.prototype.goToCart = function(){
+            if(self.cartTotal > 0){
+                this.state.go("app.cart");
+            } else {
+                cartSrvc.showToastBanner("Cart is empty.", "short", "center");
+            }
+        }
+
+        //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
     }
 
     return orderCtrl;

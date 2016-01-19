@@ -136,6 +136,24 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
                 //console.log(self.pdata);
                 //console.log(request);
 
+
+                  
+                        
+                        
+
+                        
+
+                        $ionicLoading.hide();
+                        if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
+                            var cartTotal = localStorage.getItem("cartTotal");
+                        } else {
+                            var cartTotal = 0;
+                        }
+                        self.cartTotal = parseInt(cartTotal) + 1;
+                        cartSrvc.showToastBanner("Product is add to cart successfully.", "short", "center");
+
+
+
                 productSrvc.addToCart(request).then(function(response) { console.log("add to cart response");console.log(response);
                         
                     if(response.errorMsg){
@@ -143,7 +161,19 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
                         cartSrvc.showToastBanner(response.errorMsg, "short", "center");
                         return;
                     }
+
                     if(response.cart_id){
+                        localStorage.setItem("cartid", response.cart_id);
+                        
+                        if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
+                            var cartTotal = localStorage.getItem("cartTotal");
+                        } else {
+                            var cartTotal = 0;
+                        }
+                        self.cartTotal = parseInt(cartTotal) + 1; //alert(self.cartTotal);
+                        localStorage.setItem("cartTotal", self.cartTotal);
+                    }
+                  /*  if(response.cart_id){
                         localStorage.setItem("cartid", response.cart_id);
                         
                           if(localStorage.getItem("cartTotal") && localStorage.getItem("cartTotal") != 'NaN' && localStorage.getItem("cartid") && localStorage.getItem("cartid") != 'NaN' ){
@@ -159,7 +189,7 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
                         $ionicLoading.hide();
                         
                         cartSrvc.showToastBanner(response.msg, "short", "center");
-                    }
+                    } */
                 }); 
 
                 $ionicHistory.nextViewOptions({
@@ -177,9 +207,22 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
          }
 
          productCtrl.prototype.addToWishlist = function(product_id){
-            productSrvc.addToWishlist(request).then(function(response) { console.log("add to wishlist response");console.log(response);
+            var customerId = localStorage.getItem('customer_id');
 
-            });
+            if(customerId && customerId != ''){
+                productSrvc.addToWishlist(product_id, customerId).then(function(response) { console.log("add to wishlist response");console.log(response);
+                    if(response.success == 1){
+                        cartSrvc.showToastBanner("Product Successfully Added To Your Wishlist.", "short", "center");
+                    } else {
+                        cartSrvc.showToastBanner("Opps ! Some Server issue.", "short", "center");
+                    }
+                    
+                });
+            } else {
+                $state.go("app.login",{ 'route': 'banner' });
+            }
+
+            
         }
 
         productCtrl.prototype.goToProductDetails = function(product_id){

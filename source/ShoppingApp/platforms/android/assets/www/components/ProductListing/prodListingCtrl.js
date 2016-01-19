@@ -41,7 +41,7 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
               }
                 
                 self.categoryHeading = category_name;
-            }).finally(function(){ alert(self.ShowProducts);
+            }).finally(function(){ //alert(self.ShowProducts);
                 $ionicLoading.hide();
             });
        // });

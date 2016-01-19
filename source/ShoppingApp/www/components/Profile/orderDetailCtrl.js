@@ -1,8 +1,8 @@
 var orderDetailCtrl;
 
-orderDetailCtrl = (function($state,$rootScope, $stateParams, $scope, profileSrvc, $ionicLoading) {
+orderDetailCtrl = (function($state,$rootScope, $stateParams, $scope, profileSrvc, $ionicLoading, $ionicPopover) {
 
-    function orderDetailCtrl($state,$rootScope, $stateParams, $scope, profileSrvc, $ionicLoading) {
+    function orderDetailCtrl($state,$rootScope, $stateParams, $scope, profileSrvc, $ionicLoading, $ionicPopover) {
        
        $ionicLoading.show(); 
        this.showMe = true;
@@ -29,6 +29,13 @@ orderDetailCtrl = (function($state,$rootScope, $stateParams, $scope, profileSrvc
         } else {
             $ionicLoading.hide();
         }
+
+        //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
     }
 
     return orderDetailCtrl;

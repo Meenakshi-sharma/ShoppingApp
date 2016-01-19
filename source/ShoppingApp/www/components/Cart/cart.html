@@ -3,8 +3,10 @@
         <a ui-sref="app.banner" href="javascript:;" ><img src="img/icon-small.png" class="appLogo"/></a>
   </ion-nav-title>
   <ion-nav-buttons side="right">
-    <div class="searchBar">
-        <i ui-sref="app.cart" class="icon ion-android-cart"><span class="badge badge-assertive cbadge" ng-if="cc.cartTotal">{{cc.cartTotal}}</span></i>
+<!-- User Section -->
+    <div class="searchBar" >
+      <i class="icon ion-android-more-vertical" ng-click="popover.show($event)" style="float:right;padding:0px 15px;"></i>
+      <i class="icon ion-android-cart" style="float:right;padding:0px 15px;"><span class="badge badge-assertive cbadge" ng-if="cc.cartTotal" style="margin-left:0px!important;">{{cc.cartTotal}}</span></i>
     </div>
 </ion-nav-buttons>
   <ion-content  padding="true" class="has-header" scroll="true">

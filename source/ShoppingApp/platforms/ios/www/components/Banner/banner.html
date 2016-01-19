@@ -1,12 +1,13 @@
-<ion-view view-title="Banner" ng-controller="bannerCtrl as bc">
- <ion-nav-title >
+<ion-view view-title="Banner" hide-nav-bar="false" ng-controller="bannerCtrl as bc"  cache-view="false">
+ <ion-nav-title>
         <a ui-sref="app.banner" href="javascript:;" ><img src="img/icon-small.png" class="appLogo"/></a>
   </ion-nav-title>
   <ion-nav-buttons side="right">
 <!-- User Section -->
     <div class="searchBar" >
-      <i class="icon ion-person" ng-click="popover.show($event)"></i>
-      <i ng-click="bc.goToCart()" class="icon ion-android-cart"><span class="badge badge-assertive cbadge" ng-if="bc.cartTotal">{{bc.cartTotal}}</span></i>
+      <i class="icon ion-android-more-vertical" ng-click="popover.show($event)" style="float:right;padding:0px 15px;"></i>
+      <i ng-click="bc.goToCart()" class="icon ion-android-cart" style="float:right;padding:0px 15px;"><span class="badge badge-assertive cbadge" ng-if="bc.cartTotal" style="margin-left:0px!important;">{{bc.cartTotal}}</span></i>
+      
     </div>
 
 </ion-nav-buttons> 

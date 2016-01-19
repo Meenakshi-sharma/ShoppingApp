@@ -1,13 +1,13 @@
 var cartCtrl;
 
-cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$state, cartSrvc) {   
-        function cartCtrl($rootScope, $scope,$ionicSideMenuDelegate,$state, cartSrvc, $ionicLoading) {
+cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$state, cartSrvc, $ionicPopover) {   
+        function cartCtrl($rootScope, $scope,$ionicSideMenuDelegate,$state, cartSrvc, $ionicLoading, $ionicPopover) {
         
         this.state = $state;
         var self = this;
          var grandTotal = 0;
 
-        self.ShowCartProducts = true;
+        //self.ShowCartProducts = true;
 
         $ionicLoading.show();
 
@@ -26,9 +26,9 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
                                 grandTotal += parseInt(self.cartProducts[i].subTotal);
                             }
                             self.cartProducts.grandTotal = grandTotal;
-                            self.ShowCartProducts = true; alert("1"+self.ShowCartProducts);
+                            self.ShowCartProducts = true; //alert("1"+self.ShowCartProducts);
                         }else {
-                            self.ShowCartProducts = false; alert("2"+self.ShowCartProducts);
+                            self.ShowCartProducts = false; //alert("2"+self.ShowCartProducts);
                             self.cartTotal = 0; 
                         }
                         localStorage.setItem("cartTotal", self.cartTotal);
@@ -39,19 +39,56 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
                 $ionicLoading.hide();
             });
         } else {
-            self.ShowCartProducts = false; alert("3"+self.ShowCartProducts);
+            self.ShowCartProducts = false;// alert("3"+self.ShowCartProducts);
             $ionicLoading.hide();
             cartSrvc.showToastBanner("Your Cart Is Empty.", "long", "center");
         }
 
 
-            function updateCart(msg_id){
-                //$ionicLoading.show();
-                var customer_id = localStorage.getItem("customer_id");              
+            function updateCart(msg_id, product_id){
+                $ionicLoading.show();
+                var customer_id = localStorage.getItem("customer_id"); 
+
+                if(product_id > 0){
+                    for(i=0; i<=self.cartProducts.length; i++ ){
+                        if(self.cartProducts[i]){
+                            if(self.cartProducts[i].product_id == product_id){
+                                self.cartProducts[i].qty = 0;
+                            }
+                            self.cartProducts.total = '';
+                        }
+                    }
+                }
+                          
                 cartSrvc.updateCartProducts(self.cartProducts, cartid, customer_id).then(function(response) {
+                    console.log(response); 
+                    var grandTotal2 = 0;
+                    if(response.success == 1){
+                        for(i=0; i<=self.cartProducts.length; i++ ){
+                            if(self.cartProducts[i]){
+                                if(self.cartProducts[i].product_id == product_id){
+                                    self.cartProducts.splice(i,1);
+                                }
+                                self.cartProducts.total = '';
+                            }
+                            grandTotal2 += parseInt(self.cartProducts[i].subTotal); //alert(grandTotal2);
+                        }
+                    }
+
+                    self.cartProducts.grandTotal = grandTotal2;
+
+                    if(self.cartProducts.length = 0){
+                        self.ShowCartProducts = false; //alert("4"+self.ShowCartProducts);
+                    }
+
                 }).finally(function(){
-                 //   $ionicLoading.hide();
+                    var cartTotal = self.cartProducts.length;
+                    localStorage.setItem("cartTotal", cartTotal);
+                    self.cartTotal = cartTotal;
                     
+                    $ionicLoading.hide();
+
+                    cartSrvc.showToastBanner("Product deleted from cart successfully.", "long", "center");                    
                 });
              }
              
@@ -109,32 +146,7 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
             
             
             cartCtrl.prototype.deleteProduct = function(product_id){
-                for(i=0; i<=self.cartProducts.length; i++ ){
-                    if(self.cartProducts[i]){
-                        if(self.cartProducts[i].product_id == product_id){
-                            self.cartProducts.splice(i,1);
-                        }
-                        self.cartProducts.total = '';
-                    }
-                }
-//alert(self.cartProducts.length);
-                 var grandTotal2 = 0;   
-                for(i=0; i<self.cartProducts.length;i++){ //alert(i);
-                    grandTotal2 += parseInt(self.cartProducts[i].subTotal); //alert(grandTotal2);
-                }
-                self.cartProducts.grandTotal = grandTotal2;
-
-                if(self.cartProducts.length = 0){
-                    self.ShowCartProducts = false; alert("4"+self.ShowCartProducts);
-                }
-                
-                    //updateCart(2); 
-                    var cartTotal = self.cartProducts.length;
-                    localStorage.setItem("cartTotal", cartTotal);
-                    self.cartTotal = cartTotal;
-                    //if(msg_id == 2){
-                    cartSrvc.showToastBanner("Product deleted from cart successfully.", "long", "center");
-                    //}
+                updateCart(2, product_id); 
             }
       /*      
             cartCtrl.prototype.updateCart = function(){
@@ -143,7 +155,7 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
         
         */
         cartCtrl.prototype.GoToCheckOut = function(){  console.log(localStorage.getItem("customer_id"));
-            //updateCart(1); 
+            updateCart(1, 0); 
             if(localStorage.getItem("customer_id") && localStorage.getItem("customer_id") != ''){
                 $state.go("app.checkout");
             } else {
@@ -167,6 +179,13 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
                 }
             })
         }
+
+        //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
      }
 
     return cartCtrl;

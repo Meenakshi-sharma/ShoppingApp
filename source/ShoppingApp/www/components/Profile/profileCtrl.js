@@ -1,8 +1,8 @@
 var profileCtrl;
 
-profileCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading, $ionicPopup) {
+profileCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading, $ionicPopup, $ionicPopover) {
 
-    function profileCtrl($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading, $ionicPopup) {
+    function profileCtrl($state, $stateParams,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLoading, $ionicPopup, $ionicPopover) {
     
         $ionicLoading.show();
        this.showMe = true;
@@ -90,12 +90,22 @@ profileCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, ca
           });
         }
 
-        profileCtrl.prototype.showBillingPopup = function(index) {
-            console.log(x); console.log(x.city);
+        // Go To Cart
+        profileCtrl.prototype.goToCart = function(){
+            if(self.cartTotal > 0){
+                this.state.go("app.cart");
+            } else {
+                cartSrvc.showToastBanner("Cart is empty.", "short", "center");
+            }
+        }
 
+        profileCtrl.prototype.showBillingPopup = function(index) { //alert(index);
+            //console.log(x); console.log(x.city);
+            self.index = index;
+//console.log(self.profileInfo.addresses[index].firstname);
             var myPopupBilling = $ionicPopup.show({
-            template: '<div class="list"> <label class="item item-input item-floating-label"> <span class="input-label">First Name</span><input type="text" ng-model="pl.profileInfo.addresses[index].firstname" name="firstname" placeholder="First Name" ng-minlength="3" ng-maxlength="15" required/>  </label> <label class="item item-input item-floating-label"> <span class="input-label">Last Name</span> <input type="text" ng-model="pl.profileInfo.addresses[index].lastname" name="lastname" placeholder="Last Name" ng-minlength="3" ng-maxlength="15" required /> </label><label class="item item-input item-floating-label"><span class="input-label">City/Town</span> <input type="text" ng-model="pl.profileInfo.addresses[index].city" name="city"  placeholder="City/Town"/></label><label class="item item-input item-floating-label"> <span class="input-label">State</span><input type="text" ng-model="pl.profileInfo.addresses[index].region" name="region"  placeholder="State"/></label><input type="hidden" ng-model="pl.profileInfo.addresses[index].country_id" name="country_id"/><!--  <label class="item item-input item-select"> <div class="input-label"> Country </div><select name="countary_name" ng-init="cpl.profileInfo.addresses[index].country_id = pl.profileInfo.addresses[index].country_id" ng-model="pl.profileInfo.addresses[index].country_id" style="right:5px;" ng-options="pl.profileInfo.addresses[index].country_id as pl.profileInfo.addresses[index].name for x in pl.profileInfo.addresses[index].country_list"></select></label> --> <label class="item item-input item-floating-label"> <span class="input-label">Pin Code</span> <input type="text" ng-model="pl.profileInfo.addresses[index].postcode" name="postcode" placeholder="Pin Code"/>  </label> <label class="item item-input item-floating-label"> <span class="input-label">Phone Number</span><input type="number" ng-model="pl.profileInfo.addresses[index].telephone" name="telephone"  placeholder="Phone Number"/> </label> </div>',
-            title: 'Edit Billing Information',
+            template: '<div class="list"> <label class="item item-input item-floating-label"> <span class="input-label">First Name</span><input type="text" ng-model="pl.profileInfo.addresses[pl.index].firstname" name="firstname" placeholder="First Name" ng-minlength="3" ng-maxlength="15" required/>  </label> <label class="item item-input item-floating-label"> <span class="input-label">Last Name</span> <input type="text" ng-model="pl.profileInfo.addresses[pl.index].lastname" name="lastname" placeholder="Last Name" ng-minlength="3" ng-maxlength="15" required /> </label><label class="item item-input item-floating-label"><span class="input-label">City/Town</span> <input type="text" ng-model="pl.profileInfo.addresses[pl.index].city" name="city"  placeholder="City/Town"/></label><label class="item item-input item-floating-label"> <span class="input-label">State</span><input type="text" ng-model="pl.profileInfo.addresses[pl.index].region" name="region"  placeholder="State"/></label><input type="hidden" ng-model="pl.profileInfo.addresses[pl.index].country_id" name="country_id"/><!--  <label class="item item-input item-select"> <div class="input-label"> Country </div><select name="countary_name" ng-init="pl.profileInfo.addresses[pl.index].country_id = pl.profileInfo.addresses[pl.index].country_id" ng-model="pl.profileInfo.addresses[pl.index].country_id" style="right:5px;" ng-options="pl.profileInfo.addresses[pl.index].country_id as pl.profileInfo.addresses[pl.index].name for x in pl.profileInfo.addresses[pl.index].country_list"></select></label> --> <label class="item item-input item-floating-label"> <span class="input-label">Pin Code</span> <input type="text" ng-model="pl.profileInfo.addresses[pl.index].postcode" name="postcode" placeholder="Pin Code"/>  </label> <label class="item item-input item-floating-label"> <span class="input-label">Phone Number</span><input type="text" ng-model="pl.profileInfo.addresses[pl.index].telephone" name="telephone"  placeholder="Phone Number"/> </label> </div>',
+            title: 'Edit Information',
            
             scope: $scope,
             buttons: [
@@ -217,6 +227,13 @@ profileCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, ca
                 }
             }
         }
+
+        //User Popover
+          $ionicPopover.fromTemplateUrl('components/Banner/userpopover.html', {
+            scope: $scope,
+          }).then(function(popover) {
+            $scope.popover = popover;
+          });
     }
 
     return profileCtrl;

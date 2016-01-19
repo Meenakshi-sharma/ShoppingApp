@@ -1,7 +1,7 @@
 var userPopOverCtrl;
 
-userPopOverCtrl = (function($rootScope, $scope, $state){
-    function userPopOverCtrl($rootScope,$scope, $state){
+userPopOverCtrl = (function($rootScope, $scope, $state, cartSrvc){
+    function userPopOverCtrl($rootScope,$scope, $state, cartSrvc){
         
         this.state = $state;
        this.scope = $scope;
@@ -24,6 +24,14 @@ userPopOverCtrl = (function($rootScope, $scope, $state){
                 alert("You Logout Successfully");
                 this.state.go("app.login");
                 return;
+            } else if(nav == 'compare'){
+                    var product_one = window.localStorage.getItem('compare_product_one_id');
+                    var product_two = window.localStorage.getItem('compare_product_two_id');
+                    if(product_one || product_two){
+                        this.state.go("app.productsCompare");
+                    } else {
+                        cartSrvc.showToastBanner("Please add product for compare.", "short", "center");
+                    }
             } else {
                 if(localStorage.getItem("customer_id") && localStorage.getItem("customer_id") != ''){
                     this.state.go("app."+nav);
@@ -34,7 +42,6 @@ userPopOverCtrl = (function($rootScope, $scope, $state){
             
         }
     }
-        
     return userPopOverCtrl;
 })();
 
