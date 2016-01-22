@@ -27,7 +27,12 @@
    </ion-slide-box>
     
    <div ng-if="bc.categoryBannersSpecial">
-   <h3 style="float:left; margin:0px; width:100%; padding:5px; color:#000; background:#fff;">Special Offers</h3>
+   <!-- <h3 style="float:left; margin:0px; width:100%; padding:5px; color:#000; background:#fff;">Special Offers</h3> -->
+   <div style="background: #fff; float: left;width: 100%;padding: 6px 5px 0px 10px;">
+          <h3 style="float: left;margin-top: 0px;width: 80%;color: #000;">Special Offers</h3>
+          <!--<a href="javascript:;" ng-click="bc.getSub('special', 'Special Offers')"><h6 style="float: left;margin-top: 0px;width: 20%; font-size: 16px;
+    color: #45BDAE;line-height: 28px;">View All</h6></a> -->
+    </div>
    <div class="products" style="display: flex; overflow-y: hidden; overflow-x: visible;width:100%; float:left;">
         <div class="product" style="" ng-repeat="x in bc.categoryBannersSpecial">
             <div class="product_img"><a href="javascript:;" ng-click="bc.fetchDetail(x.productid)"><img src="img/no-thumb.png" style="width: 152px !important; height:auto !important;"  ng-src="{{x.image}}" /></a></div>
@@ -39,7 +44,12 @@
    </div>
 
    <div ng-if="bc.categoryBanners">
-   <h3 style="float:left; margin:0px; width:100%; padding:5px; color:#000; margin-top:10px;background:#fff;">New Products</h3>
+   <!--<h3 style="float:left; margin:0px; width:100%; padding:5px; color:#000; margin-top:10px;background:#fff;">New Products</h3>-->
+   <div style="background: #fff; float: left;width: 100%;padding: 6px 5px 0px 10px;">
+          <h3 style="float: left;margin-top: 0px;width: 80%;color: #000;">New Products</h3>
+          <!--<a href="javascript:;" ng-click="bc.getSub('new', 'New Products')"><h6 style="float: left;margin-top: 0px;width: 20%; font-size: 16px;
+    color: #45BDAE;line-height: 28px;">View All</h6></a> -->
+    </div>
    <div class="products" style="display: flex; overflow-y: hidden; overflow-x: visible;width:100%; float:left;">
         <div class="product" ng-repeat="x in bc.categoryBanners" style="">
             <div class="product_img"><a href="javascript:;" ng-click="bc.fetchDetail(x.productid)"><img src="img/no-thumb.png" style="width: 152px !important; height:auto !important;" ng-src="{{x.image}}" /></a></div>
