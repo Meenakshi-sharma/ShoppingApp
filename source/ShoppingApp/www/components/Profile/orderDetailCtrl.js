@@ -23,7 +23,13 @@ orderDetailCtrl = (function($state,$rootScope, $stateParams, $scope, profileSrvc
         
         if(orderId){
             profileSrvc.getMyOrderDetail(orderId).then(function(response) { console.log("order details response"); console.log(response);
-                self.orderDetail = response.order[0];
+              if(response.success == 1){
+                self.orderDetail = response.order;
+              } else {
+                alert("Server Error!");
+              }
+                
+            }).finally(function(){
                 $ionicLoading.hide();
             });
         } else {

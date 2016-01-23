@@ -9,9 +9,10 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
 
         //self.ShowCartProducts = true;
 
-        $ionicLoading.show();
+        
 
         $scope.$on('$stateChangeSuccess', function () {
+            $ionicLoading.show();
             if(localStorage.getItem("cartid") && localStorage.getItem("cartid") != '' && localStorage.getItem("cartid") != 'undefined'){
                 var cartid = localStorage.getItem("cartid");
 
@@ -49,10 +50,10 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
         var cartid = localStorage.getItem("cartid");
 
 
-            function updateCart(msg_id, product_id){
+            function updateCart(msg_id, product_id){ alert(product_id);
                 $ionicLoading.show();
                 var customer_id = localStorage.getItem("customer_id"); 
-
+                console.log("first"); console.log(self.cartProducts);
                 if(product_id > 0){ console.log(product_id);
                     for(i=0; i<=self.cartProducts.length; i++ ){
                         if(self.cartProducts[i]){
@@ -63,29 +64,31 @@ cartCtrl = (function($rootScope,$scope,$ionicLoading, $ionicSideMenuDelegate,$st
                         }   
                     }
                 }
-                          console.log("before"); console.log(self.cartProducts);
-                cartSrvc.updateCartProducts(self.cartProducts, cartid, customer_id).then(function(response) {
-                    console.log(response); 
+                 console.log("before"); console.log(self.cartProducts);
+                cartSrvc.updateCartProducts(self.cartProducts, cartid, customer_id).then(function(response) { alert("duck");
+                    console.log("Response");console.log(response); 
                     var grandTotal2 = 0;
                     if(response.success == 1){
                         for(i=0; i<=self.cartProducts.length; i++ ){
                             if(self.cartProducts[i]){
                                 if(self.cartProducts[i].product_id == product_id){
                                     self.cartProducts.splice(i,1);
+                                    console.log("after2"+i); console.log(self.cartProducts);
                                 }
                                 self.cartProducts.total = '';
-                            }
-                            grandTotal2 += parseInt(self.cartProducts[i].subTotal); //alert(grandTotal2);
+                                grandTotal2 += parseInt(self.cartProducts[i].subTotal); //alert(grandTotal2);
+                            } 
                         }
                     }
-                     console.log("after"); console.log(self.cartProducts);
+                     
                     self.cartProducts.grandTotal = grandTotal2;
-
+                    return;
                     if(self.cartProducts.length = 0){
                         self.ShowCartProducts = false; //alert("4"+self.ShowCartProducts);
                     }
 
                 }).finally(function(){
+                    console.log("after"); console.log(self.cartProducts);
                     var cartTotal = self.cartProducts.length;
                     localStorage.setItem("cartTotal", cartTotal);
                     self.cartTotal = cartTotal;

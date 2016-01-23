@@ -30,6 +30,39 @@
 {
   color: #fff;
 }
+.orderProduct{
+    float:left;
+    width: 100%;
+}
+.orderProduct .item{
+    float: left;
+    width: 30%;
+}
+
+.orderProduct .content{
+    float:left;
+    width:70%;
+    padding:5px;
+}
+
+.orderProduct .content h2{
+    font-size: 16px;
+    padding: 2px;
+}
+
+.orderProduct .content .price{
+    float: left; 
+    font-size: 16px;
+    font-weight: 900;
+    color: #6FD0D6;
+}
+
+.orderProduct .item img{
+    float:left;
+    max-width: 80px;
+    width: 100%;
+    height:100%;
+}
 
 .cartButton{
     float:left;
@@ -135,7 +168,7 @@
     text-align:center;
 }
 .product .product_img img{
-    width: 167px !important;
+    width: 155px !important;
     /* height: 190px; */
     height: auto !important;
 }
@@ -332,7 +365,7 @@ font-family: inherit;
 
 .filter-sub{
     float: left;
-    margin-top: 32px;
+    margin-top: 36px;
     width: 64%;
     background: rgba(170, 170, 170, 0.12);
     height: 500px;

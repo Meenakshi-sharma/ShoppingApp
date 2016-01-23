@@ -34,7 +34,7 @@ bannerCtrl = (function($rootScope, $scope,$ionicSideMenuDelegate,$state, $ionicN
                 if(categories[i]){
                 prodListingSrvc.getCdata(categories[i].category_id).then(function(response) { //console.log("hime servies");console.log(response);
                         //response[i].category_name = this.categories[i].name;
-                        if(response.data.count > 0 ){ 
+                        if(response.data.products.length > 0 ){ 
                             if(categories[i]){
                                 if(response.success == 1){
                                       prodCatListing[i] = response.data.products;

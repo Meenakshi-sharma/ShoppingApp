@@ -32,14 +32,14 @@ console.log($stateParams);
               self.cartTotal = '0';
           }
           
-          $ionicLoading.show();
+          //$ionicLoading.show();
           prodListingSrvc.getFilterOptions(category_id).then(function(response) {
               if(response.success == 1){
                 self.filters = response.data;
               }
               
           }).finally(function(){
-            $ionicLoading.hide();
+           // $ionicLoading.hide();
           });
 
         } else {
@@ -69,7 +69,7 @@ console.log($stateParams);
     }
 
     prodFilterCtrl.prototype.filterDone = function(){ //alert("done"); console.log(this);
-      var OptionsValue = [];
+      
       var price = [];
 
       if(this.price){
@@ -81,7 +81,7 @@ console.log($stateParams);
           }
         });
       }
-       //console.log(price);
+       console.log(price);
 
       var color = [];
 
@@ -95,7 +95,7 @@ console.log($stateParams);
           
         });
       }
-       //console.log(color);
+       console.log(color);
 
       var manufacturer = [];
 
@@ -109,13 +109,12 @@ console.log($stateParams);
           
         });
       }
-
-      localStorage.setItem("OptionsValuePrice",price); //console.log(localStorage.getItem("OptionsValuePrice"));
-      localStorage.setItem("OptionsValueColor",color); //console.log(localStorage.getItem("OptionsValueColor"));
-      localStorage.setItem("OptionsValueManufacturer",manufacturer); //console.log(localStorage.getItem("OptionsValueManufacturer"));
-      localStorage.setItem("OptionsValueCategoryId",category_id); //console.log(localStorage.getItem("OptionsValueCategoryId"));
-     // var filtersValue = category_name+","+category_id+","+this.color+","+this.manufacturer+","+this.price; console.log(filtersValue);
-       self.state.go("app.prodListing", {'category_id':'filter', 'category_name':category_name});
+      
+console.log(manufacturer);
+ 
+//return;
+      var filtersValue = category_name+","+category_id+","+this.color+","+this.manufacturer+","+this.price; console.log(filtersValue);
+       self.state.go("app.prodListing", {'category_id':'filter', 'category_name':filtersValue});
      // console.log(this);
     }
   

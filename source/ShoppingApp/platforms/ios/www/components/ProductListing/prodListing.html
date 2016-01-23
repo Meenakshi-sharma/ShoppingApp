@@ -21,7 +21,7 @@
    <!-- Top Heading and sorting filter -->
    <div class="bar bar-header bar-dark">
       <h1 class="title">{{pc.categoryHeading}}</h1>
-  <!--    <button ui-sref="app.filter" class="button button clear ion-funnel"></button> -->
+      <button  ng-click="pc.goToFilters(pc.category_id)" class="button button clear ion-funnel"></button>
       <button class="button button-clear ion-arrow-swap" ng-click="pc.showMeSelect()"></button>
     </div>
     <ul class="dropdown" ng-hide="pc.showListing">

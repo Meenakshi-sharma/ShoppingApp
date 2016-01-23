@@ -93,13 +93,13 @@ profileSrvc = (function($log, $http, $q, $state, constants) {
                 })(this));
             return deferred.promise;
         },
-        getMyOrderDetail: function(orderId) {
+        getMyOrderDetail: function(orderIncrementId) {
            
             var deferred;
             $log.debug("get profile service");
             deferred = pro.$q.defer();
             $http.post(constants.API_URL+'users/getOrderDetails', {
-                    orderId: orderId
+                    orderIncrementId: orderIncrementId
                 })
                 .success((function(_this) {
                     return function(data, status) {
@@ -114,7 +114,7 @@ profileSrvc = (function($log, $http, $q, $state, constants) {
                 })(this));
             return deferred.promise;
         },
-        changePassword: function(customerId, current_password, password) { 
+        changePassword: function(customerId, current_password, password){
            
             var deferred;
             deferred = pro.$q.defer();
