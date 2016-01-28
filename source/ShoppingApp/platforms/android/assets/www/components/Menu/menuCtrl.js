@@ -9,17 +9,26 @@ menuCtrl = (function($state ,$rootScope,$scope,$timeout, $ionicLoading, menuSrvc
         this.menuSrvc= menuSrvc;
         var mycategories = {};
         var self = this;
-        
-        if(localStorage.getItem("customer_id")){
+        console.log("rootsoup222"); console.log($rootScope);
+
+       // alert(localStorage.getItem("customer_id")); alert(localStorage.getItem("firstname")); 
+        if(localStorage.getItem("customer_id")){ 
             self.username = localStorage.getItem("firstname");
         } else {
-            self.username = "Guest";
+            self.username = "Guest1";
         }
+
+        //if($rootScope.current_user.firstname){
+        //    self.username =  $rootScope.current_user.firstname;
+        //}
 
         $ionicLoading.show();
         self.menuSrvc.getCategories().then(function(response) { console.log(response);
             //menushowCat(response);
-            self.youcategories = response;
+            if(response.success == 1){
+                self.youcategories = response.data.children[0].children;
+            }
+            
         }).finally(function(){
             $ionicLoading.hide();
         });
@@ -45,9 +54,9 @@ menuCtrl = (function($state ,$rootScope,$scope,$timeout, $ionicLoading, menuSrvc
             var myarray = [];
             for(x in self.youcategories){
                 myarray.push(self.youcategories[x]);
-            }
-
-            if (myarray[index].children_count > 0){
+            } //console.log("myarray"); alert(index);
+//console.log(myarray); alert(myarray[index].children.length);
+            if (myarray[index].children.length > 0){ ///alert("hi");
                 self.state.go("app.home",{'category_id':category_id, 'category_name':category_name});
             } else {
               self.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});

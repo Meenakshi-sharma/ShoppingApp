@@ -68,7 +68,7 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
             $ionicLoading.show();
                 var category_name = $stateParams.category_name;
             //New Products Listing....
-                bannerSrvc.getBdataSecond().then(function(response) {
+                bannerSrvc.getBdataSecond().then(function(response) { console.log(response);
                     if(response.length > 0){
                       self.prodListing = response;
                       self.ShowProducts = true;

@@ -9,12 +9,18 @@ menuCtrl = (function($state ,$rootScope,$scope,$timeout, $ionicLoading, menuSrvc
         this.menuSrvc= menuSrvc;
         var mycategories = {};
         var self = this;
-        
-        if(localStorage.getItem("customer_id")){
+        console.log("rootsoup222"); console.log($rootScope);
+
+       // alert(localStorage.getItem("customer_id")); alert(localStorage.getItem("firstname")); 
+        if(localStorage.getItem("customer_id")){ 
             self.username = localStorage.getItem("firstname");
         } else {
-            self.username = "Guest";
+            self.username = "Guest1";
         }
+
+        //if($rootScope.current_user.firstname){
+        //    self.username =  $rootScope.current_user.firstname;
+        //}
 
         $ionicLoading.show();
         self.menuSrvc.getCategories().then(function(response) { console.log(response);

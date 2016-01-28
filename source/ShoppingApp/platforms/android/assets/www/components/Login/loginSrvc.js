@@ -46,6 +46,27 @@ loginSrvc = (function($log, $http, $q, $state, constants) {
                     };
                 })(this));
             return deferred.promise;
+        },
+        chkLogin2: function() { //alert("fu");
+        
+            var deferred;
+            $log.debug("get globalCompanyFields service");
+            //console.log(username);
+            deferred = ls.$q.defer();
+            $http.post(constants.API_URL+'cart/getCartId')
+                .success((function(_this) {
+                    return function(data, status) { //console.log(data); alert("success");
+                        $log.debug("Login info " + (angular.toJson(data, true)));
+                        return deferred.resolve(data);
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        $log.error("Failed to Login" + status);
+                        $log.error("Failed to Login Service");
+                        return deferred.reject(data);
+                    };
+                })(this));
+            return deferred.promise;
         }
     }
 

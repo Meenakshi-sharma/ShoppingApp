@@ -17,11 +17,15 @@ userPopOverCtrl = (function($rootScope, $scope, $state, cartSrvc){
         userPopOverCtrl.prototype.userNav = function(nav) {
             $scope.popover.hide();
             if(nav == 'logout'){
-                localStorage.setItem("email", '');
-                localStorage.setItem("firstname", '');
-                localStorage.setItem("lastname", '');
-                localStorage.setItem("customer_id", '');
-                alert("You Logout Successfully");
+                
+                localStorage.removeItem("email");
+                localStorage.removeItem("firstname");
+                localStorage.removeItem("lastname");
+                localStorage.removeItem("customer_id");
+                localStorage.removeItem("cartTotal");
+                localStorage.removeItem("cartid");
+
+                cartSrvc.showToastBanner("You Logout Successfully.", "short", "center");
                 this.state.go("app.login");
                 return;
             } else if(nav == 'compare'){

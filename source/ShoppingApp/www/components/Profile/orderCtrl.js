@@ -22,11 +22,6 @@ orderCtrl = (function($state,$rootScope, $scope, profileSrvc, cartSrvc, $ionicLo
         profileSrvc.getMyOrder(customer_id).then(function(response) { console.log("order response"); console.log(response);
             if(response.success == 1 && response.orders.length > 0){
                 self.orderInfo = response.orders;
-               self.isrecords = true;
-            } else {
-                self.isrecords = false;
-                cartSrvc.showToastBanner("No Record Found.", "long", "center");
-                return;
             }
             
         }).finally(function(){

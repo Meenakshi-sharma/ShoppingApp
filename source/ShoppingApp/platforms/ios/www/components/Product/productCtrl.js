@@ -116,7 +116,7 @@ productCtrl = (function($rootScope,$scope,$state,productSrvc, $ionicSideMenuDele
                     var cartid = null;
                 }
                 
-                alert(cartid);
+               // alert(cartid);
                 request["products"]= products1;
                 request["customer"]= customer;
                 request["shopping_cart_id"]= cartid;

@@ -15,7 +15,7 @@
         </div>
         <div class="list card" style="top: 34px; bottom:0px;">
           <div class="item">
-            <h2>Order:- #{{odc.orderDetail.increment_id}} {{odc.orderDetail.status | uppercase}}</h2>
+            <h2>Order:- #{{odc.orderDetail.increment_id}} - {{odc.orderDetail.status | uppercase}}</h2>
             <p>Order Date:- {{odc.orderDetail.created_at | date:'medium'}}<p>
             <p>Total Quantity Ordered:- {{odc.orderDetail.total_qty_ordered | number}}<p>
             <p>Total Weight Of Cart:- {{odc.orderDetail.weight | number}}</p>
@@ -54,14 +54,14 @@
             <p>{{odc.orderDetail.shipping_description}}</p>
           </div>
 
-          <div class="item">
+          <div class="item" ng-if="odc.orderDetail.payment">
             <h2>Payment Method</h2>
             <p>{{odc.orderDetail.payment.method | uppercase}}</p>
           </div>
 
           <div class="list" style="margin-bottom:20px; float:left;width:100%;" ng-if="odc.orderDetail.items">
             <div class="card orderProduct" ng-repeat="x in odc.orderDetail.items" >
-              <a class="item" href="#" >
+              <a class="item item-thumbnail-left" href="#" >
               <img src="img/no-thumb.png" ng-src="{{x.small_image}}"/>
               </a>
               <div class="content"> 
