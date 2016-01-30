@@ -20,7 +20,7 @@ wishlistCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, c
         
         $scope.$on('$stateChangeSuccess', function () {
              $ionicLoading.show();
-            profileSrvc.getWishlist(customer_id).then(function(response) { console.log("wishlist response"); console.log(response);
+            profileSrvc.getWishlist(customer_id).then(function(response) { //console.log("wishlist response"); //console.log(response);
                 if(response.success == 1 && response.wish_list_data.length > 0){
                     self.wishlist = response.wish_list_data;
                 }
@@ -32,9 +32,9 @@ wishlistCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, c
 //Remove Products from wishlist
         wishlistCtrl.prototype.RemoveFromWishlist = function(index, wishlist_item_id){
             if(wishlist_item_id){
-                self.wishlist.splice(index,1); console.log(self.wishlist);
+                self.wishlist.splice(index,1); //console.log(self.wishlist);
                 cartSrvc.showToastBanner("Product remove from wishlist successfully.", "short", "center");
-               profileSrvc.removeWishlistItem(wishlist_item_id).then(function(response) { console.log("remove profuct from wishlist response"); console.log(response);
+               profileSrvc.removeWishlistItem(wishlist_item_id).then(function(response) { //console.log("remove profuct from wishlist response"); //console.log(response);
                     //self.wishlist = response.wish_list;
                 });
             }

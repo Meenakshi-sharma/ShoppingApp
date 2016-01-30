@@ -23,7 +23,7 @@ loginCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoading, $rootS
         this.msg = 'new';
         var finalState = 'new'; 
 
-            loginCtrl.prototype.userLogin = function(finalState,$scope) { console.log("Login"); console.log(this.user); console.log(this.password);console.log("Login2"); 
+            loginCtrl.prototype.userLogin = function(finalState,$scope) { //console.log("Login"); //console.log(this.user); //console.log(this.password);//console.log("Login2"); 
 
             if(!this.user.username){
               signupSrvc.showToastBanner("Please enter email address.", "short", "center");
@@ -50,7 +50,7 @@ loginCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoading, $rootS
                     var shoppingCartId = null;
                 }
 
-               loginSrvc.chkLogin(this.user.username, this.user.password, shoppingCartId).then(function(response) { console.log("Login Restponse"); console.log(response);
+               loginSrvc.chkLogin(this.user.username, this.user.password, shoppingCartId).then(function(response) { //console.log("Login Restponse"); //console.log(response);
                 $ionicLoading.hide();
                    if(response.error == '0'){
                       //alert("Login Successfull.");
@@ -63,12 +63,18 @@ loginCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoading, $rootS
                             email: response.email,
                         }
                       };
-                    //  console.log("rootsoup"); console.log($rootScope);
+
+                      if(response.resultMergeCart){
+                        localStorage.setItem("cartid", response.resultMergeCart.shopping_cart_id);
+                        localStorage.setItem("cartTotal", response.resultMergeCart.shopping_cart_items_total.items_count);
+                      }
+                    //  //console.log("rootsoup"); //console.log($rootScope);
 
                       localStorage.setItem("email", response.email);
                       localStorage.setItem("firstname", response.firstname);
                       localStorage.setItem("lastname", response.lastname);
-                      localStorage.setItem("customer_id", response.entity_id); //alert("Hi"+localStorage.getItem("firstname"));
+                      localStorage.setItem("customer_id", response.entity_id); 
+                     //alert("Hi"+localStorage.getItem("firstname"));
                       $state.go("app."+path);
                    }else{
                     //alert("Your username or password is wrong.");

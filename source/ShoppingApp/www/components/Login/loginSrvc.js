@@ -27,15 +27,15 @@ loginSrvc = (function($log, $http, $q, $state, constants) {
         
             var deferred;
             $log.debug("get globalCompanyFields service");
-            //console.log(username);
+            ////console.log(username);
             deferred = ls.$q.defer();
-            $http.post(constants.API_URL+'users/login', {
+            $http.post(constants.API_URL+'users/logins', {
                     email: username,
                     password: password,
                     shoppingCartId:shoppingCartId
                 })
                 .success((function(_this) {
-                    return function(data, status) { //console.log(data); alert("success");
+                    return function(data, status) { ////console.log(data); alert("success");
                         $log.debug("Login info " + (angular.toJson(data, true)));
                         return deferred.resolve(data);
                     };

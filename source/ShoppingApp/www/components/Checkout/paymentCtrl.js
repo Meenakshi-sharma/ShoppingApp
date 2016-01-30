@@ -2,7 +2,7 @@ var paymentCtrl;
 
 paymentCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkoutSrvc, $ionicLoading, $ionicPopover) {
 
-    function paymentCtrl($scope,$state,cartSrvc, checkoutSrvc, $ionicLoading, $ionicPopover) { //console.log("$scope"); console.log($scope);
+    function paymentCtrl($scope,$state,cartSrvc, checkoutSrvc, $ionicLoading, $ionicPopover) { //////console.log("$scope"); ////console.log($scope);
         $ionicLoading.show();
         this.state = $state;
         var self = this;
@@ -18,7 +18,7 @@ paymentCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkout
 
         
             
-            checkoutSrvc.getUserCheckoutMethods(cartid).then(function(response) { console.log(" payment....");console.log(response);
+            checkoutSrvc.getUserCheckoutMethods(cartid).then(function(response) { ////console.log(" payment....");////console.log(response);
                 if(response.success == 1){
                     self.shippingMethod = {};
                     self.paymentMethod = {};
@@ -48,7 +48,7 @@ paymentCtrl = (function($scope,$ionicSideMenuDelegate,$state, cartSrvc, checkout
 
             $ionicLoading.show();          
             checkoutSrvc.saveShippingAndPaymentMethods(customerId, cartid, shippingm, paymentm).then(function(response) {
-               console.log("shippping/payment method update"); console.log(response);
+               ////console.log("shippping/payment method update"); ////console.log(response);
             }).finally(function(){
                 $ionicLoading.hide();
                 $state.go("app.orderreview");

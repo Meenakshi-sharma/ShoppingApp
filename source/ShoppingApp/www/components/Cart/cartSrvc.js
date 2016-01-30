@@ -29,7 +29,7 @@ cartSrvc = (function($log, $http, $q, constants) {
         getCartProducts: function(quoteId) {
             var deferred;
             //$log.debug("get globalCompanyFields service");
-            //console.log(username);
+            ////console.log(username);
             deferred = pd.$q.defer();
             $http.post(constants.API_URL+'cart/getCartProducts', {
                     quoteId: quoteId 
@@ -52,7 +52,7 @@ cartSrvc = (function($log, $http, $q, constants) {
         getCartTotal: function(quoteId) {
             var deferred;
             //$log.debug("get globalCompanyFields service");
-            //console.log(username);
+            ////console.log(username);
             deferred = pd.$q.defer();
             $http.post(constants.API_URL+'cart/getCartTotal', {
                     quoteId: quoteId 

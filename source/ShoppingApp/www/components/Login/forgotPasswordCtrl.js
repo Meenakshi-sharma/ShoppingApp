@@ -24,7 +24,7 @@ forgotPasswordCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoadin
 
             $ionicLoading.show();
              loginSrvc.forgotPassword(this.fuser.fusername).then(function(response) {
-              //alert("forgot"); console.log(response); return; 
+              //alert("forgot"); //console.log(response); return; 
               if(response.success == 1){
                   signupSrvc.showToastBanner('Password reset mail is sent to your mail id.', "short", "center");
                   $state.go("app.login");
