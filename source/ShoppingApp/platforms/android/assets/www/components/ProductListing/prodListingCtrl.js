@@ -5,7 +5,7 @@ var prodListingCtrl;
 prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListingSrvc, $ionicPopover, cartSrvc, bannerSrvc) {
 
 	function prodListingCtrl($rootScope,  $scope, prodListingSrvc , $state , $stateParams, $ionicLoading, $ionicPopover, cartSrvc, bannerSrvc) {
-        
+        console.log($stateParams);
         this.state = $state;
         var self = this;
         this.showMe = false;
@@ -68,7 +68,7 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
             $ionicLoading.show();
                 var category_name = $stateParams.category_name;
             //New Products Listing....
-                bannerSrvc.getBdataSecond().then(function(response) {
+                bannerSrvc.getBdataSecond().then(function(response) { console.log(response);
                     if(response.length > 0){
                       self.prodListing = response;
                       self.ShowProducts = true;
@@ -106,6 +106,16 @@ prodListingCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListi
           
                 prodListingSrvc.getCdata(category_id).then(function(response) { console.log(response);
                   if(response.success == 1 && response.data.products.length > 0){
+
+                    for(i=0; i<response.data.products.length; i++){
+                      if(response.data.products[i].specialprice){
+                          response.data.products[i].finalprice = response.data.products[i].specialprice;
+                      } else {
+                        response.data.products[i].finalprice = response.data.products[i].regularprice;
+                      }
+                      
+                    }
+
                       self.prodListing = response.data.products;
                       self.ShowProducts = true;
                   } else { 

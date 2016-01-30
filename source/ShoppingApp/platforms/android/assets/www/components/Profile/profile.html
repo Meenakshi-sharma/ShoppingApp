@@ -32,11 +32,11 @@
           <h1 class="title">My Account</h1>
         </div>
         
-        <div class="list card account" style="top: 73px; bottom:0px;">
+        <div class="list card account" style="top: 73px; bottom:0px;float:left;">
           <div class="item">
             <h2 style="width:80%;float:left;">Account Information</h2><span style="float:right;width:20%;"><a href="#" ng-click="pl.showUserPopup()">Edit</a></span>
             <p>First Name:- {{pl.profileInfo.customer_profile_info.firstname}}</p>
-            <p>Lase Name:- {{pl.profileInfo.customer_profile_info.lastname}}</p>
+            <p>Last Name:- {{pl.profileInfo.customer_profile_info.lastname}}</p>
             <p>Email:- {{pl.profileInfo.customer_profile_info.email}}</p>
             <hr/>
             <div class="" ng-repeat="x in pl.profileInfo.addresses" ng-show="x.is_default_billing">

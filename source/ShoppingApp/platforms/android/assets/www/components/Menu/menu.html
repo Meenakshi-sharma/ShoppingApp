@@ -15,7 +15,8 @@
       <h1 class="title">Welcome {{globals.currentUser.firstname}}</h1>
   </ion-header-bar>  
   
-  <ion-content class="sidenav" padding="true" scroll="false" class="has-header" style="background: #fff;">
+  <ion-content class="sidenav" padding="true" scroll="true" class="has-header" style="background: #fff;">
+
     <ion-list >
         <a href="javascript:;" style="text-decoration:none;" ng-repeat="x in mc.youcategories" ng-if="x.level == 2"> 
           <ion-item menu-close ng-click="mc.getSub($index, {{x.position}}, {{x.category_id}}, '{{x.name}}')" class="item-icon-right">
@@ -23,6 +24,26 @@
          </ion-item>
         </a>
     </ion-list>
+
+<!--
+    <ion-list>
+        <div ng-repeat="x in mc.youcategories">
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(x)"
+                    ng-class="{active: isGroupShown(x)}">
+              <i class="icon" ng-class="isGroupShown(x) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            {{x.name | uppercase}}
+          </ion-item>
+          <ion-item ng-if="x.children" class="item-accordion"
+                    ng-repeat="y in x.children"
+                    >
+            {{y.name | uppercase}}
+          </ion-item>
+        </div>
+      </ion-list>
+-->
+
     </ion-content>
     </ion-side-menu>
 </ion-side-menus>

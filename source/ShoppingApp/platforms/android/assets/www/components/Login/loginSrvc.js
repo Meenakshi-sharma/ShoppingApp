@@ -23,15 +23,16 @@ loginSrvc = (function($log, $http, $q, $state, constants) {
             //onError    // optional
           );
         },
-        chkLogin: function(username, password) { //alert("fu");
+        chkLogin: function(username, password, shoppingCartId) { //alert("fu");
         
             var deferred;
             $log.debug("get globalCompanyFields service");
             //console.log(username);
             deferred = ls.$q.defer();
-            $http.post(constants.API_URL+'users/login', {
+            $http.post(constants.API_URL+'users/logins', {
                     email: username,
-                    password: password
+                    password: password,
+                    shoppingCartId:shoppingCartId
                 })
                 .success((function(_this) {
                     return function(data, status) { //console.log(data); alert("success");
@@ -47,22 +48,19 @@ loginSrvc = (function($log, $http, $q, $state, constants) {
                 })(this));
             return deferred.promise;
         },
-        chkLogin2: function() { //alert("fu");
+        forgotPassword: function(username) {
         
             var deferred;
-            $log.debug("get globalCompanyFields service");
-            //console.log(username);
             deferred = ls.$q.defer();
-            $http.post(constants.API_URL+'cart/getCartId')
+            $http.post(constants.API_URL+'users/forgotPassword', {
+                    email: username
+                })
                 .success((function(_this) {
-                    return function(data, status) { //console.log(data); alert("success");
-                        $log.debug("Login info " + (angular.toJson(data, true)));
+                    return function(data, status) {
                         return deferred.resolve(data);
                     };
                 })(this)).error((function(_this) {
                     return function(data, status, headers) {
-                        $log.error("Failed to Login" + status);
-                        $log.error("Failed to Login Service");
                         return deferred.reject(data);
                     };
                 })(this));

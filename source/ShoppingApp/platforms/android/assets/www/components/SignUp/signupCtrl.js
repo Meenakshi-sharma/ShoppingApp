@@ -66,7 +66,7 @@ signupCtrl = (function($rootScope,$scope,signupSrvc, $state, $ionicSideMenuDeleg
                 signupSrvc.showToastBanner("Both passwords are not match.", "short", "center");
                 return;
             }
-
+            $ionicLoading.show();
             var signup = signupSrvc.chkLogin(this.user.username, this.user.password, this.user.firstname, this.user.lastname).then(function(response){ console.log(response);
                if(response.error == 0 && response.entity_id){
                     $rootScope.globals = {};
@@ -77,13 +77,20 @@ signupCtrl = (function($rootScope,$scope,signupSrvc, $state, $ionicSideMenuDeleg
                             lastname: response.lastname,
                             email: response.email,
                         }
-                      }; 
+                       };
+                            localStorage.setItem("email", response.email);
+                          localStorage.setItem("firstname", response.firstname);
+                          localStorage.setItem("lastname", response.lastname);
+                          localStorage.setItem("customer_id", response.entity_id); 
+                       
                       signupSrvc.showToastBanner("You signup process is successfully completed.", "short", "center");
                       $state.go("app.banner");
                 } else {
                     signupSrvc.showToastBanner("Email is already exist.","short", "center");
                 return;
                 }
+            }).finally(function(){
+                $ionicLoading.hide();
             });
             
         }

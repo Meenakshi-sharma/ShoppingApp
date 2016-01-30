@@ -23,7 +23,7 @@ menuCtrl = (function($state ,$rootScope,$scope,$timeout, $ionicLoading, menuSrvc
         //}
 
         $ionicLoading.show();
-        self.menuSrvc.getCategories().then(function(response) { console.log(response);
+        self.menuSrvc.getCategories().then(function(response) { console.log("menu categories.."); console.log(response);
             //menushowCat(response);
             if(response.success == 1){
                 self.youcategories = response.data.children[0].children;
@@ -62,6 +62,17 @@ menuCtrl = (function($state ,$rootScope,$scope,$timeout, $ionicLoading, menuSrvc
               self.state.go("app.prodListing", {'category_id':category_id, 'category_name':category_name});
             }
         }
+
+         menuCtrl.prototype.toggleGroup = function(group) {
+            if (this.isGroupShown(group)) {
+              this.shownGroup = null;
+            } else {
+              this.shownGroup = group;
+            }
+          }
+          menuCtrl.prototype.isGroupShown = function(group) {
+            return this.shownGroup === group;
+          }
 
         menuCtrl.prototype.nav = function(state) {
             self.state.go(state);

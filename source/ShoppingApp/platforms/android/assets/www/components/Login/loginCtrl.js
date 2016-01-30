@@ -43,7 +43,14 @@ loginCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoading, $rootS
                 return;
             }
               $ionicLoading.show();
-               loginSrvc.chkLogin(this.user.username, this.user.password).then(function(response) {
+
+              if(localStorage.getItem("cartid") && localStorage.getItem("cartid") != '' && localStorage.getItem("cartid") != 'undefined'){
+                    var shoppingCartId = localStorage.getItem("cartid");
+                } else {
+                    var shoppingCartId = null;
+                }
+
+               loginSrvc.chkLogin(this.user.username, this.user.password, shoppingCartId).then(function(response) { console.log("Login Restponse"); console.log(response);
                 $ionicLoading.hide();
                    if(response.error == '0'){
                       //alert("Login Successfull.");
@@ -56,12 +63,18 @@ loginCtrl = (function($state, $ionicHistory, $stateParams, $ionicLoading, $rootS
                             email: response.email,
                         }
                       };
+
+                      if(response.resultMergeCart){
+                        localStorage.setItem("cartid", response.resultMergeCart.shopping_cart_id);
+                        localStorage.setItem("cartTotal", response.resultMergeCart.shopping_cart_items_total.items_count);
+                      }
                     //  console.log("rootsoup"); console.log($rootScope);
 
                       localStorage.setItem("email", response.email);
                       localStorage.setItem("firstname", response.firstname);
                       localStorage.setItem("lastname", response.lastname);
-                      localStorage.setItem("customer_id", response.entity_id); //alert("Hi"+localStorage.getItem("firstname"));
+                      localStorage.setItem("customer_id", response.entity_id); 
+                     //alert("Hi"+localStorage.getItem("firstname"));
                       $state.go("app."+path);
                    }else{
                     //alert("Your username or password is wrong.");

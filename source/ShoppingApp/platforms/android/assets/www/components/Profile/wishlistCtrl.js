@@ -23,12 +23,8 @@ wishlistCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, c
             profileSrvc.getWishlist(customer_id).then(function(response) { console.log("wishlist response"); console.log(response);
                 if(response.success == 1 && response.wish_list_data.length > 0){
                     self.wishlist = response.wish_list_data;
-                    self.isrecords = true;
-                } else {
-                    self.isrecords = false;
-                    cartSrvc.showToastBanner("No Record Found.", "long", "center");
-                    return;
                 }
+
             }).finally(function(){
                 $ionicLoading.hide();
             });
@@ -41,9 +37,6 @@ wishlistCtrl = (function($state, $stateParams,$rootScope, $scope, profileSrvc, c
                profileSrvc.removeWishlistItem(wishlist_item_id).then(function(response) { console.log("remove profuct from wishlist response"); console.log(response);
                     //self.wishlist = response.wish_list;
                 });
-               if(self.wishlist.length == 0){
-                self.isrecords = false;
-               }
             }
         }
 //Add TO cart product

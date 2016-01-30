@@ -8,11 +8,13 @@ userPopOverCtrl = (function($rootScope, $scope, $state, cartSrvc){
        this.rootScope = $rootScope;
        var self = this;
         
-        if(localStorage.getItem('customer_id')){
-            self.isRegisterd = true;
-        }else {
-            self.isRegisterd = false;
-        }
+            if(localStorage.getItem('customer_id')){
+                self.isRegisterd = true;
+            }else {
+                self.isRegisterd = false;
+            }
+
+       // alert(localStorage.getItem("customer_id"));
 
         userPopOverCtrl.prototype.userNav = function(nav) {
             $scope.popover.hide();

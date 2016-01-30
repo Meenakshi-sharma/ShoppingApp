@@ -77,8 +77,12 @@ prodFilterCtrl = (function($rootScope, $scope, $state, $ionicLoading, prodListin
           if(key != 'undefined'){
             var price1 = key.replace("$",'');
             var price2 = price1.replace("$",''); //alert(price2);
-            var price3 = price2.replace(" and above",'-'); //alert(price3);
-            price.push(price3); 
+            var price3 = price2.replace(" and above",'-');
+            var price4 = price3.replace(" ",'');
+            var price5 = price4.replace(" ",'');
+            var price6 = price5.replace(" ",'');
+
+            price.push(price6); 
           }
         });
       }

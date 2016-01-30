@@ -113,7 +113,26 @@ cartSrvc = (function($log, $http, $q, constants) {
                     };
                 })(this));
            return deferred.promise;
-        }    
+        },
+//Delete Products from cart..
+        deleteCartProduct: function(quoteId, products) {
+            var deferred;
+            deferred = pd.$q.defer();
+            $http.post(constants.API_URL+'cart/RemoveProduct', {
+                    quoteId: quoteId, 
+                    products: products
+                })
+                .success((function(_this) {
+                    return function(data, status) {
+                        return deferred.resolve(data);
+                    };
+                })(this)).error((function(_this) {
+                    return function(data, status, headers) {
+                        return deferred.reject(data);
+                    };
+                })(this));
+           return deferred.promise;
+        }
 }
 
     return cartSrvc;
